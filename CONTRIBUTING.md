@@ -1,6 +1,6 @@
 ## Using the Console Test Runner
 
-The console test runner is used to test browserless implementations of ECMAScript, e.g., [v8](http://en.wikipedia.org/wiki/V8_(JavaScript_engine), [node](http://en.wikipedia.org/wiki/Node.js), or [js24](http://packages.ubuntu.com/trusty/libmozjs-24-bin) 
+The console test runner is used to test browserless implementations of ECMAScript, e.g., [v8](http://en.wikipedia.org/wiki/V8_(JavaScript_engine)), [node](http://en.wikipedia.org/wiki/Node.js), or [js24](http://packages.ubuntu.com/trusty/libmozjs-24-bin) 
 
 ### Requirements
 
@@ -55,7 +55,7 @@ Name | Action
 Non-option arguments are used as filters to match test names.  If no filters are found, the whole test suite is run.
 
 Example | Result
--|-
+---|---
 test262.py --command="node" | run all tests
 test262.py --command="node" ch07 ch11 | run tests from chapters 7 and 11
 test262.py --command="node" 4.4 | run all tests with "4.4" in the name
