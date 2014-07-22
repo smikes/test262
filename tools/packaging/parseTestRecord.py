@@ -78,14 +78,19 @@ def yamlAttrParser(testRecord, attrs, name):
     body = match.group(1)
     parsed = yaml.load(body)
 
+    if (parsed is None):
+        print "Failed to parse yaml in name %s"%(name)
+        return
+
     for key in parsed:
         value = parsed[key]
         if key == "info":
             key = "commentary"
         testRecord[key] = value
-
-    for flag in testRecord['flags']:
-        testRecord[flag] = ""
+        
+    if 'flags' in testRecord:
+        for flag in testRecord['flags']:
+            testRecord[flag] = ""
 
 def parseTestRecord(src, name):
     testRecord = {}
