@@ -139,6 +139,13 @@ flags: [onlyStrict]"""
         match = matchParts(contents, name)
         self.assertTrue(hasYAML(match.group(2)))
 
+    def test_missingKeys(self):
+        result = {}
+        yamlAttrParser(result, """---
+    info: some info (note no flags or includes)
+---""", "")
+        self.assertEqual("some info (note no flags or includes)", result['commentary'])
+
     def test_overview(self):
         name = 'fixtures/test262-yaml-headers.js'
         contents = slurpFile(name)
