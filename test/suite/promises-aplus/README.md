@@ -120,7 +120,7 @@ function makeSequenceArray(n, done, additionalAssertions) {
 
 This function creates an array of sequence-point promises containing `n` deferreds.  It creates an `All` promise by calling `Promise.all` on the array.  When resolved, the `All` Promise will check all sequence-point promise resolutions, call the `additionalAssertions` function (if supplied), and finally call the `done` function.  If the `All` promise is rejected, the `done` function will be called immediately to signal failure.
 
-An example of using `makeSequenceArray` can be found is used in the A+ tests that have been manually created, e.g., [`Aplus_2.1.2.1_A1.1_T6`](https://github.com/smikes/test262/blob/promises-aplus-tests-1/test/suite/promises-aplus/2.1.2.1/Aplus_2.1.2.1_A1.1_T5.js#L23)  
+An example of using `makeSequenceArray` can be found is used in the A+ tests that have been manually created, e.g., [`Aplus_2.1.2.1_A1.1_T5`](https://github.com/smikes/test262/blob/promises-aplus-tests-1/test/suite/promises-aplus/2.1.2.1/Aplus_2.1.2.1_A1.1_T5.js#L23)  
 
 ### Full Example Test
 
