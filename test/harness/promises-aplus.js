@@ -8,7 +8,27 @@ function makeDeferred() {
     return p;
 }
 
-function makePromiseTestArray(n, done) {
+var additionalAssertions;
+
+function checkAllResolutions(resolutions) {
+    resolutions.filter(identity).forEach(makeError);
+    
+    if (additionalAssertions) {
+        additionalAssertions();
+    }
+}
+
+function setupAllAssertions(all, done, additionalAssertions) {
+    all.then(function(resolutions) {
+        checkAllResolutions(resolutions);
+
+        if (additionalAssertions) {
+            additionalAssertions();
+        }
+    }).catch(makeError).then(done, done);
+}
+
+function makePromiseTestArray(n, done, additionalAssertions) {
     var i = 0,
         a = [];
 
@@ -18,13 +38,11 @@ function makePromiseTestArray(n, done) {
     a.all = Promise.all(a);
 
     if (done) {
-        setupAllAssertions(a.all, done);
+        setupAllAssertions(a.all, done, additionalAssertions);
     }
 
     return a;
 }
-
-var additionalAssertions;
 
 function makeError(r) {
     if (r instanceof Error) {
@@ -38,14 +56,3 @@ function identity(x) {
     return x; 
 }
 
-function checkAllResolutions(resolutions) {
-    resolutions.filter(identity).forEach(makeError);
-    
-    if (additionalAssertions) {
-        additionalAssertions();
-    }
-}
-
-function setupAllAssertions(all, done) {
-    all.then(checkAllResolutions).catch(makeError).then(done, done);
-}

@@ -3,13 +3,13 @@ $INCLUDE('promises-aplus.js');
 
 var fulfilledCount = 0;
 
-function additionalAssertions() {
+function fulfilledOnce() {
     if (fulfilledCount !== 1) {
         $ERROR("Expected fulfilledCount === 1, actually " + fulfilledCount);
     }
 }
 
-var a = makePromiseTestArray(3, $DONE);
+var a = makePromiseTestArray(3, $DONE, fulfilledOnce);
 
 a[0].then(function () {
     a[1].then(function expectFulfilled(arg) {
