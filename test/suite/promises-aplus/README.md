@@ -13,31 +13,27 @@ This directory contains a version of the [Promises/A+ test suite](https://github
         $ERROR("Unexpected: promise should not reject " + arg);
     }).catch($DONE);
 ```
-# Difficulties
 
-## Cannot use setTimeout() for delay
 
-The Promises/A+ test suite sometimes uses the `setTimeout` function to delay an operation.  In Test262 `setTimeout` is not available, and delays must be established using Promises.
+## Difficulties
 
-## Cannot use setTimeout() for timeout
+#### Cannot Use `setTimeout()` for Delay or Timeout
 
-The Promises/A+ test suite sometimes uses the `setTimeout` function as a timeout.  In Test262 `setTimeout` is not available, and timeouts are handled by the test runner.
+The Promises/A+ test suite sometimes uses the `setTimeout` function to delay an operation, or as a timeout.  In Test262 `setTimeout` is not available. Delays must be established using Promises, and timeouts are handled by the test runner.
 
-## Cannot use assertion libraries 
+#### No Assertion Libraries, Limited Test Helpers 
 
-  The Promises/A+ test suite runs in a node.js environment and makes use of several core node or npm-published modules: assert, sinon, mocha.  These are not available to Test262.
+The Promises/A+ test suite runs in a node.js environment and makes use of several core node or npm-published modules: assert, sinon, mocha.  These are not available to Test262.
 
-## Test Generation
+The Promises/A+ test suite uses three helper files: `testThreeCases`, `thenables`, `reasons` to generate many of its tests.  In Test262, using helpers is discouraged; the goal for this translation is to have only one helper.
+
+#### Assertion-swallowing
+
+Exceptions thrown within `onFulfilled` and `onRejected` handlers are converted into rejections which are passed along the promise chain.  It is important to ensure that any code which could throw or which runs a test assertion is able to put that assertion into a promise chain that leads to Test262's `$DONE` function.
+
+#### Test Generation
 
 The Promises/A+ test suite contains 872 tests, many generated at runtime.  Test262 requires each test to be defined in a separate file.
-
-## Test Helpers
-
-The Promises/A+ test suite uses three helper files: `testThreeCases`, `thenables`, `reasons` to generate many of its tests.  In Test262, using helpers is discouraged.
-
-## Assertion-swallowing
-
-Because promise-related code often runs asynchronously on a clean stack, thrown exceptions are converted into rejections which are passed along the promise chain.  It is important to ensure that any code which could throw or which runs a test assertion is able to put that assertion into a promise chain that leads to Test262's `$DONE` function.
 
 # Approach
 
