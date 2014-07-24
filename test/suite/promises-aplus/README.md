@@ -64,9 +64,11 @@ d.promise.then(func);
 ```
 
 ### Sequence-Point Promises
-In order to support sequencing of operations without resorting to `setTimeout`, I am using an array of promises.  For example, in order to ensure that funcA is executed after funcB, I could use the following code:
+
+In order to support sequencing of operations in the absence of `setTimeout`, I use an array of "sequence-point" promises.  For example, in order to ensure that `funcA` is asynchronously called after `funcB`, I could use the following code:
 
 ```
+// 'a' is an array of sequence-point promises
 var a = [deferred(), deferred()];
 
 // call funcA, then resolve a[1] ..
