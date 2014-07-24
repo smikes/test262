@@ -57,50 +57,51 @@ The Test262 version of `deferred` also has a `then` method which delegates to `p
 
 # Overview of Promises/Aplus Tests
 
-Section | Tests | Notes
---------|-------|-----
-2.1.2 | 6
-2.1.3 | 6
-2.2.1 | 20 | non-functions (5) x cases (4)
-2.2.2 | 11
-2.2.2.1 | 3 | {already,immediately,eventually} (3)
-2.2.2.2 | 2 | {delay,never} (2)
-2.2.2.3 | 6 | cases(6)
-2.2.3 | 11
-2.2.3.1 | 3 | {already,immediately,eventually} (3)
-2.2.3.2 | 2 | {delay,never} (2)
-2.2.3.3 | 6 | cases(6)
-2.2.4 | 16
-2.2.4a | 6 | (testFulfilled (3) + testRejected(3))
-2.2.4b | 5 | cases(5)
-2.2.4c | 5 | cases(5)
-2.2.5 | 4
-2.2.6 | 30
-2.2.6.1 | 15 | cases (5) x testFulfilled (3)
-2.2.6.1 | 15 | cases (5) x testFulfilled (3)
-2.2.7 | 1
-2.2.7.1 | 1
-2.2.7.2 | 66 | reasons (11) x (testFullfilled (3) + testRejected (3))
-2.2.7.3 | 18 | nonFunctions (6) x testFulfilled (3)
-2.2.7.4 | 18 | nonFunctions (6) x testRejected (3)
-2.3.1 | 2
-2.3.2 | 10
-2.3.2.1 | 2 |
-2.3.2.2 | 4 | {already,eventually} (2) x {fulfilled, rejected} (2)
-2.3.2.3 | 4 | {already,eventually} (2) x {fulfilled, rejected} (2)
-2.3.3 | 610
-2.3.3.1 | 6 | testPromiseResolution (2) x cases (3)
-2.3.3.2 | 22 | testPromiseResolution (2) x reasons (11)
-2.3.3.3 | 4 | testPromiseResolution (2) x cases (2)
-2.3.3.3.1 | 472
-2.3.3.3.1a | 24 | testCallingResolvePromiseFulfillsWith (4) x objects (6)
-2.3.3.3.1b | 56 | testCallingResolvePromiseFulfillsWith (4) x thenables (14)
-2.3.3.3.1c | 392 | thenables-fulfilled (7) x thenables (14) x testCallingResolvePromise{Fulfills,Rejects}With (4)
-2.3.3.3.2 | 44 | reasons (11) x testCallingRejectPromiseRejectsWith (4)
-2.3.3.3.3 | 34 | 17 cases (17) x testPromiseResolution(2)
-2.3.3.3.4.1 | 12 | 6 cases (6) x testPromiseResolution(2)
-2.3.3.3.4.2 | 6 |  3 cases (3) x testPromiseResolution(2)
-2.3.3.4 | 10 | testPromiseResolution (2) x nonFunctions (5)
 
-2.3.4 | 42 | 7 cases (7) x (testFulfilled (3) + testRejected (3))
-Total | 872
+Section | Subsection | Tests | Notes
+--------|------------|-------|-------
+2.1.2 | 6 ||
+2.1.3 | 6 ||
+2.2.1 | 20 || non-functions (5) x cases (4)
+2.2.2 | 11 ||
+2.2.2.1 || 3 | {already,immediately,eventually} (3)
+2.2.2.2 || 2 | {delay,never} (2)
+2.2.2.3 || 6 | cases(6)
+2.2.3 | 11 ||
+2.2.3.1 || 3 | {already,immediately,eventually} (3)
+2.2.3.2 || 2 | {delay,never} (2)
+2.2.3.3 || 6 | cases(6)
+2.2.4 | 16 ||
+2.2.4a || 6 | (testFulfilled (3) + testRejected(3))
+2.2.4b || 5 | cases(5)
+2.2.4c || 5 | cases(5)
+2.2.5 | 4 ||
+2.2.6 | 30 ||
+2.2.6.1 || 15 | cases (5) x testFulfilled (3)
+2.2.6.1 || 15 | cases (5) x testFulfilled (3)
+2.2.7 | 104 ||
+2.2.7 || 1
+2.2.7.1 || 1
+2.2.7.2 || 66 | reasons (11) x (testFullfilled (3) + testRejected (3))
+2.2.7.3 || 18 | nonFunctions (6) x testFulfilled (3)
+2.2.7.4 || 18 | nonFunctions (6) x testRejected (3)
+2.3.1 | 2 ||
+2.3.2 | 10  ||
+2.3.2.1 || 2 |
+2.3.2.2 || 4 | {already,eventually} (2) x {fulfilled, rejected} (2)
+2.3.2.3 || 4 | {already,eventually} (2) x {fulfilled, rejected} (2)
+2.3.3 | 610 ||
+2.3.3.1 || 6 | testPromiseResolution (2) x cases (3)
+2.3.3.2 || 22 | testPromiseResolution (2) x reasons (11)
+2.3.3.3 || 4 | testPromiseResolution (2) x cases (2)
+2.3.3.3.1 | 472 ||
+2.3.3.3.1a || 24 | testCallingResolvePromiseFulfillsWith (4) x objects (6)
+2.3.3.3.1b || 56 | testCallingResolvePromiseFulfillsWith (4) x thenables (14)
+2.3.3.3.1c || 392 | thenables-fulfilled (7) x thenables (14) x testCallingResolvePromise{Fulfills,Rejects}With (4)
+2.3.3.3.2 || 44 | reasons (11) x testCallingRejectPromiseRejectsWith (4)
+2.3.3.3.3 || 34 | 17 cases (17) x testPromiseResolution(2)
+2.3.3.3.4.1 || 12 | 6 cases (6) x testPromiseResolution(2)
+2.3.3.3.4.2 || 6 |  3 cases (3) x testPromiseResolution(2)
+2.3.3.4 || 10 | testPromiseResolution (2) x nonFunctions (5)
+2.3.4 | 42 || 7 cases (7) x (testFulfilled (3) + testRejected (3))
+Total | 872 ||
