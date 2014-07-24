@@ -75,15 +75,34 @@ a[0].resolve();
 
 There are, of course, many ways that this could be arranged, but this one provides a reasonable amount of flexibility while still being simple to implement.
 
-## Assertions
+## Completing the Async Test
 
 In order to ensure that all sequence points of a test have been hit, I create another promise (the `All` promise) by calling `Promise.all` on the array of sequence-point promises.  The Test262 `$DONE` function will be called from the `then` of the `All` promise.
 
 In addition, I require that all sequence-point promises settle by calling `resolve` with a falsy value.  If one of the sequence-point promises settles with `reject`, the `All` promise will reject, and the test case will fail immediately.  
 
-If one of the sequence-point promises settles with `resolve` and a truthy value, the test case will continue to run; but in the `then` handler of the `All` promise, the truthy value will be converted into an exception, and the `All` promise will call `$DONE` with the exception, causing the test case to fail.
+If one of the sequence-point promises settles with `resolve` and a truthy value, the test case will fail eventually.  In the `then` handler of the `All` promise, the truthy value will be converted into an exception, and the `All` promise will call `$DONE` with the exception, causing the test case to fail.
+
+Since the sequence-point promises and the `All` promise have strict requirements about how they are resolved,
+they are not suitable for testing.  Tests should be written about other promises generated with the `deferred()` function.  The convention I have adopted is that sequence-point promises are stored in an array named `a` and promises whose properties are being tested are named `promise` or `promise1`, `promise2` etc.
+
+## Assertions
+
+Although assertions and test failures can be signaled by rejecting a sequence-point promise, it is also desirable to call an assertion function before ending the test.  There is a hook in the `All` promise's resolution function for calling a test-specific assertion function.  The assertion function is called after checking the sequence-point resolutions array.  To signal test failure, this function should throw an exception, for example by calling the Test262 `$ERROR` function.  The return value of the assertion function is ignored.
 
 ## Helper Function
+
+There is a helper function which creates an array of sequence points, sets up the `All` promise, and installs the test-specific assertion function.  It is currently called [`makeSequenceArray`](https://github.com/smikes/test262/blob/promises-aplus-tests-1/test/harness/promises-aplus.js#L44):
+
+```
+/***
+ * @param {Number} n Number of sequence-point promises to create
+ * @param {Function} done(arg) Function to call on completion
+ * @param arg Argument to done function; if truthy, test fails
+ * @param {Function} additionalAssertions function to all after all sequence points
+ */
+function makeSequenceArray(n, done, additionalAssertions) {
+```
 
 # Overview of Promises/Aplus Tests
 
