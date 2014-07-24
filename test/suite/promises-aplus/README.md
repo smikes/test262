@@ -2,8 +2,7 @@
 
 The [Promises/A+ spec](https://github.com/promises-aplus/promises-spec) is a standard for JavaScript promises.  Although Promises/A+ is not formally part of ECMA-262 version 6.0, Promises/A+ informed the development of the Promises portion of ECMAScript 6.0.  ECMAScript 6.0 `Promise` objects should conform to Promises/A+.  
 
-This directory contains a version of the promises/a+ test suite [link] ported 
-to the test framework used in the ECMA's Test262 project.
+This directory contains a version of the [Promises/A+ test suite](https://github.com/promises-aplus/promises-tests) ported to the test framework used in the ECMA's Test262 project.
 
 # Difficulties
 
@@ -17,7 +16,7 @@ The Promises/A+ test suite sometimes uses the `setTimeout` function as a timeout
 
 ## Cannot use assertion libraries 
 
-  The [Promises/A+ test suite](https://github.com/promises-aplus/promises-tests) as currently written  run in a node.js environment and make use of several core node or npm-published modules: assert, sinon, mocha.
+  The Promises/A+ test suite runs in a node.js environment and makes use of several core node or npm-published modules: assert, sinon, mocha.  These are not available to Test262.
 
 ## Test Generation
 
@@ -33,11 +32,11 @@ Because promise-related code often runs asynchronously on a clean stack, thrown 
 
 # Approach
 
-My initial approach is to try to solve the setTimeout and assertion problems manually at first.  Once I have an adequate manual solution for translating tests from Promises/A+ to the Test262 idiom, then I will tackle generating Test262 tests.
+My initial approach is to try to solve the setTimeout and assertion problems manually.  Once I have an adequate manual solution for translating tests from Promises/A+ to the Test262 idiom, then I will tackle generating Test262 tests.
 
 ## Deferred
 
-Promises/A+ does not test the full ES6 promise behavior, but rather provides strict requirements on `promise` and `thenable` objects that conform to its specification.  The Promises/Aplus tests expect that the implementation under test will provide (an adapter)[https://github.com/promises-aplus/promises-tests#adapters] that will return `promise` objects to test.  In particular, the adapter must provide a function named `deferred` that returns an object:
+Promises/A+ does not test the full ES6 promise behavior, but rather provides strict requirements on `promise` and `thenable` objects that conform to its specification.  The Promises/Aplus tests expect that the implementation under test will provide [an adapter](https://github.com/promises-aplus/promises-tests#adapters) that will return `promise` objects to test.  In particular, the adapter must provide a function named `deferred` that returns an object:
 
 ```js
 {
@@ -47,7 +46,10 @@ Promises/A+ does not test the full ES6 promise behavior, but rather provides str
 }
 ```
 
-To simplify translation of the tests, I have created a helper file `promises-aplus.js` containing a `deferred()` function that 
+To simplify translation of the tests, I have created a helper file `promises-aplus.js` containing a [`deferred()` function](https://github.com/smikes/test262/blob/promises-aplus-tests-1/test/harness/promises-aplus.js#L3) that returns an object conforming to this interface.
+
+The Test262 version of `deferred` also has a `then` method which delegates to `p.then`.  Thus in the Test262 harness, the return value of `deferred()` is also a `thenable`.  This is for convenience;  the returned object can be used in place of the promise whever a `thenable` is required.
+
 
 ## Sequencing
 
