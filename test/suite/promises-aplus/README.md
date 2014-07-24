@@ -50,10 +50,40 @@ To simplify translation of the tests, I have created a helper file `promises-apl
 
 The Test262 version of `deferred` also has a `then` method which delegates to `p.then`.  Thus in the Test262 harness, the return value of `deferred()` is also a `thenable`.  This is for convenience;  the returned object can be used in place of the promise whever a `thenable` is required.
 
+## Sequence-Point Promises
 
-## Sequencing
+In order to support sequencing of operations without resorting to `setTimeout`, I am using an array of promises.  For example, in order to ensure that funcA is executed after funcB, I could use the following code:
 
+```
+var a = [deferred(), deferred()];
 
+// call funcA, then resolve a[1] ..
+a[0].then(function () {
+    funcA();
+    a[1].resolve();
+});
+
+// .. which will then call funcB
+a[1].then(function () {
+    funcB();
+});
+
+// kick off the whole sequence
+a[0].resolve();
+
+```
+
+There are, of course, many ways that this could be arranged, but this one provides a reasonable amount of flexibility while still being simple to implement.
+
+## Assertions
+
+In order to ensure that all sequence points of a test have been hit, I create another promise (the `All` promise) by calling `Promise.all` on the array of sequence-point promises.  The Test262 `$DONE` function will be called from the `then` of the `All` promise.
+
+In addition, I require that all sequence-point promises settle by calling `resolve` with a falsy value.  If one of the sequence-point promises settles with `reject`, the `All` promise will reject, and the test case will fail immediately.  
+
+If one of the sequence-point promises settles with `resolve` and a truthy value, the test case will continue to run; but in the `then` handler of the `All` promise, the truthy value will be converted into an exception, and the `All` promise will call `$DONE` with the exception, causing the test case to fail.
+
+## Helper Function
 
 # Overview of Promises/Aplus Tests
 
@@ -103,5 +133,5 @@ Section | Subsection | Tests | Notes
 -| 2.3.3.3.4.1 | 12 | 6 cases (6) x testPromiseResolution(2)
 -| 2.3.3.3.4.2 | 6 |  3 cases (3) x testPromiseResolution(2)
 -| 2.3.3.4 | 10 | testPromiseResolution (2) x nonFunctions (5)
-2.3.4 | 42 || 7 cases (7) x (testFulfilled (3) + testRejected (3))
-Total | 872 ||
+2.3.4 || 42 | 7 cases (7) x (testFulfilled (3) + testRejected (3))
+Total || 872 |
