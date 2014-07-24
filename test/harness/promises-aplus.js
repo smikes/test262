@@ -1,19 +1,41 @@
-/*global $ERROR, $DONE, Promise*/
-function makeDeferred() {
-    var a,
-        p = new Promise(function (r1, r2) { a = [r1, r2]; });
-    p.resolve = a[0];
-    p.reject = a[1];
+/*global $ERROR, Promise*/
 
-    return p;
+function deferred() {
+    'use strict';
+    var resolve,
+        reject,
+        promise = new Promise(function (res, rej) {
+            resolve = res;
+            reject = rej;
+        }),
+        then = promise.then.bind(promise);
+
+    return {
+        promise: promise,
+        resolve: resolve,
+        reject: reject,
+        then: then
+    };
+}
+
+function makeError(r) {
+    'use strict';
+    if (r instanceof Error) {
+        throw r;
+    }
+
+    $ERROR("Error: " + r);
 }
 
 function checkAllResolutions(resolutions) {
-    resolutions.filter(identity).forEach(makeError);
+    'use strict';
+    // turn any truthy resolution into an error
+    resolutions.filter(function identity(x) { return x; }).forEach(makeError);
 }
 
 function setupAllAssertions(all, done, additionalAssertions) {
-    all.then(function(resolutions) {
+    'use strict';
+    all.then(function (resolutions) {
         checkAllResolutions(resolutions);
 
         if (additionalAssertions) {
@@ -23,30 +45,18 @@ function setupAllAssertions(all, done, additionalAssertions) {
 }
 
 function makePromiseTestArray(n, done, additionalAssertions) {
+    'use strict';
     var i = 0,
-        a = [];
+        array = [];
 
     for (i = 0; i < n; i += 1) {
-        a[i] = makeDeferred();
+        array[i] = deferred();
     }
-    a.all = Promise.all(a);
+    array.all = Promise.all(array);
 
     if (done) {
-        setupAllAssertions(a.all, done, additionalAssertions);
+        setupAllAssertions(array.all, done, additionalAssertions);
     }
 
-    return a;
+    return array;
 }
-
-function makeError(r) {
-    if (r instanceof Error) {
-        throw r;
-    }
-
-    $ERROR("Error: " + r);
-}
-
-function identity(x) { 
-    return x; 
-}
-

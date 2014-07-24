@@ -5,8 +5,9 @@
  *
  * @description already-fulfilled promise does not transition
  * @author Sam Mikes
- */ 
+ */
 
+/*global $INCLUDE, $ERROR, $DONE, makePromiseTestArray*/
 $INCLUDE('promises-aplus.js');
 
 var fulfilledCount = 0;

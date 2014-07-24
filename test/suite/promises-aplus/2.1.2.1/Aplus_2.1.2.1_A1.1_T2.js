@@ -1,3 +1,13 @@
+/// Copyright 2014 Ecma International. All rights reserved.
+
+/**
+ * Promises/A+ 2.1.2.1 When fulfilled, a promise must not transition to any other state
+ *
+ * @description immediately-fulfilled promise does not transition
+ * @author Sam Mikes
+ */
+
+/*global $INCLUDE, $ERROR, $DONE, makePromiseTestArray*/
 $INCLUDE('promises-aplus.js');
 
 var fulfilledCount = 0;
@@ -11,10 +21,10 @@ function fulfilledOnce() {
 var a = makePromiseTestArray(2, $DONE, fulfilledOnce);
 
 a[0].then(function () {
-    a[1].then(function expectFulfilled(arg) {
+    a[1].then(function expectFulfilled() {
         fulfilledCount += 1;
         if (fulfilledCount !== 1) {
-            $ERROR("Unexpected: promise fulfilled more than once");
+            $ERROR("Unexpected: promise fulfilled more than once " + fulfilledCount);
         }
     }, function shouldNotReject(arg) {
         $ERROR("Unexpected: promise should not reject " + arg);
