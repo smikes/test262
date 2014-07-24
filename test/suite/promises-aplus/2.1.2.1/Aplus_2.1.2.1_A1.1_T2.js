@@ -18,17 +18,20 @@ function fulfilledOnce() {
     }
 }
 
-var a = makePromiseTestArray(2, $DONE, fulfilledOnce);
+var a = makePromiseTestArray(1, $DONE, fulfilledOnce);
+
+var p = deferred();
 
 a[0].then(function () {
-    a[1].then(function expectFulfilled() {
+
+    p.then(function expectFulfilled() {
         fulfilledCount += 1;
     }, function shouldNotReject(arg) {
         $ERROR("Unexpected: promise should not reject " + arg);
     }).catch($DONE);
 
     // immediately-fulfilled
-    a[1].resolve();
+    p.resolve();
 });
 
 a[0].resolve();

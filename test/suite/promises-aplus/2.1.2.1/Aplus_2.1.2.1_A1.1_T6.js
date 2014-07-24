@@ -18,26 +18,29 @@ function fulfilledOnce() {
         $ERROR("Expected fulfilledCount === 1, actually " + fulfilledCount);
     }
 
+    // ensure that delayed reject is actually called
     if (!triedRejection) {
         $ERROR("Expected triedRejection to be true, actually " + triedRejection);
     }
 }
 
-var a = makePromiseTestArray(3, $DONE, fulfilledOnce);
+var p = deferred();
+
+var a = makePromiseTestArray(2, $DONE, fulfilledOnce);
 
 a[0].then(function () {
-    a[1].then(function expectFulfilled() {
+    p.then(function expectFulfilled() {
         fulfilledCount += 1;
     }, function shouldNotReject(arg) {
         $ERROR("Unexpected: promise should not reject " + arg);
     }).catch($DONE).then(function () {
-        a[1].reject(new Test262Error('Unexpected rejection'));
+        p.reject(new Test262Error('Unexpected rejection'));
         triedRejection = true;
     }).then(function () {
-        a[2].resolve();
+        a[1].resolve();
     });
 
-    a[1].resolve();
+    p.resolve();
 });
 
 a[0].resolve();

@@ -18,17 +18,21 @@ function fulfilledOnce() {
     }
 }
 
-var a = makePromiseTestArray(2, $DONE, fulfilledOnce);
+var p = deferred();
+
+var a = makePromiseTestArray(1, $DONE, fulfilledOnce);
 
 a[0].then(function () {
-    a[1].then(function expectFulfilled() {
+    p.then(function expectFulfilled() {
         fulfilledCount += 1;
     }, function shouldNotReject(arg) {
         $ERROR("Unexpected: promise should not reject: " + arg);
     }).catch($DONE);
+
 }).then(function () {
-    a[1].resolve();
-    a[1].reject(new Test262Error('Unexpected rejection'));
+    // deferred resolve-reject
+    p.resolve();
+    p.reject(new Test262Error('Unexpected rejection'));
 });
 
 a[0].resolve();
