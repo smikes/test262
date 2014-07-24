@@ -8,9 +8,7 @@ function additionalAssertions() {
     }
 }
 
-var a = makePromiseTestArray(2);
-
-a.all.then(checkAllResolutions).then($DONE, $DONE);
+var a = makePromiseTestArray(2, $DONE);
 
 a[0].then(function () {
     a[1].then(function expectFulfilled(arg) {
@@ -21,6 +19,8 @@ a[0].then(function () {
     }, function shouldNotReject(arg) {
         $ERROR("Unexpected: promise should not reject " + arg);
     }).catch($DONE);
+
+    // immediately-fulfilled
     a[1].resolve();
 });
 

@@ -8,15 +8,13 @@ function additionalAssertions() {
     }
 }
 
-var a = makePromiseTestArray(3);
-
-a.all.then(checkAllResolutions).then($DONE,$DONE);
+var a = makePromiseTestArray(3, $DONE);
 
 a[0].then(function () {
-    a[1].then(function expectFulfilled(arg) {
+    a[1].then(function expectFulfilled() {
         fulfilledCount += 1;
         if (fulfilledCount !== 1) {
-            $ERROR("Unexpected: promise fulfilled more than once: " + arg);
+            $ERROR("Unexpected: promise fulfilled more than once: " + fulfilledCount);
         }
     }, function shouldNotReject(arg) {
         $ERROR("Unexpected: promise should not reject: " + arg);

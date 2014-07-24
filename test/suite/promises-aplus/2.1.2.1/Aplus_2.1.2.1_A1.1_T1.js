@@ -17,9 +17,7 @@ function additionalAssertions() {
     }
 }
 
-var a = makePromiseTestArray(2);
-
-setupAllAssertions(a.all, $DONE);
+var a = makePromiseTestArray(2, $DONE);
 
 a[0].then(function () {
     // already-fulfilled
