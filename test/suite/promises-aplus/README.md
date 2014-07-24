@@ -41,7 +41,7 @@ My initial approach is to try to solve the setTimeout and assertion problems man
 
 ### Deferred
 
-Promises/A+ does not test the full ES6 promise behavior, but rather provides strict requirements on `promise` and `thenable` objects that conform to its specification.  The Promises/Aplus tests expect that the implementation under test will provide [an adapter](https://github.com/promises-aplus/promises-tests#adapters) that will return `promise` objects to test.  In particular, the adapter must provide a function named `deferred` that returns an object:
+Promises/A+ does not test the full ES6 promise behavior, but rather provides strict requirements on `promise` and `thenable` objects that conform to its specification.  The Promises/A+ tests expect that the implementation under test will provide [an adapter](https://github.com/promises-aplus/promises-tests#adapters) that will return `promise` objects to test.  In particular, the adapter must provide a function named `deferred` that returns an object:
 
 ```js
 {
@@ -117,6 +117,10 @@ There is a helper function which creates an array of sequence points, sets up th
  */
 function makeSequenceArray(n, done, additionalAssertions) {
 ```
+
+This function creates an array of sequence-point promises containing `n` deferreds.  It creates an `All` promise by calling `Promise.all` on the array.  When resolved, the `All` Promise will check all sequence-point promise resolutions, call the `additionalAssertions` function (if supplied), and finally call the `done` function.  If the `All` promise is rejected, the `done` function will be called immediately to signal failure.
+
+An example of using `makeSequenceArray` can be found is used in the A+ tests that have been manually created, e.g., [`Aplus_2.1.2.1_A1.1_T6`](https://github.com/smikes/test262/blob/promises-aplus-tests-1/test/suite/promises-aplus/2.1.2.1/Aplus_2.1.2.1_A1.1_T5.js#L23)  
 
 ### Full Example Test
 
