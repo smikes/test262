@@ -1,46 +1,48 @@
-# Promises/Aplus tests for Test262
+# Promises/A+ tests for Test262
 
-This directory contains a version of the promises/aplus test suite [link] ported 
-to the test framework used in the ECMA's Test262 project
+The [Promises/A+ spec](https://github.com/promises-aplus/promises-spec) is a standard for JavaScript promises.  Although Promises/A+ is not formally part of ECMA-262 version 6.0, Promises/A+ informed the development of the Promises portion of ECMAScript 6.0.  ECMAScript 6.0 `Promise` objects should conform to Promises/A+.  
+
+This directory contains a version of the promises/a+ test suite [link] ported 
+to the test framework used in the ECMA's Test262 project.
 
 # Difficulties
 
 ## Cannot use setTimeout() for delay
 
-The Promises/Aplus test suite sometimes uses the `setTimeout` function to delay an operation.  In Test262 `setTimeout` is not available, and delays must be established using Promises.
+The Promises/A+ test suite sometimes uses the `setTimeout` function to delay an operation.  In Test262 `setTimeout` is not available, and delays must be established using Promises.
 
 ## Cannot use setTimeout() for timeout
 
-The Promises/Aplus test suite sometimes uses the `setTimeout` function as a timeout.  In Test262 `setTimeout` is not available, and timeouts are handled by the test runner.
+The Promises/A+ test suite sometimes uses the `setTimeout` function as a timeout.  In Test262 `setTimeout` is not available, and timeouts are handled by the test runner.
 
 ## Cannot use assertion libraries 
 
-  The (Promises/Aplus test suite)[https://github.com/promises-aplus/promises-tests] as currently written  run in a node.js environment and make use of several core node or npm-published modules: assert, sinon, mocha.
+  The [Promises/A+ test suite](https://github.com/promises-aplus/promises-tests) as currently written  run in a node.js environment and make use of several core node or npm-published modules: assert, sinon, mocha.
 
 ## Test Generation
 
-The Promises/Aplus test suite contains 872 tests, many generated at runtime.  Test262 requires each test to be defined in a separate file.
+The Promises/A+ test suite contains 872 tests, many generated at runtime.  Test262 requires each test to be defined in a separate file.
 
 ## Test Helpers
 
-The Promises/Aplus test suite uses three helper files: `testThreeCases`, `thenables`, `reasons` to generate many of its tests.  In Test262, using helpers is discouraged.
+The Promises/A+ test suite uses three helper files: `testThreeCases`, `thenables`, `reasons` to generate many of its tests.  In Test262, using helpers is discouraged.
 
 ## Assertion-swallowing
 
-Because promise-related code often runs asyncronously on a clean stack, thrown exceptions are converted into rejections which are passed along the promise chain.  It is important to ensure that any code which could throw or which runs a test assertion is able to put that assertion into a promise chain that leads to Test262's `$DONE` function.
+Because promise-related code often runs asynchronously on a clean stack, thrown exceptions are converted into rejections which are passed along the promise chain.  It is important to ensure that any code which could throw or which runs a test assertion is able to put that assertion into a promise chain that leads to Test262's `$DONE` function.
 
 # Approach
 
-My initial approach is to try to solve the setTimeout and assertion problems manually at first.  Once I have an adequate manual solution for translating tests from Promises/Aplus to the Test262 idiom, then I will tackle generating Test262 tests.
+My initial approach is to try to solve the setTimeout and assertion problems manually at first.  Once I have an adequate manual solution for translating tests from Promises/A+ to the Test262 idiom, then I will tackle generating Test262 tests.
 
 ## Deferred
 
-Promises/Aplus does not test the full ES6 promise behavior, but rather provides strict requirements on `promise` and `thenable` objects that conform to its specification.  The Promises/Aplus tests expect that the implementation under test will provide (an adapter)[https://github.com/promises-aplus/promises-tests#adapters] that will return `promise` objects to test.  In particular, the adapter must provide a function named `deferred` that returns an object:
+Promises/A+ does not test the full ES6 promise behavior, but rather provides strict requirements on `promise` and `thenable` objects that conform to its specification.  The Promises/Aplus tests expect that the implementation under test will provide (an adapter)[https://github.com/promises-aplus/promises-tests#adapters] that will return `promise` objects to test.  In particular, the adapter must provide a function named `deferred` that returns an object:
 
-```
+```js
 {
    promise: p, // a new promise in the pending state
-   resolve: function (value) { // resolves the promise with **value** },
+   resolve: function (value) { // resolves the promise with <b>value</b> },
    reject:  function (reason) { // rejects the promise with **reason** }
 }
 ```
