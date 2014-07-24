@@ -8,14 +8,8 @@ function makeDeferred() {
     return p;
 }
 
-var additionalAssertions;
-
 function checkAllResolutions(resolutions) {
     resolutions.filter(identity).forEach(makeError);
-    
-    if (additionalAssertions) {
-        additionalAssertions();
-    }
 }
 
 function setupAllAssertions(all, done, additionalAssertions) {
