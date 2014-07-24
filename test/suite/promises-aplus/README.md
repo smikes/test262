@@ -2,7 +2,7 @@
 
 Version: 0.0.0 (2014-Jul-24)
 
-The [Promises/A+ spec](https://github.com/promises-aplus/promises-spec) is a standard for JavaScript promises.  Although Promises/A+ is not formally part of ECMA-262 version 6.0, Promises/A+ informed the development of the Promises portion of ECMAScript 6.0.  ECMAScript 6.0 `Promise` objects should conform to Promises/A+.  
+The [Promises/A+ spec](https://github.com/promises-aplus/promises-spec) is a standard for JavaScript promises.  Although Promises/A+ is not formally part of ECMA-262 version 6.0, Promises/A+ informed the development of the Promises portion of ECMAScript 6.0, and a conformant ECMAScript 6.0 `Promise` implementation objects should conform to Promises/A+.
 
 This directory contains a version of the [Promises/A+ test suite](https://github.com/promises-aplus/promises-tests) ported to the test framework used in the ECMA's Test262 project.
 
@@ -19,17 +19,17 @@ This directory contains a version of the [Promises/A+ test suite](https://github
 
 #### Cannot Use `setTimeout()` for Delay or Timeout
 
-The Promises/A+ test suite sometimes uses the `setTimeout` function to delay an operation, or as a timeout.  In Test262 `setTimeout` is not available. Delays must be established using Promises, and timeouts are handled by the test runner.
+The Promises/A+ test suite uses the `setTimeout` function in two ways: sometimes to delay an operation, and sometimes as a timeout. In Test262, `setTimeout` is not available. Delays must be established using Promises, and timeouts are handled by the test runner.
 
 #### No Assertion Libraries, Limited Test Helpers 
 
 The Promises/A+ test suite runs in a node.js environment and makes use of several core node or npm-published modules: assert, sinon, mocha.  These are not available to Test262.
 
-The Promises/A+ test suite uses three helper files: `testThreeCases`, `thenables`, `reasons` to generate many of its tests.  In Test262, using helpers is discouraged; the goal for this translation is to have only one helper.
+The Promises/A+ test suite uses three helper files: `testThreeCases`, `thenables`, `reasons` to generate many of its tests.  In Test262, using helpers is discouraged.  The goal for this translation is to have only one helper.
 
 #### Assertion-swallowing
 
-Exceptions thrown within `onFulfilled` and `onRejected` handlers are converted into rejections which are passed along the promise chain.  It is important to ensure that any code which could throw or which runs a test assertion is able to put that assertion into a promise chain that leads to Test262's `$DONE` function.
+Exceptions thrown within `onFulfilled` and `onRejected` handlers are converted into rejections which are passed along the promise chain.  It is important to ensure that any code which could throw or which runs a test assertion is able to put the exception into a promise chain that leads to Test262's `$DONE` function.
 
 #### Test Generation
 
@@ -37,7 +37,7 @@ The Promises/A+ test suite contains 872 tests, many generated at runtime.  Test2
 
 ## Approach
 
-My initial approach is to try to solve the setTimeout and assertion problems manually.  Once I have an adequate manual solution for translating tests from Promises/A+ to the Test262 idiom, then I will tackle generating Test262 tests.
+My initial approach is to try to solve the setTimeout and assertion problems manually.  Once I have an adequate manual solution for translating tests from Promises/A+ to the Test262 idiom, then I will tackle generating Test262 tests for each generated Promises/A+ test.
 
 ### Deferred
 
@@ -180,7 +180,7 @@ In the `Notes` column of the table below, I identify places where tests are gene
 
 For example, the Promises/A+ helper function `testFulfilled` generates three tests.  In section 2.2.6.1, five cases are each passed through `testFullfilled` for a total of 5 x 3 = 15 tests.
 
-In section 2.3.3.3.1c, 392 tests are generated through the interaction of 7 x 14 x 4 
+In section 2.3.3.3.1c, 392 tests are generated through the interaction of three lists, (7 x 14 x 4 = 392).  This accounts for nearly half of the Promises/A+ test suite. 
 
 ### Table of Tests By Section
 
