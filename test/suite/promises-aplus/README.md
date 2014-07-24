@@ -113,7 +113,7 @@ There is a helper function which creates an array of sequence points, sets up th
  * @param {Number} n Number of sequence-point promises to create
  * @param {Function} done(arg) Function to call on completion
  * @param arg Argument to done function; if truthy, test fails
- * @param {Function} additionalAssertions function to all after all sequence points
+ * @param {Function} additionalAssertions (optional) function to call after all sequence points
  */
 function makeSequenceArray(n, done, additionalAssertions) {
 ```
