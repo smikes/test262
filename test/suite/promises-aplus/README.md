@@ -35,11 +35,11 @@ Exceptions thrown within `onFulfilled` and `onRejected` handlers are converted i
 
 The Promises/A+ test suite contains 872 tests, many generated at runtime.  Test262 requires each test to be defined in a separate file.
 
-# Approach
+## Approach
 
 My initial approach is to try to solve the setTimeout and assertion problems manually.  Once I have an adequate manual solution for translating tests from Promises/A+ to the Test262 idiom, then I will tackle generating Test262 tests.
 
-## Deferred
+### Deferred
 
 Promises/A+ does not test the full ES6 promise behavior, but rather provides strict requirements on `promise` and `thenable` objects that conform to its specification.  The Promises/Aplus tests expect that the implementation under test will provide [an adapter](https://github.com/promises-aplus/promises-tests#adapters) that will return `promise` objects to test.  In particular, the adapter must provide a function named `deferred` that returns an object:
 
@@ -55,8 +55,8 @@ To simplify translation of the tests, I have created a helper file `promises-apl
 
 The Test262 version of `deferred` also has a `then` method which delegates to `p.then`.  Thus in the Test262 harness, the return value of `deferred()` is also a `thenable`.  This is for convenience;  the returned object can be used in place of the promise whever a `thenable` is required.
 
-## Sequence-Point Promises
 
+### Sequence-Point Promises
 In order to support sequencing of operations without resorting to `setTimeout`, I am using an array of promises.  For example, in order to ensure that funcA is executed after funcB, I could use the following code:
 
 ```
@@ -80,7 +80,7 @@ a[0].resolve();
 
 There are, of course, many ways that this could be arranged, but this one provides a reasonable amount of flexibility while still being simple to implement.
 
-## Completing the Async Test
+### Completing the Async Test
 
 In order to ensure that all sequence points of a test have been hit, I create another promise (the `All` promise) by calling `Promise.all` on the array of sequence-point promises.  The Test262 `$DONE` function will be called from the `then` of the `All` promise.
 
@@ -91,11 +91,11 @@ If one of the sequence-point promises settles with `resolve` and a truthy value,
 Since the sequence-point promises and the `All` promise have strict requirements about how they are resolved,
 they are not suitable for testing.  Tests should be written about other promises generated with the `deferred()` function.  The convention I have adopted is that sequence-point promises are stored in an array named `a` and promises whose properties are being tested are named `promise` or `promise1`, `promise2` etc.
 
-## Assertions
+### Assertions
 
 Although assertions and test failures can be signaled by rejecting a sequence-point promise, it is also desirable to call an assertion function before ending the test.  There is a hook in the `All` promise's resolution function for calling a test-specific assertion function.  The assertion function is called after checking the sequence-point resolutions array.  To signal test failure, this function should throw an exception, for example by calling the Test262 `$ERROR` function.  The return value of the assertion function is ignored.
 
-## Helper Function
+### Helper Function `makeSequenceArray`
 
 There is a helper function which creates an array of sequence points, sets up the `All` promise, and installs the test-specific assertion function.  It is currently called [`makeSequenceArray`](https://github.com/smikes/test262/blob/promises-aplus-tests-1/test/harness/promises-aplus.js#L44):
 
@@ -109,8 +109,9 @@ There is a helper function which creates an array of sequence points, sets up th
 function makeSequenceArray(n, done, additionalAssertions) {
 ```
 
-# Overview of Promises/Aplus Tests
+## Overview of Promises/A+ Tests
 
+### Table of Tests By Section
 
 Section | Subsection | Tests | Notes
 --------|------------|-------|-------
