@@ -6,6 +6,13 @@ The [Promises/A+ spec](https://github.com/promises-aplus/promises-spec) is a sta
 
 This directory contains a version of the [Promises/A+ test suite](https://github.com/promises-aplus/promises-tests) ported to the test framework used in the ECMA's Test262 project.
 
+```
+    promise.then(function expectFulfilled() {
+        fulfilledCount += 1;
+    }, function shouldNotReject(arg) {
+        $ERROR("Unexpected: promise should not reject " + arg);
+    }).catch($DONE);
+```
 # Difficulties
 
 ## Cannot use setTimeout() for delay
