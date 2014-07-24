@@ -1,5 +1,7 @@
 # Promises/A+ tests for Test262
 
+Version: 0.0.0 (2014-Jul-24)
+
 The [Promises/A+ spec](https://github.com/promises-aplus/promises-spec) is a standard for JavaScript promises.  Although Promises/A+ is not formally part of ECMA-262 version 6.0, Promises/A+ informed the development of the Promises portion of ECMAScript 6.0.  ECMAScript 6.0 `Promise` objects should conform to Promises/A+.  
 
 This directory contains a version of the [Promises/A+ test suite](https://github.com/promises-aplus/promises-tests) ported to the test framework used in the ECMA's Test262 project.
@@ -154,3 +156,10 @@ Section | Subsection | Tests | Notes
 -| 2.3.3.4 | 10 | testPromiseResolution (2) x nonFunctions (5)
 2.3.4 | - | 42 | 7 cases (7) x (testFulfilled (3) + testRejected (3))
 Total || 872 |
+
+## Versions
+
+This document references [version 1.1.1 of the Promises/A+ spec](https://github.com/promises-aplus/promises-spec/commit/669f6a6bb56bf45bf99cb97e742d07b8f0d60d93) and [version 2.0.4 of the Promises/A+ test suite](https://github.com/promises-aplus/promises-tests/commit/b4be92c227edb14285a1470156e6fcacafc41032)
+
+## References
+
