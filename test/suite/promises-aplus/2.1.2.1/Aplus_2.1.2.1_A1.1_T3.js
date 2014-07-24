@@ -7,7 +7,7 @@
  * @author Sam Mikes
  */
 
-/*global $INCLUDE, $ERROR, $DONE, makePromiseTestArray*/
+/*global $INCLUDE, $ERROR, $DONE, makeSequenceArray*/
 $INCLUDE('promises-aplus.js');
 
 var fulfilledCount = 0;
@@ -18,13 +18,13 @@ function fulfilledOnce() {
     }
 }
 
-var p = deferred();
+var promise = deferred();
 
-var a = makePromiseTestArray(1, $DONE, fulfilledOnce);
+var a = makeSequenceArray(1, $DONE, fulfilledOnce);
 
 a[0].then(function () {
 
-    p.then(function expectFulfilled() {
+    promise.then(function expectFulfilled() {
         fulfilledCount += 1;
     }, function shouldNotReject(arg) {
         $ERROR("Unexpected: promise should not reject " + arg);
@@ -32,7 +32,7 @@ a[0].then(function () {
 
 }).then(function () {
     // eventually-fulfilled
-    p.resolve();
+    promise.resolve();
 });
 
 a[0].resolve();

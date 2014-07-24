@@ -7,7 +7,7 @@
  * @author Sam Mikes
  */
 
-/*global $INCLUDE, $ERROR, $DONE, makePromiseTestArray, Test262Error*/
+/*global $INCLUDE, $ERROR, $DONE, makeSequenceArray, Test262Error*/
 $INCLUDE('promises-aplus.js');
 
 var fulfilledCount = 0,
@@ -24,23 +24,24 @@ function fulfilledOnce() {
     }
 }
 
-var p = deferred();
+var promise = deferred();
 
-var a = makePromiseTestArray(2, $DONE, fulfilledOnce);
+var a = makeSequenceArray(2, $DONE, fulfilledOnce);
 
 a[0].then(function () {
-    p.then(function expectFulfilled() {
+    promise.then(function expectFulfilled() {
         fulfilledCount += 1;
     }, function shouldNotReject(arg) {
         $ERROR("Unexpected: promise should not reject " + arg);
-    }).catch($DONE).then(function () {
-        p.reject(new Test262Error('Unexpected rejection'));
+    }).catch($DONE);
+
+    a[1].then(function () {
+        promise.reject(new Test262Error('Unexpected rejection'));
         triedRejection = true;
-    }).then(function () {
-        a[1].resolve();
     });
 
-    p.resolve();
+    a[1].resolve();
+    promise.resolve();
 });
 
 a[0].resolve();
