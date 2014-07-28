@@ -2,7 +2,7 @@
 
 Version: 0.0.0 (2014-Jul-24)
 
-The [Promises/A+ spec](https://github.com/promises-aplus/promises-spec) is a standard for JavaScript promises.  Although Promises/A+ is not formally part of ECMA-262 version 6.0, Promises/A+ informed the development of the Promises portion of ECMAScript 6.0, and a conformant ECMAScript 6.0 `Promise` implementation objects should conform to Promises/A+.
+The [Promises/A+ spec](https://github.com/promises-aplus/promises-spec) is a standard for JavaScript promises.  Although Promises/A+ is not formally part of ECMA-262 version 6.0, Promises/A+ informed the development of the Promises portion of ECMAScript 6.0; a conformant ECMAScript 6.0 should have `Promise` objects that conform to Promises/A+.
 
 This directory contains a version of the [Promises/A+ test suite](https://github.com/promises-aplus/promises-tests) ported to the test framework used in the ECMA's Test262 project.
 
@@ -52,16 +52,6 @@ Promises/A+ does not test the full ES6 promise behavior, but rather provides str
 ```
 
 To simplify translation of the tests, I have created a helper file `promises-aplus.js` containing a [`deferred()` function](https://github.com/smikes/test262/blob/promises-aplus-tests-1/test/harness/promises-aplus.js#L3) that returns an object conforming to this interface.
-
-The object returned by the Test262 version of `deferred` also has a `then` method which delegates to the promise's `then` method.  Thus in the Test262 harness, the return value of `deferred()` is also a `thenable`.  This is for convenience;  the returned object can be used in place of the promise wherever a `thenable` is required.
-
-```
-var d = deferred();
-
-// these two are equivalent
-d.then(func);
-d.promise.then(func);
-```
 
 ### Sequence-Point Promises
 

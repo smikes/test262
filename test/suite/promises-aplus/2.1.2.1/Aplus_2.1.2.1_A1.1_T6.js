@@ -24,24 +24,24 @@ function fulfilledOnce() {
     }
 }
 
-var promise = deferred();
+var d = deferred();
 
 var a = makeSequenceArray(2, $DONE, fulfilledOnce);
 
-a[0].then(function () {
-    promise.then(function expectFulfilled() {
+a[0].promise.then(function () {
+    d.promise.then(function expectFulfilled() {
         fulfilledCount += 1;
     }, function shouldNotReject(arg) {
         $ERROR("Unexpected: promise should not reject " + arg);
     }).catch($DONE);
 
-    a[1].then(function () {
-        promise.reject(new Test262Error('Unexpected rejection'));
+    a[1].promise.then(function () {
+        d.reject(new Test262Error('Unexpected rejection'));
         triedRejection = true;
     });
 
     a[1].resolve();
-    promise.resolve();
+    d.resolve();
 });
 
 a[0].resolve();

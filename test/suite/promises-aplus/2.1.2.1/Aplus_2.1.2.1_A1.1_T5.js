@@ -18,12 +18,12 @@ function fulfilledOnce() {
     }
 }
 
-var promise = deferred();
+var d = deferred();
 
 var a = makeSequenceArray(1, $DONE, fulfilledOnce);
 
-a[0].then(function () {
-    promise.then(function expectFulfilled() {
+a[0].promise.then(function () {
+    d.promise.then(function expectFulfilled() {
         fulfilledCount += 1;
     }, function shouldNotReject(arg) {
         $ERROR("Unexpected: promise should not reject " + arg);
@@ -31,8 +31,8 @@ a[0].then(function () {
 
 }).then(function () {
     // deferred resolve-reject
-    promise.resolve();
-    promise.reject(new Test262Error('Unexpected rejection'));
+    d.resolve();
+    d.reject(new Test262Error('Unexpected rejection'));
 });
 
 a[0].resolve();
