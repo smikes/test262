@@ -1,6 +1,6 @@
 # Promises/A+ tests for Test262
 
-Version: 0.0.0 (2014-Jul-24)
+Version: 0.0.1 (2014-Jul-28)
 
 The [Promises/A+ spec](https://github.com/promises-aplus/promises-spec) is a standard for JavaScript promises.  Although Promises/A+ is not formally part of ECMA-262 version 6.0, Promises/A+ informed the development of the Promises portion of ECMAScript 6.0; a conformant ECMAScript 6.0 should have `Promise` objects that conform to Promises/A+.
 
@@ -53,22 +53,22 @@ Promises/A+ does not test the full ES6 promise behavior, but rather provides str
 
 To simplify translation of the tests, I have created a helper file `promises-aplus.js` containing a [`deferred()` function](https://github.com/smikes/test262/blob/promises-aplus-tests-1/test/harness/promises-aplus.js#L3) that returns an object conforming to this interface.
 
-### Sequence-Point Promises
+### Sequence Points
 
-In order to support sequencing of operations in the absence of `setTimeout`, I use an array of "sequence-point" promises.  For example, in order to ensure that `funcA` is asynchronously called after `funcB`, I could use the following code:
+In order to support sequencing of operations in the absence of `setTimeout`, I use an array of "sequence points".  For example, in order to ensure that `funcA` is asynchronously called after `funcB`, I could use the following code:
 
 ```
-// 'a' is an array of sequence-point promises
+// 'a' is an array of sequence points
 var a = [deferred(), deferred()];
 
 // call funcA, then resolve a[1] ..
-a[0].then(function () {
+a[0].promise.then(function () {
     funcA();
     a[1].resolve();
 });
 
 // .. which will then call funcB
-a[1].then(function () {
+a[1].promise.then(function () {
     funcB();
 });
 
@@ -81,18 +81,20 @@ There are, of course, many ways that this could be arranged, but this one provid
 
 ### Completing the Async Test
 
-In order to ensure that all sequence points of a test have been hit, I create another promise (the `All` promise) by calling `Promise.all` on the array of sequence-point promises.  The Test262 `$DONE` function will be called from the `then` of the `All` promise.
+In order to ensure that all sequence points of a test have been hit, I construct an array of promises from the sequence points, and create a promise (the `All` promise) by calling `Promise.all` on this array.  The Test262 `$DONE` function will be called from the `then` of the `All` promise.  Thus, if any sequence point is not hit, the `$DONE` function will never be called, and the test will time out.
 
-In addition, I require that all sequence-point promises settle by calling `resolve` with a falsy value.  If one of the sequence-point promises settles with `reject`, the `All` promise will reject, and the test case will fail immediately.  
+In addition, I require that all sequence points settle by calling `resolve` with a falsy value.  If one of the sequence points  settles with `reject`, the `All` promise will reject, and the test case will fail immediately.  
 
-If one of the sequence-point promises settles with `resolve` and a truthy value, the test case will fail eventually.  In the `then` handler of the `All` promise, the truthy value will be converted into an exception, and the `All` promise will call `$DONE` with the exception, causing the test case to fail.
+If one of the sequence points settles with `resolve` and a truthy value, the test case will fail eventually.  In the `then` handler of the `All` promise, the truthy value will be converted into an exception, and the `All` promise will call `$DONE` with the exception, causing the test case to fail.
 
-Since the sequence-point promises and the `All` promise have strict requirements about how they are resolved,
-they are not suitable for testing.  Tests should be written about other promises generated with the `deferred()` function.  The convention I have adopted is that sequence-point promises are stored in an array named `a` and promises whose properties are being tested are named `promise` or `promise1`, `promise2` etc.
+Since the sequence points and the `All` promise have strict requirements about how they are resolved,
+they should not be used to test the `Promise` implementation. Tests should be written about deferreds generated directly using the `deferred()` function.  The convention I have adopted is that sequence points are stored in an array named `a`; and promises whose properties are being tested are named `promise` or `promise1`, `promise2` etc. ; and deferreds whose properties are being tested are named `deferred` or `d1`, `d2`, etc.
 
 ### Assertions
 
-Although assertions and test failures can be signaled by rejecting a sequence-point promise, it is also desirable to call an assertion function before ending the test.  There is a hook in the `All` promise's resolution function for calling a test-specific assertion function.  The assertion function is called after checking the sequence-point resolutions array.  To signal test failure, this function should throw an exception, for example by calling the Test262 `$ERROR` function.  The return value of the assertion function is ignored.
+Although assertions and test failures can be signaled by rejecting a sequence point, it is also desirable to call an assertion function before ending the test.  There is a hook in the `All` promise's resolution function for calling a test-specific assertion function.  To signal test failure, this function should throw an exception, typically by calling the Test262 `$ERROR` function.
+
+The assertion function is called after checking the sequence-point resolutions array.  No arguments are passed to the assertion function, and its return value is ignored.
 
 ### Helper Function `makeSequenceArray`
 
@@ -100,7 +102,7 @@ There is a helper function which creates an array of sequence points, sets up th
 
 ```
 /***
- * @param {Number} n Number of sequence-point promises to create
+ * @param {Number} n Number of sequence points to create
  * @param {Function} done(arg) Function to call on completion
  * @param arg Argument to done function; if truthy, test fails
  * @param {Function} additionalAssertions (optional) function to call after all sequence points
@@ -108,7 +110,7 @@ There is a helper function which creates an array of sequence points, sets up th
 function makeSequenceArray(n, done, additionalAssertions) {
 ```
 
-This function creates an array of sequence-point promises containing `n` deferreds.  It creates an `All` promise by calling `Promise.all` on the array.  When resolved, the `All` Promise will check all sequence-point promise resolutions, call the `additionalAssertions` function (if supplied), and finally call the `done` function.  If the `All` promise is rejected, the `done` function will be called immediately to signal failure.
+This function creates an array of sequence points containing `n` deferreds.  It creates an `All` promise by calling `Promise.all`.  When resolved, the `All` Promise will check all sequence-point resolutions, call the `additionalAssertions` function (if supplied), and finally call the `done` function.  If the `All` promise is rejected, the `done` function will be called immediately to signal failure.
 
 An example of using `makeSequenceArray` can be found is used in the A+ tests that have been manually created, e.g., [`Aplus_2.1.2.1_A1.1_T5`](https://github.com/smikes/test262/blob/promises-aplus-tests-1/test/suite/promises-aplus/2.1.2.1/Aplus_2.1.2.1_A1.1_T5.js#L23)  
 
@@ -135,11 +137,12 @@ function fulfilledOnce() {
     }
 }
 
-var promise = deferred();
+var d = deferred(),
+    promise = d.promise;
 
 var a = makeSequenceArray(1, $DONE, fulfilledOnce);
 
-a[0].then(function () {
+a[0].promise.then(function () {
     promise.then(function expectFulfilled() {
         fulfilledCount += 1;
     }, function shouldNotReject(arg) {
@@ -148,8 +151,8 @@ a[0].then(function () {
 
 }).then(function () {
     // deferred resolve-reject
-    promise.resolve();
-    promise.reject(new Test262Error('Unexpected rejection'));
+    d.resolve();
+    d.reject(new Test262Error('Unexpected rejection'));
 });
 
 a[0].resolve();
