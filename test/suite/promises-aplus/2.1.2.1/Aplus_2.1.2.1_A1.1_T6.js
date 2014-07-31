@@ -1,14 +1,13 @@
 /// Copyright 2014 Ecma International. All rights reserved.
 
-/**
- * Promises/A+ 2.1.2.1 When fulfilled, a promise must not transition to any other state
- *
- * @description fulfilled-immediately then delay-rejected promise does not transition
- * @author Sam Mikes
- */
+/*---
+ info: Promises/A+ 2.1.2.1 When fulfilled, a promise must not transition to any other state
+ description: fulfilled-immediately then delay-rejected promise does not transition
+ author: Sam Mikes
+ includes: [promises-aplus.js]
+---*/
 
-/*global $INCLUDE, $ERROR, $DONE, makeSequenceArray, Test262Error*/
-$INCLUDE('promises-aplus.js');
+/*global $ERROR, $DONE, makeSequenceArray, Test262Error*/
 
 var fulfilledCount = 0,
     triedRejection = false;
