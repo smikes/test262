@@ -6,9 +6,10 @@ info: FunctionDeclaration within a "for-in" Statement is not allowed
 description: >
     Declaring function within a "for-in" Statement that is within
     function declaration
-flags: [negative]
+negative: SyntaxError
 ---*/
 
+throw NotEarlyError;
 function(){
 
 for(x in this){

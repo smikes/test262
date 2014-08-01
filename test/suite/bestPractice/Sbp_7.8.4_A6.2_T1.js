@@ -4,8 +4,9 @@
 /*---
 info: "HexEscapeSequence :: x HexDigit is incorrect"
 description: "HexDigit :: 1"
-flags: [negative]
+negative: SyntaxError
 ---*/
 
 //CHECK#1
+throw NotEarlyError;
 "\x1"
