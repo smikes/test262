@@ -7,7 +7,7 @@ es5id: 11.13.2_A2.2_T7
 description: >
     If Type(LeftHandSideExpression) is not Reference, throw
     ReferenceError (or SyntaxError). Check operator is "x >>= y"
-flags: [negative]
+negative: ReferenceError
 ---*/
 
 //CHECK#1
