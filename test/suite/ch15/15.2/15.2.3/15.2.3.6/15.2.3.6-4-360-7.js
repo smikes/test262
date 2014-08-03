@@ -17,6 +17,10 @@ includes:
 ---*/
 
 function testcase() {
+    function getFunc() {
+        return 20;
+    }
+
         var obj = fnGlobalObject();
         try {
             Object.defineProperty(obj, "0", {
@@ -27,9 +31,6 @@ function testcase() {
             });
             var desc1 = Object.getOwnPropertyDescriptor(obj, "0");
 
-            function getFunc() {
-                return 20;
-            }
             Object.defineProperty(obj, "0", {
                 get: getFunc
             });

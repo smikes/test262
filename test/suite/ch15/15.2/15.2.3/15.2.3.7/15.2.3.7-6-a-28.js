@@ -21,7 +21,14 @@ function testcase() {
                 value: 1001
             }
         });
-        obj.prop = 1002;
+        try {
+            obj.prop = 1002;
+        } catch(se) {
+            // strict mode: expect TypeError
+            if (!/TypeError/.test(se)) {
+                $ERROR("Expected TypeError, got " + se);
+            }
+        }
         return obj.hasOwnProperty("prop") && obj.prop === 1001;
     }
 runTestCase(testcase);

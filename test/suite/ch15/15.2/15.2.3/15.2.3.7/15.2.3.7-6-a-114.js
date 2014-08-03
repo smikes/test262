@@ -10,7 +10,7 @@ description: >
     Object.defineProperties - 'O' is an Array, 'P' is the length
     property of 'O', the [[Value]] field of 'desc' is absent, test
     every field in 'desc' is absent (15.4.5.1 step 3.a.i)
-includes: [runTestCase.js]
+includes: [runTestCase.js, propertyHelper.js]
 ---*/
 
 function testcase() {
@@ -32,10 +32,10 @@ function testcase() {
             }
         }
 
-        var verifyConfigurable = false;
-        delete arr.length;
-        verifyConfigurable = arr.hasOwnProperty("length");
+        if (isConfigurable(arr, "length")) {
+            $ERROR("Expected arr.length to not be configurable (cannot delete)");
+        }
 
-        return verifyValue && verifyWritable && !verifyEnumerable && verifyConfigurable;
+        return verifyValue && verifyWritable && !verifyEnumerable;
     }
 runTestCase(testcase);

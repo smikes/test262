@@ -10,7 +10,7 @@ description: >
     Object.defineProperties will not throw TypeError when
     P.configurable is false, P.[[Set]] and properties.[[Set]] are
     undefined (8.12.9 step 11.a.i)
-includes: [runTestCase.js]
+includes: [runTestCase.js, propertyHelper.js]
 ---*/
 
 function testcase() {
@@ -34,19 +34,16 @@ function testcase() {
             }
         });
 
-        var verifyEnumerable = false;
-        for (var p in obj) {
-            if (p === "foo") {
-                verifyEnumerable = true;
-            }
+        if (isEnumerable(obj, "foo")) {
+            $ERROR("Expected obj.foo to not be enumerable");
+        }
+
+        if (isConfigurable(obj, "foo")) {
+            $ERROR("Expected obj.foo to not be configurable");
         }
 
         var desc = Object.getOwnPropertyDescriptor(obj, "foo");
 
-        var verifyConfigurable = false;
-        delete obj.foo;
-        verifyConfigurable = obj.hasOwnProperty("foo");
-
-        return verifyConfigurable && !verifyEnumerable && typeof (desc.set) === "undefined";
+        return typeof (desc.set) === "undefined";
     }
 runTestCase(testcase);

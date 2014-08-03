@@ -10,7 +10,7 @@ description: >
     Object.defineProperties - 'P' doesn't exist in 'O', test
     [[Configurable]] of 'P' is set as false value if absent in data
     descriptor 'desc' (8.12.9 step 4.a.i)
-includes: [runTestCase.js]
+includes: [runTestCase.js, propertyHelper.js]
 ---*/
 
 function testcase() {
@@ -20,7 +20,10 @@ function testcase() {
         Object.defineProperties(obj, {
             prop: { value: 1001 }
         });
-        delete obj.prop;
+
+        if (isConfigurable(obj, "prop")) {
+            $ERROR("Expected obj[prop] to not be configurable if not specified.");
+        }
         return obj.hasOwnProperty("prop") && obj.prop === 1001;        
     }
 runTestCase(testcase);

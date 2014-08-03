@@ -2,6 +2,28 @@
 //Verify all attributes specified accessor property of given object:
 //get, set, enumerable, configurable
 //If all attribute values are expected, return true, otherwise, return false
+
+function isConfigurable(obj, name) {
+    try {
+        delete obj[name];
+    } catch (de) {
+        if (!de instanceof TypeError)
+            $ERROR("Expected TypeError, got " + de);
+    }
+    // return: did delete succeed?
+    return !obj.hasOwnProperty(name);
+}
+
+function isEnumerable(obj, name) {
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop) && prop === name) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function accessorPropertyAttributesAreCorrect(obj,
                                               name,
                                               get,
@@ -41,32 +63,16 @@ function accessorPropertyAttributesAreCorrect(obj,
             }
         }
     } catch (se) {
-        throw se;
+        if (!se instanceof TypeError)
+            throw se;
     }
 
 
-    var enumerated = false;
-    for (var prop in obj) {
-        if (obj.hasOwnProperty(prop) && prop === name) {
-            enumerated = true;
-        }
-    }
-
-    if (enumerated !== enumerable) {
+    if (enumerable !== isEnumerable(obj, name)) {
         attributesCorrect = false;
     }
 
-
-    var deleted = false;
-    try {
-        delete obj[name];
-    } catch (de) {
-        throw de;
-    }
-    if (!obj.hasOwnProperty(name)) {
-        deleted = true;
-    }
-    if (deleted !== configurable) {
+    if (configurable !== isConfigurable(obj, name)) {
         attributesCorrect = false;
     }
 

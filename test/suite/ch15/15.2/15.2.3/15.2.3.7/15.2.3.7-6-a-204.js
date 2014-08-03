@@ -12,7 +12,7 @@ description: >
     [[Configurable]] of 'P' property in 'Attributes' is set as false
     value if [[Configurable]] is absent in accessor descriptor 'desc'
     (15.4.5.1 step 4.c)
-includes: [runTestCase.js]
+includes: [runTestCase.js, propertyHelper.js]
 ---*/
 
 function testcase() {
@@ -33,12 +33,12 @@ function testcase() {
             }
         });
 
-        beforeDeleted = arr.hasOwnProperty("0");
-        delete arr[0];
-        afterDeleted = arr.hasOwnProperty("0");
+        if (isConfigurable(arr, "0")) {
+            $ERROR("Expected arr[0] to not be configurable (cannot delete)");
+        }
 
         arr[0] = 101;
 
-        return beforeDeleted && afterDeleted && arr[0] === 101 && arr.verifySetter === 101;
+        return arr[0] === 101 && arr.verifySetter === 101;
     }
 runTestCase(testcase);
