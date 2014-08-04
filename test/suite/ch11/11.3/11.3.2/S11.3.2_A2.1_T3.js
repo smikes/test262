@@ -2,10 +2,12 @@
 // This code is governed by the BSD license found in the LICENSE file.
 
 /*---
-info: Operator x-- uses GetValue and PutValue
+info: >
+ Operator x-- uses GetValue and PutValue
+ ES6, 12.4.1 and 12.5.1 specify ReferenceError
 es5id: 11.3.2_A2.1_T3
-description: If Type(x) is not Reference, throw ReferenceError (or SyntaxError)
-negative: Error
+description: If Type(x) is not Reference, throw ReferenceError
+negative: ReferenceError
 ---*/
 
 //CHECK#1

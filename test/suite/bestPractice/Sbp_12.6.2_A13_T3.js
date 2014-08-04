@@ -9,7 +9,6 @@ description: >
 negative: SyntaxError
 ---*/
 
-throw NotEarlyError;
 function(){
 
 while(0){

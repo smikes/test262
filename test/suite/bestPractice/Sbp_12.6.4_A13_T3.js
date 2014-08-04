@@ -9,7 +9,6 @@ description: >
 negative: SyntaxError
 ---*/
 
-throw NotEarlyError;
 function(){
 
 for(x in this){

@@ -8,5 +8,4 @@ negative: SyntaxError
 ---*/
 
 //CHECK#
-throw NotEarlyError;
 "\x0G"
