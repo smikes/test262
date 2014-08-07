@@ -11,10 +11,6 @@ function $DONE() {
     if (testDescrip.negative !== undefined) {
         //TODO - come up with a generic way of catching the error type
         //from this.onerror
-        testDescrip.negative = testDescrip.negative === "NotEarlyError" ?
-                testDescrip.negative :
-            (testDescrip.negative === "^((?!NotEarlyError).)*$" ?
-                testDescrip.negative : ".");
         if (this.iframeError === undefined) { //no exception was thrown
             testRun(testDescrip.id,
                     testDescrip.path,
