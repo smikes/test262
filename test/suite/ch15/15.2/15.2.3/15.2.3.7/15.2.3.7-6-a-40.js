@@ -9,9 +9,7 @@ es5id: 15.2.3.7-6-a-40
 description: >
     Object.defineProperties - 'P' is accessor descriptor and every
     fields in 'desc' is the same with 'P' (8.12.9 step 6)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

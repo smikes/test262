@@ -12,9 +12,7 @@ description: >
     of 'O', test TypeError is thrown when updating the
     [[Configurable]] attribute value of 'P' which is defined as
     non-configurable (10.6 [[DefineOwnProperty]] step 4)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

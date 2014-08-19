@@ -10,9 +10,7 @@ description: >
     Object.defineProperties will not throw TypeError when
     P.configurable is false, P.[[Get]] and properties.[[Get]] are
     undefined (8.12.9 step 11.a.ii)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

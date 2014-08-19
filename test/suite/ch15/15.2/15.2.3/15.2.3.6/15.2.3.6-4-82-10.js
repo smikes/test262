@@ -13,9 +13,7 @@ description: >
     'desc' is a generic descriptor which contains [[Enumerable]]
     attribute as true and [[Configurable]] attribute is false, 'name'
     property is an accessor property (8.12.9 step 8)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

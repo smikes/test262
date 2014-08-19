@@ -10,9 +10,7 @@ description: >
     Object.defineProperty will throw TypeError when name.configurable
     = false, name.writable = false, desc.value = +0 and name.value =
     -0 (8.12.9 step 10.a.ii.1)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

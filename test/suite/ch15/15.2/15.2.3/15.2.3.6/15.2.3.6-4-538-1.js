@@ -10,9 +10,7 @@ description: >
     ES5 Attributes - Updating an indexed 'P' whose [[Configurable]]
     attribute is true to a data property is successful, 'A' is an
     Array object (8.12.9 - step 9.c.i)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

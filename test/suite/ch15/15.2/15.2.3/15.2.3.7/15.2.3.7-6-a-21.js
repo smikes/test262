@@ -9,9 +9,7 @@ es5id: 15.2.3.7-6-a-21
 description: >
     Object.defineProperties - 'O' is an Error object which implements
     its own [[GetOwnProperty]] method to get 'P' (8.12.9 step 1 )
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

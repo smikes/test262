@@ -10,9 +10,7 @@ description: >
     Object.defineProperty - 'name' property doesn't exist in 'O', test
     [[Configurable]] of 'name' property is set as false if it is
     absent in data descriptor 'desc' (8.12.9 step 4.a.i)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

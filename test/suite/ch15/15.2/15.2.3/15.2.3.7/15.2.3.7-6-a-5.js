@@ -9,9 +9,7 @@ es5id: 15.2.3.7-6-a-5
 description: >
     Object.defineProperties - 'P' is own accessor property (8.12.9
     step 1 )
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

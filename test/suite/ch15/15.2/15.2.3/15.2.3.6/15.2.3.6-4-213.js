@@ -11,9 +11,7 @@ description: >
     named property, 'name' makes no change if the value of every field
     in 'desc' is the same value as the corresponding field in
     'name'(desc is accessor property) (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

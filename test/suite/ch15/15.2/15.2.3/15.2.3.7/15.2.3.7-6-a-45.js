@@ -9,9 +9,7 @@ es5id: 15.2.3.7-6-a-45
 description: >
     Object.defineProperties - desc.value is +0 and P.value is -0
     (8.12.9 step 6)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

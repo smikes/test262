@@ -11,9 +11,7 @@ description: >
     property, the [[Set]] field of 'desc' and the [[Set]] attribute
     value of 'P' are two objects which refer to the same object
     (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

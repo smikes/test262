@@ -10,9 +10,7 @@ description: >
     ES5 Attributes - Updating an indexed accessor property 'P' whose
     [[Configurable]] attribute is true to a data property is
     successful, 'O' is an Arguments object
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

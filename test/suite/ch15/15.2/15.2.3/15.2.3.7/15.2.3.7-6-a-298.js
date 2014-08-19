@@ -12,9 +12,7 @@ description: >
     [[ParameterMap]] of 'O', test TypeError is thrown when updating
     the [[Get]] attribute value of 'P' which is not configurable (10.6
     [[DefineOwnProperty]] step 4)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

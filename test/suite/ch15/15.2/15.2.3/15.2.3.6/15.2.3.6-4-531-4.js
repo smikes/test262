@@ -10,10 +10,7 @@ description: >
     Object.defineProperty will update [[Get]] and [[Set]] attributes
     of named accessor property 'P' successfully when [[Configurable]]
     attribute is true, 'O' is the global object (8.12.9 step 11)
-includes:
-    - runTestCase.js
-    - fnGlobalObject.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js, fnGlobalObject.js]
 ---*/
 
 function testcase() {

@@ -9,9 +9,7 @@ es5id: 15.2.3.7-6-a-108
 description: >
     Object.defineProperties - 'P' is accessor property, P.configurable
     is true and properties.configurable is false
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

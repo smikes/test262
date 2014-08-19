@@ -12,9 +12,7 @@ description: >
     'O', test TypeError is thrown when updating the [[Value]]
     attribute value of 'P' whose writable and configurable attributes
     are false (10.6 [[DefineOwnProperty]] step 4)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -14,9 +14,7 @@ description: >
     [[Get]] field of 'desc' and the [[Get]] attribute value of 'P' are
     two objects which refer to the different objects  (15.4.5.1 step
     4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

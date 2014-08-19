@@ -11,9 +11,7 @@ description: >
     attributes of a named accessor property 'P' whose [[Configurable]]
     attribute is false and throws TypeError exception, 'O' is an
     Object object (8.12.9 step 11.a)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

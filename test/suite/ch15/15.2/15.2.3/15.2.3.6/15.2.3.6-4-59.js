@@ -9,9 +9,7 @@ es5id: 15.2.3.6-4-59
 description: >
     Object.defineProperty - 'name' is accessor descriptor and every
     fields in 'desc' is absent (8.12.9 step 5)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

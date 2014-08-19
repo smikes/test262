@@ -10,9 +10,7 @@ description: >
     Object.defineProperty - 'name' and 'desc' are accessor properties,
     name.enumerable and desc.enumerable are different values (8.12.9
     step 12)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

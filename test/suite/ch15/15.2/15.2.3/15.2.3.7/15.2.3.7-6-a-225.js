@@ -10,9 +10,7 @@ description: >
     Object.defineProperties - 'O' is an Array, 'P' is an array index
     property that already exists on 'O' with [[Configurable]] true,
     the [[Configurable]] field of 'desc' is true (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

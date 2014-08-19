@@ -10,9 +10,7 @@ description: >
     Object.freeze - The [[Configurable]] attribute of all own data
     property of 'O' is set to false while other attributes are
     unchanged
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

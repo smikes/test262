@@ -9,9 +9,7 @@ es5id: 15.2.3.7-6-a-65
 description: >
     Object.defineProperties throws TypeError when P.configurable is
     false and desc.configurable is true (8.12.9 step 7.a)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

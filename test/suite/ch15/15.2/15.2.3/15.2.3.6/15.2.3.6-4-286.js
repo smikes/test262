@@ -11,9 +11,7 @@ description: >
     accessor property of 'O', and 'desc' is accessor descriptor, test
     TypeError is thrown when updating the [[Set]] attribute value of
     'name' (15.4.5.1 step 5)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

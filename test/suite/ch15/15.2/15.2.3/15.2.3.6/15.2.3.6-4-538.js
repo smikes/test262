@@ -10,9 +10,7 @@ description: >
     ES5 Attributes - success to update the accessor property ([[Get]]
     is a Function, [[Set]] is a Function, [[Enumerable]] is true,
     [[Configurable]] is true) to a data property
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

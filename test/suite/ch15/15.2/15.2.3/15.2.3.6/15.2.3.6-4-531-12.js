@@ -10,9 +10,7 @@ description: >
     Object.defineProperty will update [[Get]] and [[Set]] attributes
     of indexed accessor property successfully when [[Configurable]]
     attribute is true, 'O' is an Arguments object (8.12.9 step 11)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

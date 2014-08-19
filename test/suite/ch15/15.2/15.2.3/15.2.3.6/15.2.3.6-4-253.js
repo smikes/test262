@@ -13,9 +13,7 @@ description: >
     false, test TypeError is thrown if the [[Set]] field of 'desc' is
     present, and the [[Set]] field of 'desc' is an object and the
     [[Set]] attribute value of 'name' is undefined (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

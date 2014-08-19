@@ -13,9 +13,7 @@ description: >
     is thrown when updating the [[Set]] attribute value of 'name'
     which is defined as non-configurable (10.6 [[DefineOwnProperty]]
     steps 4 and 5a)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -12,9 +12,7 @@ description: >
     [[ParameterMap]] of 'O', and 'desc' is data descriptor, test
     updating multiple attribute values of 'name' (10.6
     [[DefineOwnProperty]] step 3)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

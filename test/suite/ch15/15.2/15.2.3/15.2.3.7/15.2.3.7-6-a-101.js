@@ -10,9 +10,7 @@ description: >
     Object.defineProperties - 'P' is accessor property, both
     properties.[[Get]] and P.[[Get]] are two different values (8.12.9
     step 12)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

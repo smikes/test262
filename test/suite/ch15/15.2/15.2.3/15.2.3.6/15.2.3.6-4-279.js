@@ -10,9 +10,7 @@ description: >
     Object.defineProperty - 'O' is an Array, 'name' is generic own
     accessor property of 'O', and 'desc' is accessor descriptor, test
     updating multiple attribute values of 'name' (15.4.5.1 step 5)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

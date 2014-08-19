@@ -11,9 +11,7 @@ description: >
     named property, 'name' property doesn't exist in 'O', test 'name'
     is defined as data property when 'desc' is generic descriptor
     (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

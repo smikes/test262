@@ -9,9 +9,7 @@ es5id: 15.2.3.6-4-100
 description: >
     Object.defineProperty - 'name' and 'desc' are data properties,
     desc.value and name.value are two different values (8.12.9 step 12)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

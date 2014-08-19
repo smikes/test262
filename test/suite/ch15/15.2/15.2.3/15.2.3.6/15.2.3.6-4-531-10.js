@@ -11,9 +11,7 @@ description: >
     of indexed accessor property 'P' successfully when
     [[Configurable]] attribute is true, 'O' is an Object object
     (8.12.9 step 11)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

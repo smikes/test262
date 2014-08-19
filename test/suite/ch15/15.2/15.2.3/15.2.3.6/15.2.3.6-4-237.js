@@ -11,9 +11,7 @@ description: >
     property, the [[Configurable]] field of 'desc' and the
     [[Configurable]] attribute value of 'name' are two booleans with
     different values (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

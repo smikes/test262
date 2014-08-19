@@ -9,9 +9,7 @@ es5id: 15.2.3.7-6-a-41
 description: >
     Object.defineProperties - type of desc.value is different from
     type of P.value (8.12.9 step 6)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

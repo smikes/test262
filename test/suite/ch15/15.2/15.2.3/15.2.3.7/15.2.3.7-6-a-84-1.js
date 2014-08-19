@@ -11,9 +11,7 @@ description: >
     P.configurable is false, P.writalbe is false, properties.value and
     P.value are two Objects refer to the same object which has been
     updated before use it to update the object (8.12.9 step 10.a.ii.1)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

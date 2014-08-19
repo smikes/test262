@@ -11,9 +11,7 @@ description: >
     accessor property of 'O', test TypeError is thrown when updating
     the [[Enumerable]] attribute value of 'name' which is defined as
     non-configurable (15.4.5.1 step 5)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

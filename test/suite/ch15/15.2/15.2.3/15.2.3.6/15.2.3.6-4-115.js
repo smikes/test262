@@ -10,9 +10,7 @@ description: >
     Object.defineProperty - 'name' and 'desc' are accessor properties,
     several attributes values of 'name' and 'desc' are different
     (8.12.9 step 12)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

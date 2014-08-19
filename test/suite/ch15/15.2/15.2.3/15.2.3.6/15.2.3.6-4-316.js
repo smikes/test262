@@ -11,9 +11,7 @@ description: >
     own data property of 'O', and 'desc' is data descriptor, test
     updating multiple attribute values of 'P' (10.6
     [[DefineOwnProperty]] step 3)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

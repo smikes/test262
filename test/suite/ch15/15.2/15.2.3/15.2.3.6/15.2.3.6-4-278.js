@@ -10,9 +10,7 @@ description: >
     Object.defineProperty - 'name' is generic property that won't
     exist on 'O', and 'desc' is accessor descriptor, test 'name' is
     defined in 'O' with all correct attribute values (15.4.5.1 step 5)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -12,9 +12,7 @@ description: >
     test TypeError is thrown when updating the [[Enumerable]]
     attribute value of 'P' which is not configurable (10.6
     [[DefineOwnProperty]] step 4)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {
@@ -32,7 +30,7 @@ function testcase() {
                     enumerable: false
                 });
             } catch (e) {
-                verifyFormal = c === 3;
+                var verifyFormal = c === 3;
                 return e instanceof TypeError &&
                     accessorPropertyAttributesAreCorrect(arguments, "genericProperty", undefined, setFunc, "genericPropertyString", true, false) && verifyFormal;
             }

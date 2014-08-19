@@ -11,9 +11,7 @@ description: >
     that has formal parameters, 'P' is own property, and 'desc' is
     data descriptor, test 'P' is defined in 'O' with all correct
     attribute values (10.6 [[DefineOwnProperty]] step 3)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

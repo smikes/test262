@@ -9,9 +9,7 @@ es5id: 15.2.3.7-6-a-59
 description: >
     Object.defineProperties - both desc.[[Set]] and P.[[Set]] are two
     objects which refer to the same object (8.12.9 step 6)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

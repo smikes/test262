@@ -10,9 +10,7 @@ description: >
     Object.defineProperty - 'name' and 'desc' are accessor properties,
     name.[[Set]] is undefined and desc.[[Set]] is function (8.12.9
     step 12)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -11,9 +11,7 @@ description: >
     property, TypeError is thrown if 'P' is accessor property, and
     'desc' is data descriptor, and the [[Configurable]] attribute
     value of 'P' is false  (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

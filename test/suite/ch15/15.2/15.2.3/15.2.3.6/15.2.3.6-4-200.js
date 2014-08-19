@@ -12,9 +12,7 @@ description: >
     [[Value]] of 'name' property of 'Attributes' is set as undefined
     if [[Value]] is absent in data descriptor 'desc' (15.4.5.1 step
     4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

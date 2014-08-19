@@ -9,9 +9,7 @@ es5id: 15.2.3.9-2-b-i-1
 description: >
     Object.freeze - The [[Wrtiable]] attribute of own data property of
     'O' is set to false while other attributes are unchanged
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

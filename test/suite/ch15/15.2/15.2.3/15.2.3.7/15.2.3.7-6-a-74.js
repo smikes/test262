@@ -10,9 +10,7 @@ description: >
     Object.defineProperties will not throw TypeError if P.configurable
     is false, P.writalbe is false, P.value is null and
     properties.value is null (8.12.9 step 10.a.ii.1)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

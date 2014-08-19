@@ -10,9 +10,7 @@ description: >
     Object.defineProperties - 'O' is an Array, 'P' is generic
     property, and 'desc' is accessor descriptor, test 'P' is defined
     in 'O' with all correct attribute values (15.4.5.1 step 5)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

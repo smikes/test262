@@ -11,9 +11,7 @@ description: >
     attributes of an indexed accessor property 'P' whose
     [[Configurable]] attribute is false, 'O' is an Arguments object
     (8.12.9 step 11.a)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

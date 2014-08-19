@@ -10,9 +10,7 @@ description: >
     Object.seal - the [[Configurable]] attribute of own data property
     of 'O' is set from true to false and other attributes of the
     property are unaltered
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

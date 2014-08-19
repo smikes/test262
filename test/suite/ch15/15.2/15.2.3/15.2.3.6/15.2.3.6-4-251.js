@@ -14,9 +14,7 @@ description: >
     value of 'name' is false, and the [[Value]] field of 'desc' and
     the [[Value]] attribute value of 'name' are two objects which
     refer to the different objects (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -11,9 +11,7 @@ description: >
     named property,  'name' is accessor property and  assignment to
     the accessor property, fails to convert accessor property from
     accessor property to data property (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -9,9 +9,7 @@ es5id: 15.2.3.7-6-a-102
 description: >
     Object.defineProperties - 'P' is accessor property, P.[[Get]] is
     present and properties.[[Get]] is undefined (8.12.9 step 12)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

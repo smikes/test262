@@ -13,9 +13,7 @@ description: >
     accessor descriptor, test 'name' is defined in 'O' with all
     correct attribute values (10.6 [[DefineOwnProperty]] step 3 and
     step 5a)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

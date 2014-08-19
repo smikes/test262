@@ -10,9 +10,7 @@ description: >
     Object.defineProperties throws TypeError when P is data property
     and  P.configurable is false, desc is accessor property (8.12.9
     step 9.a)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

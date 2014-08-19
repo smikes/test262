@@ -12,9 +12,7 @@ description: >
     TypeError is thrown when updating the [[Configurable]] attribute
     value of 'P' which is not configurable (10.6 [[DefineOwnProperty]]
     step 4)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

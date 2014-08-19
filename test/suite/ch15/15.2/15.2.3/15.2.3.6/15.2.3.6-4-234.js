@@ -11,9 +11,7 @@ description: >
     property, the [[Enumerable]] field of 'desc' and the
     [[Enumerable]] attribute value of 'name' are two booleans with
     same value (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

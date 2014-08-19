@@ -10,9 +10,7 @@ description: >
     Object.defineProperties throws TypeError when P.configurable is
     false, P.enumerable and desc.enumerable has different values
     (8.12.9 step 7.b)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

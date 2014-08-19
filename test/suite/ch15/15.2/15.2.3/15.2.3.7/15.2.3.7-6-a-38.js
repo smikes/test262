@@ -10,9 +10,7 @@ description: >
     Object.defineProperties - 'P' exists in 'O', test 'P' makes no
     change if 'desc' is generic descriptor without any attribute
     (8.12.9 step 5)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -11,9 +11,7 @@ description: >
     P.configurable is false, both properties.[[Set]] and P.[[Set]] are
     two objects which refer to the same object and the object has been
     updated after defined(8.12.9 step 11.a.i)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

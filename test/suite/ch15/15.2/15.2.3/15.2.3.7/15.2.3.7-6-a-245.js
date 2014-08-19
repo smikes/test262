@@ -13,9 +13,7 @@ description: >
     descriptor, the [[Get]] field of 'desc' is present, and  the
     [[Get]] field of 'desc' is an object and the [[Get]] attribute
     value of 'P' is undefined  (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

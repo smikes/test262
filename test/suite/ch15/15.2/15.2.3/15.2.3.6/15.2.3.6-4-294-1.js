@@ -13,9 +13,7 @@ description: >
     is thrown when updating the [[Writable]] attribute value of 'name'
     which is defined as non-configurable (10.6 [[DefineOwnProperty]]
     step 4 and 5b)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

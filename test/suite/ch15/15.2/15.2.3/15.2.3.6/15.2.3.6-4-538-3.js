@@ -10,10 +10,7 @@ description: >
     ES5 Attributes - Updating a named accessor property 'P' whose
     [[Configurable]] attribute is true to a data property is
     successful, 'O' is the global object
-includes:
-    - runTestCase.js
-    - fnGlobalObject.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js, fnGlobalObject.js]
 ---*/
 
 function testcase() {

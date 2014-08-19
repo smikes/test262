@@ -11,9 +11,7 @@ description: >
     generic own accessor property of 'O', and 'desc' is accessor
     descriptor, test updating multiple attribute values of 'P' (10.6
     [[DefineOwnProperty]] step 4)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -9,9 +9,7 @@ es5id: 15.2.3.6-4-57
 description: >
     Object.defineProperty - 'desc' is accessor descriptor, test
     updating all attribute values of 'name' (8.12.9 step 4.b.i)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

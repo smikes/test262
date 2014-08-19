@@ -10,9 +10,7 @@ description: >
     Object.defineProperties - 'P' is accessor property, several
     attributes values of P and properties are different (8.12.9 step
     12)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

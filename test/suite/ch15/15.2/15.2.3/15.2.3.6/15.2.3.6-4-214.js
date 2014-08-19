@@ -12,9 +12,7 @@ description: >
     false, test TypeError is thrown when the type of the [[Value]]
     field of 'desc' is different from the type of the [[Value]]
     attribute value of 'name' (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

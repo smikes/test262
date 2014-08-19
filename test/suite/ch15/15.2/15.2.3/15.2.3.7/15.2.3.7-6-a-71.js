@@ -10,9 +10,7 @@ description: >
     Object.defineProperties throws TypeError when 'P' is data property
     and  P.configurable is false, P.writable is false, desc is data
     property and  desc.writable is true (8.12.9 step 10.a.i)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

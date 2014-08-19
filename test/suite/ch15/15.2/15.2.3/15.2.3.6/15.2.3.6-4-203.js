@@ -12,9 +12,7 @@ description: >
     [[Configurable]] is absent in data descriptor 'desc', test
     [[Configurable]] of property 'name' is set to false (15.4.5.1 step
     4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -10,9 +10,7 @@ description: >
     Object.defineProperty - 'O' is an Array, 'name' is an array index
     named property, 'name' makes no change if every field in 'desc' is
     absent (name is data property) (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

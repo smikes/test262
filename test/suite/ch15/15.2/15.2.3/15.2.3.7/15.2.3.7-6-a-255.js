@@ -11,9 +11,7 @@ description: >
     named property that already exists on 'O' is accessor property and
     'desc' is accessor descriptor, test setting the [[Get]] attribute
     value of 'P' as undefined  (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -10,9 +10,7 @@ description: >
     Object.defineProperty - 'O' is an Array, 'name' is generic own
     data property of 'O', and 'desc' is data descriptor, test updating
     multiple attribute values of 'name' (15.4.5.1 step 5)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

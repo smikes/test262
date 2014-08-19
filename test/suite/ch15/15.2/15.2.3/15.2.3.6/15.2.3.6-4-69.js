@@ -9,9 +9,7 @@ es5id: 15.2.3.6-4-69
 description: >
     Object.defineProperty - both desc.value and name.value are boolean
     values with the same value (8.12.9 step 6)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -10,10 +10,7 @@ description: >
     Object.defineProperties - 'O' is the global object which
     implements its own [[GetOwnProperty]] method to get 'P' (8.12.9
     step 1 )
-includes:
-    - runTestCase.js
-    - fnGlobalObject.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js, fnGlobalObject.js]
 ---*/
 
 function testcase() {

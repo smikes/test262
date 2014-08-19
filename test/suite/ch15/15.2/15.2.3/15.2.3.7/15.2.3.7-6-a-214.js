@@ -10,9 +10,7 @@ description: >
     Object.defineProperties - 'O' is an Array, 'name' is an array
     index property, the [[Value]] field of 'desc' is -0, and the
     [[Value]] attribute value of 'name' is +0  (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

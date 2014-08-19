@@ -11,9 +11,7 @@ description: >
     property that won't exist on 'O', and 'desc' is data descriptor,
     test 'name' is defined in 'O' with all correct attribute values
     (15.4.5.1 step 5)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

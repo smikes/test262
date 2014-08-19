@@ -9,10 +9,7 @@ es5id: 15.2.3.7-6-a-110
 description: >
     Object.defineProperties - all own properties (data property and
     accessor property)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

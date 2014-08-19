@@ -10,9 +10,7 @@ description: >
     Object.defineProperty will not throw TypeError when
     name.configurable = false, both desc.[[Get]] and name.[[Get]] are
     two objects which refer to the same object (8.12.9 step 11.a.ii)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

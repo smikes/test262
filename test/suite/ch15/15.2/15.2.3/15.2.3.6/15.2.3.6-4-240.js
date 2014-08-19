@@ -11,9 +11,7 @@ description: >
     named property, TypeError is thrown if 'name' is accessor
     property, and 'desc' is data descriptor, and the [[Configurable]]
     attribute value of 'name' is false (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -12,9 +12,7 @@ description: >
     descriptor, and the [[Configurable]] attribute value of 'name' is
     true, test 'name' is converted from data property to accessor
     property (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

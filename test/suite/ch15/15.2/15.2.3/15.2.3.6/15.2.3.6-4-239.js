@@ -12,9 +12,7 @@ description: >
     attribute value of 'name' is false, and [[Enumerable]] of 'desc'
     is present and its value is different from the [[Enumerable]]
     attribute value of 'name' (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

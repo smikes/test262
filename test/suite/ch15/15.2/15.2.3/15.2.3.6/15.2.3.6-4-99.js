@@ -10,9 +10,7 @@ description: >
     Object.defineProperty will throw TypeError when name.configurable
     = false, name.[[Get]] is undefined, desc.[[Get]] refers to an
     object (8.12.9 step 11.a.ii)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

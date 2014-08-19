@@ -11,9 +11,7 @@ description: >
     data property 'P' successfully when [[Configurable]] attribute is
     true and [[Writable]] attribute is false but not when both are
     false (8.12.9 - step Note & 10.a.ii.1)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

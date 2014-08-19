@@ -11,9 +11,7 @@ description: >
     named property, 'name' property doesn't exist in 'O' and [[Get]]
     is absent in accessor descriptor 'desc', test [[Get]] attribute of
     property 'name' is set to undefined (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

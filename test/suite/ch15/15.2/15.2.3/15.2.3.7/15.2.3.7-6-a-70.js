@@ -10,9 +10,7 @@ description: >
     Object.defineProperties - 'P' is accessor property and
     P.configurable is true, 'desc' in 'Properties' is data property
     (8.12.9 step 9.c.i)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

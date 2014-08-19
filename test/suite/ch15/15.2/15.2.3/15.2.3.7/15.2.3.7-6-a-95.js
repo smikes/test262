@@ -9,9 +9,7 @@ es5id: 15.2.3.7-6-a-95
 description: >
     Object.defineProperties - 'P' is data property, P.value is present
     and properties.value is undefined (8.12.9 step 12)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -10,9 +10,7 @@ description: >
     Object.defineProperties throws TypeError when P.configurable is
     false, both properties.[[Get]] and P.[[Get]] are two objects which
     refer to different objects (8.12.9 step 11.a.ii)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -11,9 +11,7 @@ description: >
     generic property, and 'desc' is accessor descriptor, test 'P' is
     defined in 'O' with all correct attribute values (10.6
     [[DefineOwnProperty]] step 4)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

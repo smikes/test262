@@ -10,9 +10,7 @@ description: >
     ES5 Attributes - Updating a named accessor property 'P' whose
     [[Configurable]] attribute is false to a data property does not
     succeed, 'A' is an Array object (8.12.9 step 9.a)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

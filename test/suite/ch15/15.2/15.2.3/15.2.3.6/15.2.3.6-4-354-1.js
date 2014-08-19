@@ -11,9 +11,7 @@ description: >
     property 'P' successfully when [[Configurable]] attribute is true
     and [[Writable]] attribute is false, 'O' is an Object object
     (8.12.9 step - Note)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

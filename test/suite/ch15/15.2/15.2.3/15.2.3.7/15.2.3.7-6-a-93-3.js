@@ -10,9 +10,7 @@ description: >
     Object.defineProperties will fail to update [[Value]] attribute of
     named data property 'P' when [[Configurable]] attribute of first
     updating property is false  (8.12.9 - step Note & 10.a.ii.1)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

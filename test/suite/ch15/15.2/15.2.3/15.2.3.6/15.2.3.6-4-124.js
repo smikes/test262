@@ -11,9 +11,7 @@ description: >
     property of 'O', the [[Value]] field of 'desc' is absent, test
     updating the [[Writable]] attribute of the length property from
     true to false (15.4.5.1 step 3.a.i)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

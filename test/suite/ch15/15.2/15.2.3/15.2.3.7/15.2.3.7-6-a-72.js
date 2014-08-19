@@ -11,9 +11,7 @@ description: >
     and  P.configurable is false, P.writable is false, desc is data
     property and  desc.value is not equal to P.value (8.12.9 step
     10.a.ii.1)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

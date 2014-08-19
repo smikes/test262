@@ -10,9 +10,7 @@ description: >
     Object.defineProperty - 'desc' is generic descriptor without any
     attribute, test 'name' is defined in 'obj' with all default
     attribute values (8.12.9 step 4.a.i)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

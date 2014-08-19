@@ -9,9 +9,7 @@ es5id: 15.2.3.7-6-a-52
 description: >
     Object.defineProperties - desc.value and P.value are two boolean
     values with different values (8.12.9 step 6)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

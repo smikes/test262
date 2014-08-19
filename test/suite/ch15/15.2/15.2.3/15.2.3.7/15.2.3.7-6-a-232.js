@@ -12,9 +12,7 @@ description: >
     and the [[Configurable]] attribute value of 'P' is true, test 'P'
     is converted from accessor property to data property  (15.4.5.1
     step 4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -10,9 +10,7 @@ description: >
     Object.defineProperties - both desc.configurable and
     P.configurable are boolean values with the same value (8.12.9 step
     6)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

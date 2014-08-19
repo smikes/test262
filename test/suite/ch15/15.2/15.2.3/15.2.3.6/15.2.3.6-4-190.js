@@ -11,9 +11,7 @@ description: >
     named property, 'name' is own data property, test TypeError is
     thrown on updating the configurable attribute from false to true
     (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

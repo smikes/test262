@@ -9,10 +9,7 @@ es5id: 15.2.3.8-2-b-4
 description: >
     Object.seal - all own properties of 'O' are already
     non-configurable
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

@@ -9,9 +9,7 @@ es5id: 15.2.3.6-4-62
 description: >
     Object.defineProperty - both desc.value and name.value are null
     (8.12.9 step 6)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

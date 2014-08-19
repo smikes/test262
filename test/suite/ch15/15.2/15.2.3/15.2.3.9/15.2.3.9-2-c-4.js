@@ -9,9 +9,7 @@ es5id: 15.2.3.9-2-c-4
 description: >
     Object.freeze - all own properties of 'O' are not writable and not
     configurable
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

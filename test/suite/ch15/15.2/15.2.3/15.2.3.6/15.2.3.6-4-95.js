@@ -11,9 +11,7 @@ description: >
     = false, name.writable = false, desc.value and name.value are two
     objects which refer to the different objects (8.12.9 step
     10.a.ii.1)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

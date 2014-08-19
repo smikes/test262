@@ -10,9 +10,7 @@ description: >
     Object.defineProperties - 'O' is an Array, 'P' is an array index
     named property, 'desc' is accessor descriptor, test updating all
     attribute values of 'P'  (15.4.5.1 step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {

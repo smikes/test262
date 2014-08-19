@@ -12,9 +12,7 @@ description: >
     the [[Value]] attribute value of 'name' which is defined as
     non-writable and configurable (10.6 [[DefineOwnProperty]] step 3
     and 5b)
-includes:
-    - runTestCase.js
-    - dataPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {
