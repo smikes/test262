@@ -10,12 +10,17 @@ description: >
     Object.defineProperty - 'O' is an Array, 'name' is an array index
     named property, 'name' is an inherited accessor property (15.4.5.1
     step 4.c)
-includes:
-    - runTestCase.js
-    - accessorPropertyAttributesAreCorrect.js
+includes: [propertyHelper.js]
 ---*/
 
 function testcase() {
+    function getFunc() {
+        return arrObj.helpVerifySet;
+    }
+    function setFunc(value) {
+        arrObj.helpVerifySet = value;
+    }
+
         try {
             Object.defineProperty(Array.prototype, "0", {
                 get: function () {
@@ -26,12 +31,6 @@ function testcase() {
 
             var arrObj = [];
 
-            function getFunc() {
-                return arrObj.helpVerifySet;
-            }
-            function setFunc(value) {
-                arrObj.helpVerifySet = value;
-            }
 
             Object.defineProperty(arrObj, "0", {
                 get: getFunc,
