@@ -7,7 +7,6 @@ function isConfigurable(obj, name) {
     try {
         delete obj[name];
     } catch (e) {
-        // in strict mode, throws TypeError
         if (!e instanceof TypeError) {
             $ERROR("Expected TypeError, got " + e);
         }
@@ -25,6 +24,37 @@ function isEnumerable(obj, name) {
     return false;
 }
 
+function isEqualTo(obj, name, expectedValue) {
+    var actualValue = obj[name];
+
+    if(actualValue === expectedValue ||
+       (typeof actualValue === "number" &&
+        typeof expectedValue === "number" &&
+        isNaN(actualValue) && isNaN(expectedValue)))
+        return true;
+
+    return false;
+}
+
+function isWritable(obj, name, verifyProp) {
+    var newValue = "unlikelyValue";
+
+    try {
+        obj[name] = newValue;
+    } catch (e) {
+        if (!e instanceof TypeError) {
+            $ERROR("Expected TypeError, got " + e);
+        }
+    }
+
+    if ((verifyProp && isEqualTo(obj, verifyProp, newValue)) ||
+        isEqualTo(obj, name, newValue)) {
+        return true;
+    }
+
+    return false;
+}
+
 function accessorPropertyAttributesAreCorrect(obj,
                                               name,
                                               get,
@@ -35,39 +65,19 @@ function accessorPropertyAttributesAreCorrect(obj,
     var attributesCorrect = true;
 
     if (get !== undefined) {
-        if (obj[name] !== get()) {
-            if (typeof obj[name] === "number" &&
-                isNaN(obj[name]) &&
-                typeof get() === "number" &&
-                isNaN(get())) {
-                // keep empty
-            } else {
-                attributesCorrect = false;
-            }
-        }
-    } else {
-        if (obj[name] !== undefined) {
-            attributesCorrect = false;
+        var value = get();
+        if (!isEqualTo(obj, name, value)) {
+            $ERROR("Expected obj[name] to equal " + value +
+                   ", actually " + obj[name]);
         }
     }
 
-    try {
-        var desc = Object.getOwnPropertyDescriptor(obj, name);
-        if (typeof desc.set === "undefined") {
-            if (typeof set !== "undefined") {
-                attributesCorrect = false;
-            }
-        } else {
-            obj[name] = "toBeSetValue";
-            if (obj[setVerifyHelpProp] !== "toBeSetValue") {
-                attributesCorrect = false;
-            }
+    if ((typeof set !== "undefined") && setVerifyHelpProp) {
+        if (!isWritable(obj, name, setVerifyHelpProp)) {
+            $ERROR("Expected writes to obj[name] to set " + setVerifyHelpProp +
+                   ", but did not.");
         }
-    } catch (se) {
-        if (!se instanceof TypeError)
-            throw se;
     }
-
 
     if (enumerable !== isEnumerable(obj, name)) {
         $ERROR("Expected obj[prop].[[Enumerable]] to be " +
@@ -94,42 +104,17 @@ function dataPropertyAttributesAreCorrect(obj,
                                           configurable) {
     var attributesCorrect = true;
 
-    if (obj[name] !== value) {
-        if (typeof obj[name] === "number" &&
-            isNaN(obj[name]) &&
-            typeof value === "number" &&
-            isNaN(value)) {
-            // keep empty
-        } else {
-            attributesCorrect = false;
-        }
+    if (!isEqualTo(obj, name, value)) {
+        $ERROR("Expected obj[name] to equal " + value +
+               ", actually " + obj[name]);
     }
 
-    try {
-        if (obj[name] === "oldValue") {
-            obj[name] = "newValue";
-        } else {
-            obj[name] = "OldValue";
-        }
-    } catch (we) {
+    if (writable != isWritable(obj, name)) {
+        $ERROR("Expected obj[prop].[[Writable]] to be " +
+               writable + ", actually " + !writable);
     }
 
-    var overwrited = false;
-    if (obj[name] !== value) {
-        if (typeof obj[name] === "number" &&
-            isNaN(obj[name]) &&
-            typeof value === "number" &&
-            isNaN(value)) {
-            // keep empty
-        } else {
-            overwrited = true;
-        }
-    }
-    if (overwrited !== writable) {
-        attributesCorrect = false;
-    }
-
-    if(enumerable !== isEnumerable(obj, prop)) {
+    if(enumerable !== isEnumerable(obj, name)) {
         $ERROR("Expected obj[prop].[[Enumerable]] to be " +
                enumerable + ", actually " + !enumerable);
     }
@@ -141,4 +126,10 @@ function dataPropertyAttributesAreCorrect(obj,
     }
 
     return attributesCorrect;
+}
+
+function runTestCase(testcase) {
+    if (testcase() !== true) {
+        $ERROR("Test case returned non-true value!");
+    }
 }
