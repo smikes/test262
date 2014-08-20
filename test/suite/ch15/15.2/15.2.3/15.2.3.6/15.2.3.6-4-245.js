@@ -17,24 +17,25 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var arrObj = [];
+var arrObj = [];
 
-        Object.defineProperty(arrObj, "1", {
-            value: 3,
-            writable: false,
-            configurable: false
-        });
+Object.defineProperty(arrObj, "1", {
+    value: 3,
+    writable: false,
+    configurable: false
+});
 
-        try {
+try {
 
-            Object.defineProperty(arrObj, "1", {
-                value: "abc"
-            });
-            return false;
-        } catch (e) {
-            return e instanceof TypeError && dataPropertyAttributesAreCorrect(arrObj, "1", 3, false, false, false);
-        }
+    Object.defineProperty(arrObj, "1", {
+        value: "abc"
+    });
+    $ERROR("Should not reach: expected exception.");
+} catch (e) {
+    if (!e instanceof TypeError) {
+        $ERROR("Expected e instanceof TypeError, actually " + e);
     }
-runTestCase(testcase);
+    dataPropertyAttributesAreCorrect(arrObj, "1", 3, false, false, false);
+}
+

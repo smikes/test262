@@ -14,16 +14,17 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
         var arrObj = [];
 
         Object.defineProperty(arrObj, "0", { value: +0 });
 
         try {
             Object.defineProperty(arrObj, "0", { value: -0 });
-            return false;
+            $ERROR("Should not reach: expected exception.");
         } catch (e) {
-            return e instanceof TypeError && dataPropertyAttributesAreCorrect(arrObj, "0", +0, false, false, false);
+            if (!e instanceof TypeError) {
+                $ERROR("Expected e instanceof TypeError, actually " + e);
+            }
+            dataPropertyAttributesAreCorrect(arrObj, "0", +0, false, false, false);
         }
-    }
-runTestCase(testcase);
+

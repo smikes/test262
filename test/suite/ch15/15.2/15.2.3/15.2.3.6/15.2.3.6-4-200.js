@@ -15,15 +15,13 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var arrObj = [];
+var arrObj = [];
 
-        Object.defineProperty(arrObj, "0", {
-            writable: true,
-            enumerable: true,
-            configurable: false
-        });
+Object.defineProperty(arrObj, "0", {
+    writable: true,
+    enumerable: true,
+    configurable: false
+});
 
-        return dataPropertyAttributesAreCorrect(arrObj, "0", undefined, true, true, false);
-    }
-runTestCase(testcase);
+dataPropertyAttributesAreCorrect(arrObj, "0", undefined, true, true, false);
+

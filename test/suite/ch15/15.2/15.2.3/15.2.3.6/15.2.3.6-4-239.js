@@ -15,27 +15,28 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var arrObj = [];
+var arrObj = [];
 
-        Object.defineProperty(arrObj, "1", {
-            value: 3,
-            writable: true,
-            configurable: false,
-            enumerable: false
-        });
+Object.defineProperty(arrObj, "1", {
+    value: 3,
+    writable: true,
+    configurable: false,
+    enumerable: false
+});
 
-        try {
-            Object.defineProperty(arrObj, "1", {
-                value: 13,
-                writable: true,
-                enumerable: true
-            });
-            return false;
+try {
+    Object.defineProperty(arrObj, "1", {
+        value: 13,
+        writable: true,
+        enumerable: true
+    });
+    $ERROR("Should not reach: expected exception.");
 
-        } catch (e) {
-            return e instanceof TypeError && dataPropertyAttributesAreCorrect(arrObj, "1", 3, true, false, false);
-        }
+} catch (e) {
+    if (!e instanceof TypeError) {
+        $ERROR("Expected e instanceof TypeError, actually " + e );
     }
-runTestCase(testcase);
+    dataPropertyAttributesAreCorrect(arrObj, "1", 3, true, false, false);
+}
+
