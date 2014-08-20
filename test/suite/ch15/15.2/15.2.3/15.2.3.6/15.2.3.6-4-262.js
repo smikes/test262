@@ -14,13 +14,11 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var arrObj = [100];
+var arrObj = [100];
 
-        Object.defineProperty(arrObj, "0", {
-            enumerable: false
-        });
-        return dataPropertyAttributesAreCorrect(arrObj, "0", 100, true, false, true);
-    }
-runTestCase(testcase);
+Object.defineProperty(arrObj, "0", {
+    enumerable: false
+});
+dataPropertyAttributesAreCorrect(arrObj, "0", 100, true, false, true);
+

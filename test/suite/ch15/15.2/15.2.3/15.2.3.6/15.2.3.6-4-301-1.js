@@ -15,8 +15,7 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        return (function (a, b, c) {
+(function (a, b, c) {
             delete arguments[0];
             Object.defineProperty(arguments, "0", {
                 value: 10,
@@ -24,8 +23,9 @@ function testcase() {
                 enumerable: false,
                 configurable: false
             });
-            var verifyFormal = a === 0;
-            return dataPropertyAttributesAreCorrect(arguments, "0", 10, false, false, false) && verifyFormal;
-        }(0, 1, 2));
+    if (a !== 0) {
+        $ERROR("Expected a === 0, actually " + a);
     }
-runTestCase(testcase);
+    dataPropertyAttributesAreCorrect(arguments, "0", 10, false, false, false);
+}(0, 1, 2));
+
