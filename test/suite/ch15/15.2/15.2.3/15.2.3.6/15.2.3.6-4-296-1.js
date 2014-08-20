@@ -16,23 +16,27 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        return (function (a, b, c) {
-            Object.defineProperty(arguments, "0", {
-                value: 10,
-                writable: false,
-                enumerable: false,
-                configurable: false
-            });
-            try {
-                Object.defineProperty(arguments, "0", {
-                    configurable: true
-                });
-            } catch (e) {
-                var verifyFormal = a === 10;
-                return e instanceof TypeError && dataPropertyAttributesAreCorrect(arguments, "0", 10, false, false, false) && verifyFormal;
-            }
-            return false;
-        }(0, 1, 2));
+(function (a, b, c) {
+    Object.defineProperty(arguments, "0", {
+        value: 10,
+        writable: false,
+        enumerable: false,
+        configurable: false
+    });
+    try {
+        Object.defineProperty(arguments, "0", {
+            configurable: true
+        });
+    } catch (e) {
+        if (!e instanceof TypeError) {
+            $ERROR("Expected a TypeError, got " + e);
+        }
+        if (a !== 10) {
+            $ERROR("Expected a === 10, actually " + a);
+        }
+        dataPropertyAttributesAreCorrect(arguments, "0", 10, false, false, false);
+
+        return;
     }
-runTestCase(testcase);
+    $ERROR("Should not reach: expected an exception.");
+}(0, 1, 2));

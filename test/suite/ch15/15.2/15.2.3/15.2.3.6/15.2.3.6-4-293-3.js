@@ -16,17 +16,16 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        return (function (a, b, c) {
-        Object.defineProperty(arguments, "0", {
-            value: 10,
-            writable: false,
-        });
-        Object.defineProperty(arguments, "0", {
-            value: 20
-        });
-        var verifyFormal = a === 10;        
-        return dataPropertyAttributesAreCorrect(arguments, "0", 20, false, true, true) && verifyFormal;
-        }(0, 1, 2));
+(function (a, b, c) {
+    Object.defineProperty(arguments, "0", {
+        value: 10,
+        writable: false,
+    });
+    Object.defineProperty(arguments, "0", {
+        value: 20
+    });
+    dataPropertyAttributesAreCorrect(arguments, "0", 20, false, true, true);
+    if (a !== 10) {
+        $ERROR("Expected a === 10, actually " + a);
     }
-runTestCase(testcase);
+}(0, 1, 2));
