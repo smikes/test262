@@ -13,11 +13,9 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var obj = {};
+var obj = {};
 
-        Object.defineProperty(obj, "property", {});
+Object.defineProperty(obj, "property", {});
 
-        return dataPropertyAttributesAreCorrect(obj, "property", undefined, false, false, false);
-    }
-runTestCase(testcase);
+dataPropertyAttributesAreCorrect(obj, "property", undefined, false, false, false);
+

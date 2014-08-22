@@ -14,24 +14,22 @@ description: >
 includes: [propertyHelper.js, fnGlobalObject.js]
 ---*/
 
-function testcase() {
 
-        var obj = fnGlobalObject();
+var obj = fnGlobalObject();
 
-        try {
-            Object.defineProperty(obj, "0", {
-                value: 1001,
-                writable: false,
-                configurable: true
-            });
+try {
+    Object.defineProperty(obj, "0", {
+        value: 1001,
+        writable: false,
+        configurable: true
+    });
 
-            Object.defineProperty(obj, "0", {
-                value: 1002
-            });
+    Object.defineProperty(obj, "0", {
+        value: 1002
+    });
 
-            return dataPropertyAttributesAreCorrect(obj, "0", 1002, false, false, true);
-        } finally {
-            delete obj[0];
-        }
-    }
-runTestCase(testcase);
+    dataPropertyAttributesAreCorrect(obj, "0", 1002, false, false, true);
+} finally {
+    delete obj[0];
+}
+

@@ -13,16 +13,14 @@ description: >
 includes: [propertyHelper.js, fnGlobalObject.js]
 ---*/
 
-function testcase() {
-        try {
-            Object.defineProperty(fnGlobalObject(), "foo", {
-                value: 12,
-                configurable: true
-            });
+try {
+    Object.defineProperty(fnGlobalObject(), "foo", {
+        value: 12,
+        configurable: true
+    });
 
-            return dataPropertyAttributesAreCorrect(fnGlobalObject(), "foo", 12, false, false, true);
-        } finally {
-            delete fnGlobalObject().foo;
-        }
-    }
-runTestCase(testcase);
+    dataPropertyAttributesAreCorrect(fnGlobalObject(), "foo", 12, false, false, true);
+} finally {
+    delete fnGlobalObject().foo;
+}
+

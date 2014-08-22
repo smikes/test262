@@ -13,37 +13,46 @@ description: >
 includes: [propertyHelper.js, fnGlobalObject.js]
 ---*/
 
-function testcase() {
-        var obj = fnGlobalObject();
+var obj = fnGlobalObject();
 
-        obj.verifySetFunc = "data";
-        var getFunc = function () {
-            return obj.verifySetFunc;
-        };
+obj.verifySetFunc = "data";
+var getFunc = function () {
+    return obj.verifySetFunc;
+};
 
-        var setFunc = function (value) {
-            obj.verifySetFunc = value;
-        };
-        try {
-            Object.defineProperty(obj, "0", {
-                get: getFunc,
-                set: setFunc,
-                enumerable: true,
-                configurable: true
-            });
-            var desc1 = Object.getOwnPropertyDescriptor(obj, "0");
+var setFunc = function (value) {
+    obj.verifySetFunc = value;
+};
+try {
+    Object.defineProperty(obj, "0", {
+        get: getFunc,
+        set: setFunc,
+        enumerable: true,
+        configurable: true
+    });
+    var desc1 = Object.getOwnPropertyDescriptor(obj, "0");
 
-            Object.defineProperty(obj, "0", {
-                value: 1001
-            });
-            var desc2 = Object.getOwnPropertyDescriptor(obj, "0");
+    Object.defineProperty(obj, "0", {
+        value: 1001
+    });
+    var desc2 = Object.getOwnPropertyDescriptor(obj, "0");
 
-            return desc1.hasOwnProperty("get") && desc2.hasOwnProperty("value") &&
-                typeof desc2.get === "undefined" && typeof desc2.get === "undefined" &&
-                dataPropertyAttributesAreCorrect(obj, "0", 1001, false, true, true);
-        } finally {
-            delete obj[0];
-            delete obj.verifySetFunc;
-        }
+    if (!desc1.hasOwnProperty("get")) {
+        $ERROR('Expected desc1.hasOwnProperty("get"), actually ' + desc1.hasOwnProperty("get"));
     }
-runTestCase(testcase);
+    if (!desc2.hasOwnProperty("value")) {
+        $ERROR('Expected desc2.hasOwnProperty("value"), actually ' + desc2.hasOwnProperty("value"));
+    }
+    if (!typeof desc2.get === "undefined") {
+        $ERROR('Expected typeof desc2.get === "undefined", actually ' + typeof desc2.get === "undefined");
+    }
+    if (!typeof desc2.get === "undefined") {
+        $ERROR('Expected typeof desc2.get === "undefined", actually ' + typeof desc2.get === "undefined");
+    }
+    
+    dataPropertyAttributesAreCorrect(obj, "0", 1001, false, true, true);
+} finally {
+    delete obj[0];
+    delete obj.verifySetFunc;
+}
+
