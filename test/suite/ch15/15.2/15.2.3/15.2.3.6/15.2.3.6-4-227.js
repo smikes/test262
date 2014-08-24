@@ -32,4 +32,3 @@ try {
     dataPropertyAttributesAreCorrect(arrObj, "0", obj1, false, false, false);
     throw e;
 }
-

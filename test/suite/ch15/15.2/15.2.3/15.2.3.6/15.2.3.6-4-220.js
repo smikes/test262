@@ -20,4 +20,3 @@ Object.defineProperty(arrObj, "0", { value: 101 });
 
 Object.defineProperty(arrObj, "0", { value: 101 });
 dataPropertyAttributesAreCorrect(arrObj, "0", 101, false, false, false);
-

@@ -24,5 +24,4 @@ try {
 } catch (e) {
     dataPropertyAttributesAreCorrect(arrObj, "0", +0, false, false, false);
     throw e;
-    }
-
+        }

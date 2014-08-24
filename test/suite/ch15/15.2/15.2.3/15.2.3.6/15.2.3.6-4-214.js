@@ -30,4 +30,3 @@ try {
     dataPropertyAttributesAreCorrect(arrObj, "0", 101, false, false, false);
     throw e;
 }
-
