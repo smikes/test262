@@ -15,24 +15,21 @@ description: >
     and the [[Value]] attribute value of 'name' is -0 (15.4.5.1 step
     4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        var arrObj = [];
+var arrObj = [];
 
-        Object.defineProperty(arrObj, "1", {
-            value: -0
+Object.defineProperty(arrObj, "1", {
+    value: -0
 
-        });
+});
 
-        try {
-            Object.defineProperty(arrObj, "1", {
-                value: +0
-            });
-
-            return false;
-        } catch (e) {
-            return e instanceof TypeError && dataPropertyAttributesAreCorrect(arrObj, "1", -0, false, false, false);
-        }
-    }
-runTestCase(testcase);
+try {
+    Object.defineProperty(arrObj, "1", {
+        value: +0
+    });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(arrObj, "1", -0, false, false, false);
+    throw e;
+}

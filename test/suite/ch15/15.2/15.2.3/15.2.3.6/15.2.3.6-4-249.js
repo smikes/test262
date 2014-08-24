@@ -15,23 +15,21 @@ description: >
     the [[Value]] attribute value of 'name' are two strings with
     different values (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        var arrObj = [];
+var arrObj = [];
 
-        Object.defineProperty(arrObj, "1", {
-            value: "abc"
-        });
+Object.defineProperty(arrObj, "1", {
+    value: "abc"
+});
 
-        try {
-            Object.defineProperty(arrObj, "1", {
-                value: "fgh"
-            });
+try {
+    Object.defineProperty(arrObj, "1", {
+        value: "fgh"
+    });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(arrObj, "1", "abc", false, false, false);
+    throw e;
+}
 
-            return false;
-        } catch (e) {
-            return e instanceof TypeError && dataPropertyAttributesAreCorrect(arrObj, "1", "abc", false, false, false);
-        }
-    }
-runTestCase(testcase);

@@ -12,22 +12,20 @@ description: >
     'desc' and the [[Value]] attribute value of 'name' are two numbers
     with different values (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        var arrObj = [];
+var arrObj = [];
 
-        Object.defineProperty(arrObj, 0, {
-            value: 101,
-            writable: false,
-            configurable: false
-        });
+Object.defineProperty(arrObj, 0, {
+    value: 101,
+    writable: false,
+    configurable: false
+});
 
-        try {
-            Object.defineProperty(arrObj, "0", { value: 123 });
-            return false;
-        } catch (e) {
-            return e instanceof TypeError && dataPropertyAttributesAreCorrect(arrObj, "0", 101, false, false, false);
-        }
-    }
-runTestCase(testcase);
+try {
+    Object.defineProperty(arrObj, "0", { value: 123 });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(arrObj, "0", 101, false, false, false);
+    throw e;
+}

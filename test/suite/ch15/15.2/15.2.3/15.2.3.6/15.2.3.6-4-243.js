@@ -15,22 +15,19 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var arrObj = [];
+var arrObj = [];
 
-        function getFunc() {
-            return 3;
-        }
-        Object.defineProperty(arrObj, "1", {
-            get: getFunc,
-            configurable: true
-        });
+function getFunc() {
+    return 3;
+}
+Object.defineProperty(arrObj, "1", {
+    get: getFunc,
+    configurable: true
+});
 
-        Object.defineProperty(arrObj, "1", {
-            value: 12
-        });
+Object.defineProperty(arrObj, "1", {
+    value: 12
+});
 
-        return dataPropertyAttributesAreCorrect(arrObj, "1", 12, false, false, true);
-    }
-runTestCase(testcase);
+dataPropertyAttributesAreCorrect(arrObj, "1", 12, false, false, true);

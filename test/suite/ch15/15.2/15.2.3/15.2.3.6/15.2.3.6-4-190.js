@@ -12,23 +12,20 @@ description: >
     thrown on updating the configurable attribute from false to true
     (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        var arrObj = [];
-        Object.defineProperty(arrObj, 0, {
-            value: "ownDataProperty",
-            configurable: false
-        });
+var arrObj = [];
+Object.defineProperty(arrObj, 0, {
+    value: "ownDataProperty",
+    configurable: false
+});
 
-        try {
-            Object.defineProperty(arrObj, 0, {
-                configurable: true
-            });
-            return false;
-        } catch (e) {
-            return e instanceof TypeError &&
-                dataPropertyAttributesAreCorrect(arrObj, "0", "ownDataProperty", false, false, false);
-        }
-    }
-runTestCase(testcase);
+try {
+    Object.defineProperty(arrObj, 0, {
+        configurable: true
+    });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(arrObj, "0", "ownDataProperty", false, false, false);
+    throw e;
+}
