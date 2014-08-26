@@ -48,7 +48,7 @@ try {
     if (typeof desc2.get !== "undefined") {
         $ERROR('Expected typeof desc2.get === "undefined", actually ' + typeof desc2.get);
     }
-
+    
     dataPropertyAttributesAreCorrect(obj, "0", 1001, false, true, true);
 } finally {
     delete obj[0];
