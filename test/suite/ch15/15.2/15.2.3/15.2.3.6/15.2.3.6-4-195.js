@@ -13,36 +13,33 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-    function getFunc() {
-        return arrObj.helpVerifySet;
-    }
-    function setFunc(value) {
-        arrObj.helpVerifySet = value;
-    }
+function getFunc() {
+    return arrObj.helpVerifySet;
+}
+function setFunc(value) {
+    arrObj.helpVerifySet = value;
+}
 
-        try {
-            Object.defineProperty(Array.prototype, "0", {
-                get: function () {
-                    return 11;
-                },
-                configurable: true
-            });
+try {
+    Object.defineProperty(Array.prototype, "0", {
+        get: function () {
+            return 11;
+        },
+        configurable: true
+    });
 
-            var arrObj = [];
+    var arrObj = [];
 
 
-            Object.defineProperty(arrObj, "0", {
-                get: getFunc,
-                set: setFunc,
-                configurable: false
-            });
+    Object.defineProperty(arrObj, "0", {
+        get: getFunc,
+        set: setFunc,
+        configurable: false
+    });
 
-            arrObj[0] = 13;
+    arrObj[0] = 13;
 
-            return accessorPropertyAttributesAreCorrect(arrObj, "0", getFunc, setFunc, "helpVerifySet", false, false);
-        } finally {
-            delete Array.prototype[0];
-        }
-    }
-runTestCase(testcase);
+    accessorPropertyAttributesAreCorrect(arrObj, "0", getFunc, setFunc, "helpVerifySet", false, false);
+} finally {
+    delete Array.prototype[0];
+}
