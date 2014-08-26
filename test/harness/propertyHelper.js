@@ -1,7 +1,3 @@
-//-----------------------------------------------------------------------------
-//Verify all attributes specified accessor property of given object:
-//get, set, enumerable, configurable
-//If all attribute values are expected, return true, otherwise, return false
 
 function isConfigurable(obj, name) {
     try {
@@ -55,6 +51,53 @@ function isWritable(obj, name, verifyProp) {
     return false;
 }
 
+function assertEqualTo(obj, name, value) {
+    if (!isEqualTo(obj, name, value)) {
+        $ERROR("Expected obj[" + name + "] to equal " + value +
+                   ", actually " + obj[name]);
+    }
+}
+
+function assertWritable(obj, name, verifyProp) {
+    if (!isWritable(obj, name, verifyProp)) {
+        $ERROR("Expected obj[" + name + "] to be writable, but was not.");
+    }
+}
+
+function assertNotWritable(obj, name, verifyProp) {
+    if (isWritable(obj, name, verifyProp)) {
+        $ERROR("Expected obj[" + name + "] NOT to be writable, but was.");
+    }
+}
+
+function assertEnumerable(obj, name) {
+    if (!isEnumerable(obj, name)) {
+        $ERROR("Expected obj[" + name + "] to be enumerable, but was not.");
+    }
+}
+
+function assertNotEnumerable(obj, name) {
+    if (isEnumerable(obj, name)) {
+        $ERROR("Expected obj[" + name + "] NOT to be enumerable, but was.");
+    }
+}
+
+function assertConfigurable(obj, name) {
+    if (!isConfigurable(obj, name)) {
+        $ERROR("Expected obj[" + name + "] to be configurable, but was not.");
+    }
+}
+
+function assertNotConfigurable(obj, name) {
+    if (isConfigurable(obj, name)) {
+        $ERROR("Expected obj[" + name + "] NOT to be configurable, but was.");
+    }
+}
+
+//-----------------------------------------------------------------------------
+//Verify all attributes specified accessor property of given object:
+//get, set, enumerable, configurable
+//If all attribute values are expected, return true, otherwise throw
 function accessorPropertyAttributesAreCorrect(obj,
                                               name,
                                               get,
@@ -66,66 +109,58 @@ function accessorPropertyAttributesAreCorrect(obj,
     var prop = 'obj["' + name + '"]';
 
     if (get !== undefined) {
-        var value = get();
-        if (!isEqualTo(obj, name, value)) {
-            $ERROR("Expected " + prop + " to equal " + value +
-                   ", actually " + obj[name]);
-        }
+        assertEqualTo(obj, name, get());
     }
 
-    if ((typeof set !== "undefined") && setVerifyHelpProp) {
-        if (!isWritable(obj, name, setVerifyHelpProp)) {
-            $ERROR("Expected writes to " + prop + " to set " + setVerifyHelpProp +
-                   ", but did not.");
-        }
+    if (typeof set !== "undefined") {
+        assertWritable(obj, name, setVerifyHelpProp);
     }
 
-    if (enumerable !== isEnumerable(obj, name)) {
-        $ERROR("Expected " + prop + ".[[Enumerable]] to be " +
-               enumerable + ", actually " + !enumerable);
+    if (enumerable) {
+        assertEnumerable(obj, name);
+    } else {
+        assertNotEnumerable(obj, name);
     }
 
-    if (configurable !== isConfigurable(obj, name)) {
-        $ERROR("Expected " + prop + ".[[Configurable]] to be " +
-               configurable + ", actually " + !configurable);
+    if (configurable) {
+        assertConfigurable(obj, name);
+    } else {
+        assertNotConfigurable(obj, name);
     }
 
-    return attributesCorrect;
+    return true;
 }
 
 //-----------------------------------------------------------------------------
 //Verify all attributes specified data property of given object:
 //value, writable, enumerable, configurable
-//If all attribute values are expected, return true, otherwise, return false
+//If all attribute values as expected, return true, otherwise throw
 function dataPropertyAttributesAreCorrect(obj,
                                           name,
                                           value,
                                           writable,
                                           enumerable,
                                           configurable) {
-    var attributesCorrect = true;
-    var prop = 'obj["' + name + '"]';
 
-    if (!isEqualTo(obj, name, value)) {
-        $ERROR("Expected " + prop + " to equal " + value +
-               ", actually " + obj[name]);
+    assertEqualTo(obj, name, value);
+
+    if (writable) {
+        assertWritable(obj, name);
+    } else {
+        assertNotWritable(obj, name);
     }
 
-    if (writable != isWritable(obj, name)) {
-        $ERROR("Expected " + prop + ".[[Writable]] to be " +
-               writable + ", actually " + !writable);
+    if (enumerable) {
+        assertEnumerable(obj, name);
+    } else {
+        assertNotEnumerable(obj, name);
     }
 
-    if(enumerable !== isEnumerable(obj, name)) {
-        $ERROR("Expected " + prop + ".[[Enumerable]] to be " +
-               enumerable + ", actually " + !enumerable);
+    if (configurable) {
+        assertConfigurable(obj, name);
+    } else {
+        assertNotConfigurable(obj, name);
     }
 
-
-    if (configurable !== isConfigurable(obj, name)) {
-        $ERROR("Expected " + prop + ".[[Configurable]] to be " +
-               configurable + ", actually " + !configurable);
-    }
-
-    return attributesCorrect;
+    return true;
 }
