@@ -13,25 +13,25 @@ description: >
     'P' which is not writable and not configurable (10.6
     [[DefineOwnProperty]] step 4)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        return (function (a, b, c) {
-            Object.defineProperty(arguments, "genericProperty", {
-                value: 1001,
-                writable: false,
-                configurable: false
-            });
-            try {
-                Object.defineProperty(arguments, "genericProperty", {
-                    value: 1002
-                });
-            } catch (e) {
-                var verifyFormal = b === 2;
-                return e instanceof TypeError &&
-                    dataPropertyAttributesAreCorrect(arguments, "genericProperty", 1001, false, false, false) && verifyFormal;
-            }
-            return false;
-        }(1, 2, 3));
+(function (a, b, c) {
+    Object.defineProperty(arguments, "genericProperty", {
+        value: 1001,
+        writable: false,
+        configurable: false
+    });
+    try {
+        Object.defineProperty(arguments, "genericProperty", {
+            value: 1002
+        });
+    } catch (e) {
+        if (b !== 2) {
+            $ERROR('Expected "b === 2;", actually ' + b);
+        }
+
+        dataPropertyAttributesAreCorrect(arguments, "genericProperty", 1001, false, false, false);
+        throw e;
     }
-runTestCase(testcase);
+}(1, 2, 3));

@@ -13,16 +13,13 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        try {
-            Object.defineProperty(Math, "foo", {
-                value: 12,
-                configurable: true
-            });
-        
-            return dataPropertyAttributesAreCorrect(Math, "foo", 12, false, false, true);
-        } finally {
-            delete Math.foo;
-        }
-    }
-runTestCase(testcase);
+try {
+    Object.defineProperty(Math, "foo", {
+        value: 12,
+        configurable: true
+    });
+    
+    dataPropertyAttributesAreCorrect(Math, "foo", 12, false, false, true);
+} finally {
+    delete Math.foo;
+}

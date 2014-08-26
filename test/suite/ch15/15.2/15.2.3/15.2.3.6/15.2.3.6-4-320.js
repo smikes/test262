@@ -12,22 +12,21 @@ description: >
     [[Configurable]] attribute value of 'P' which is not configurable
     (10.6 [[DefineOwnProperty]] step 4)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        return (function () {
-            Object.defineProperty(arguments, "genericProperty", {
-                configurable: false
-            });
-            try {
-                Object.defineProperty(arguments, "genericProperty", {
-                    configurable: true
-                });
-            } catch (e) {
-                return e instanceof TypeError &&
-                    dataPropertyAttributesAreCorrect(arguments, "genericProperty", undefined, false, false, false);
-            }
-            return false;
-        }(1, 2, 3));
+(function () {
+    Object.defineProperty(arguments, "genericProperty", {
+        configurable: false
+    });
+    try {
+        Object.defineProperty(arguments, "genericProperty", {
+            configurable: true
+        });
+    } catch (e) {
+        dataPropertyAttributesAreCorrect(arguments, "genericProperty", undefined, false, false, false);
+
+        throw e;
     }
-runTestCase(testcase);
+
+}(1, 2, 3));
