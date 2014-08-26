@@ -25,9 +25,4 @@ Object.defineProperty(obj, "foo", {
     configurable: false
 });
 
-try {
-    Object.defineProperty(obj, "foo", { set: setFunc });
-    return accessorPropertyAttributesAreCorrect(obj, "foo", undefined, setFunc, "setVerifyHelpProp", false, false);
-} catch (e) {
-    false;
-}
+accessorPropertyAttributesAreCorrect(obj, "foo", undefined, setFunc, "setVerifyHelpProp", false, false);

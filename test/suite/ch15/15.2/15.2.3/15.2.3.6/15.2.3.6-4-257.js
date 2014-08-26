@@ -27,12 +27,8 @@ Object.defineProperty(arrObj, "1", {
     configurable: false
 });
 
-try {
-    Object.defineProperty(arrObj, "1", {
-        get: undefined
-    });
+Object.defineProperty(arrObj, "1", {
+    get: undefined
+});
 
-    return accessorPropertyAttributesAreCorrect(arrObj, "1", undefined, setFunc, "setVerifyHelpProp", false, false);
-} catch (e) {
-    false;
-}
+accessorPropertyAttributesAreCorrect(arrObj, "1", undefined, setFunc, "setVerifyHelpProp", false, false);

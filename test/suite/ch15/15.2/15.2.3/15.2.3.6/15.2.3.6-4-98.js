@@ -29,9 +29,6 @@ Object.defineProperty(obj, "foo", {
     configurable: false
 });
 
-try {
-    Object.defineProperty(obj, "foo", { get: getFunc });
-    return accessorPropertyAttributesAreCorrect(obj, "foo", getFunc, setFunc, "verifyGetHelpMethod", false, false);
-} catch (e) {
-    false;
-}
+Object.defineProperty(obj, "foo", { get: getFunc });
+
+accessorPropertyAttributesAreCorrect(obj, "foo", getFunc, setFunc, "verifyGetHelpMethod", false, false);
