@@ -12,33 +12,30 @@ description: >
     when updating the [[Enumerable]] attribute value of 'P' which is
     not configurable (10.6 [[DefineOwnProperty]] step 4)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        var arg = (function () {
-            return arguments;
-        }(1, 2, 3));
+var arg = (function () {
+    return arguments;
+}(1, 2, 3));
 
-        function setFun(value) {
-            arg.genericPropertyString = value;
+function setFun(value) {
+    arg.genericPropertyString = value;
+}
+Object.defineProperty(arg, "genericProperty", {
+    set: setFun,
+    enumerable: true,
+    configurable: false
+});
+
+try {
+    Object.defineProperties(arg, {
+        "genericProperty": {
+            enumerable: false
         }
-        Object.defineProperty(arg, "genericProperty", {
-            set: setFun,
-            enumerable: true,
-            configurable: false
-        });
+    });
 
-        try {
-            Object.defineProperties(arg, {
-                "genericProperty": {
-                    enumerable: false
-                }
-            });
-
-            return false;
-        } catch (ex) {
-            return ex instanceof TypeError &&
-                accessorPropertyAttributesAreCorrect(arg, "genericProperty", undefined, setFun, "genericPropertyString", true, false);
-        }
-    }
-runTestCase(testcase);
+} catch (ex) {
+    accessorPropertyAttributesAreCorrect(arg, "genericProperty", undefined, setFun, "genericPropertyString", true, false);
+    throw ex;
+}

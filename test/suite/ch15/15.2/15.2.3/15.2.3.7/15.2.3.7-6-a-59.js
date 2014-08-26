@@ -12,23 +12,20 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        function set_func(value) {
-            obj.setVerifyHelpProp = value;
-        }
+function set_func(value) {
+    obj.setVerifyHelpProp = value;
+}
 
-        Object.defineProperty(obj, "foo", {
-            set: set_func
-        });
+Object.defineProperty(obj, "foo", {
+    set: set_func
+});
 
-        Object.defineProperties(obj, {
-            foo: {
-                set: set_func
-            }
-        });
-        return accessorPropertyAttributesAreCorrect(obj, "foo", undefined, set_func, "setVerifyHelpProp", false, false);
+Object.defineProperties(obj, {
+    foo: {
+        set: set_func
     }
-runTestCase(testcase);
+});
+accessorPropertyAttributesAreCorrect(obj, "foo", undefined, set_func, "setVerifyHelpProp", false, false);

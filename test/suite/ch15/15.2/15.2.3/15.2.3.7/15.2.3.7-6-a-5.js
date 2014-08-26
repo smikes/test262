@@ -10,29 +10,27 @@ description: >
     Object.defineProperties - 'P' is own accessor property (8.12.9
     step 1 )
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        var obj = {};
-        function getFunc() {
-            return 11;
-        }
+var obj = {};
+function getFunc() {
+    return 11;
+}
 
-        Object.defineProperty(obj, "prop", {
-            get: getFunc,
-            configurable: false
-        });
+Object.defineProperty(obj, "prop", {
+    get: getFunc,
+    configurable: false
+});
 
-        try {
-            Object.defineProperties(obj, {
-                prop: {
-                    value: 12,
-                    configurable: true
-                }
-            });
-            return false;
-        } catch (e) {
-            return e instanceof TypeError && accessorPropertyAttributesAreCorrect(obj, "prop", getFunc, undefined, undefined, false, false);
+try {
+    Object.defineProperties(obj, {
+        prop: {
+            value: 12,
+            configurable: true
         }
-    }
-runTestCase(testcase);
+    });
+} catch (e) {
+    accessorPropertyAttributesAreCorrect(obj, "prop", getFunc, undefined, undefined, false, false);
+    throw e;
+}
