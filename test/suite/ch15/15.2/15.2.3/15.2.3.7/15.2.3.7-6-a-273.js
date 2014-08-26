@@ -12,25 +12,23 @@ description: >
     [[Configurable]] attribute value of 'P' which is defined as
     non-configurable (15.4.5.1 step 5)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var arr = [];
+var arr = [];
 
-        Object.defineProperty(arr, "property", {
-            value: 12
-        });
+Object.defineProperty(arr, "property", {
+    value: 12
+});
 
-        try {
-            Object.defineProperties(arr, {
-                "property": {
-                    configurable: true
-                }
-            });
-            return false;
-        } catch (ex) {
-            return (ex instanceof TypeError) && dataPropertyAttributesAreCorrect(arr, "property", 12, false, false, false);
+try {
+    Object.defineProperties(arr, {
+        "property": {
+            configurable: true
         }
-    }
-runTestCase(testcase);
+    });
+} catch (ex) {
+    dataPropertyAttributesAreCorrect(arr, "property", 12, false, false, false);
+    throw ex;
+}

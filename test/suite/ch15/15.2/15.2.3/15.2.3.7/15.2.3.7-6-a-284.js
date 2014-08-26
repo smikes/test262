@@ -13,33 +13,31 @@ description: >
     attribute value of 'P' which is defined as non-configurable (10.6
     [[DefineOwnProperty]] step 4)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var arg;
+var arg;
 
-        (function fun(a, b, c) {
-            arg = arguments;
-        }(0, 1, 2));
+(function fun(a, b, c) {
+    arg = arguments;
+}(0, 1, 2));
 
-        Object.defineProperty(arg, "0", {
-            value: 0,
-            writable: false,
-            enumerable: true,
-            configurable: false
-        });
+Object.defineProperty(arg, "0", {
+    value: 0,
+    writable: false,
+    enumerable: true,
+    configurable: false
+});
 
-        try {
-            Object.defineProperties(arg, {
-                "0": {
-                    enumerable: false
-                }
-            });
-
-            return false;          
-        } catch (e) {
-            return (e instanceof TypeError) && dataPropertyAttributesAreCorrect(arg, "0", 0, false, true, false);
+try {
+    Object.defineProperties(arg, {
+        "0": {
+            enumerable: false
         }
-    }
-runTestCase(testcase);
+    });
+
+} catch (e) {
+    dataPropertyAttributesAreCorrect(arg, "0", 0, false, true, false);
+    throw e;
+}

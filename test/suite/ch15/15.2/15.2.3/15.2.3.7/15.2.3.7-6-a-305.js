@@ -14,26 +14,23 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var arg = (function () {
-            return arguments;
-        }(1, 2, 3));
+var arg = (function () {
+    return arguments;
+}(1, 2, 3));
 
-        Object.defineProperty(arg, "genericProperty", {
-            value: 1001,
-            writable: true,
-            enumerable: true,
-            configurable: true
-        });
+Object.defineProperty(arg, "genericProperty", {
+    value: 1001,
+    writable: true,
+    enumerable: true,
+    configurable: true
+});
 
-        Object.defineProperties(arg, {
-            "genericProperty": {
-                value: 1002,
-                enumerable: false,
-                configurable: false
-            }
-        });
-
-        return dataPropertyAttributesAreCorrect(arg, "genericProperty", 1002, true, false, false);
+Object.defineProperties(arg, {
+    "genericProperty": {
+        value: 1002,
+        enumerable: false,
+        configurable: false
     }
-runTestCase(testcase);
+});
+
+dataPropertyAttributesAreCorrect(arg, "genericProperty", 1002, true, false, false);

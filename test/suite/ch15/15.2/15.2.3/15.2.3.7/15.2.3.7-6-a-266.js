@@ -14,18 +14,20 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var arr = [];
+var arr = [];
 
-        Object.defineProperties(arr, {
-            "property": {
-                value: 12,
-                writable: true,
-                enumerable: true,
-                configurable: true
-            }
-        });
-        return dataPropertyAttributesAreCorrect(arr, "property", 12, true, true, true) && arr.length === 0;
+Object.defineProperties(arr, {
+    "property": {
+        value: 12,
+        writable: true,
+        enumerable: true,
+        configurable: true
     }
-runTestCase(testcase);
+});
+dataPropertyAttributesAreCorrect(arr, "property", 12, true, true, true);
+
+if (arr.length !== 0) {
+    $ERROR('Expected arr.length === 0, actually ' + arr.length);
+}
+
