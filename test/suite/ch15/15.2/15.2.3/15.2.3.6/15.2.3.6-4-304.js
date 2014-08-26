@@ -15,15 +15,12 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        return (function () {
-            Object.defineProperty(arguments, "0", {
-                value: 20,
-                writable: false,
-                enumerable: false,
-                configurable: false
-            });
-            return dataPropertyAttributesAreCorrect(arguments, "0", 20, false, false, false);
-        }());
-    }
-runTestCase(testcase);
+(function () {
+    Object.defineProperty(arguments, "0", {
+        value: 20,
+        writable: false,
+        enumerable: false,
+        configurable: false
+    });
+    dataPropertyAttributesAreCorrect(arguments, "0", 20, false, false, false);
+}());

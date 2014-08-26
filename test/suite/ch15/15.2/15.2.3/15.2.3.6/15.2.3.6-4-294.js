@@ -12,24 +12,22 @@ description: >
     [[Writable]] attribute value of 'name' which is defined as
     non-configurable (10.6 [[DefineOwnProperty]] step 4)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        return (function () {
-            Object.defineProperty(arguments, "0", {
-                value: 10,
-                writable: false,
-                enumerable: false,
-                configurable: false
-            });
-            try {
-                Object.defineProperty(arguments, "0", {
-                    writable: true
-                });
-            } catch (e) {
-                return e instanceof TypeError && dataPropertyAttributesAreCorrect(arguments, "0", 10, false, false, false);
-            }
-            return false;
-        }(0, 1, 2));
+(function () {
+    Object.defineProperty(arguments, "0", {
+        value: 10,
+        writable: false,
+        enumerable: false,
+        configurable: false
+    });
+    try {
+        Object.defineProperty(arguments, "0", {
+            writable: true
+        });
+    } catch (e) {
+        dataPropertyAttributesAreCorrect(arguments, "0", 10, false, false, false);
+        throw e;
     }
-runTestCase(testcase);
+}(0, 1, 2));
