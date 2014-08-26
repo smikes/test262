@@ -13,18 +13,19 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var obj = {};
+var obj = {};
 
-        Object.defineProperty(obj, "foo", {
-            value: 10,
-            writable: true,
-            enumerable: true,
-            configurable: true
-        });
-        var preCheck = Object.isExtensible(obj);
-        Object.seal(obj);
+Object.defineProperty(obj, "foo", {
+    value: 10,
+    writable: true,
+    enumerable: true,
+    configurable: true
+});
+var preCheck = Object.isExtensible(obj);
+Object.seal(obj);
 
-        return preCheck && dataPropertyAttributesAreCorrect(obj, "foo", 10, true, true, false);
-    }
-runTestCase(testcase);
+if (!preCheck) {
+    $ERROR('Expected preCheck to be true, actually ' + preCheck);
+}
+
+dataPropertyAttributesAreCorrect(obj, "foo", 10, true, true, false);
