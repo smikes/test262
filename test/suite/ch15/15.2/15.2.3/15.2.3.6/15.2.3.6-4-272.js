@@ -14,21 +14,18 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var arrObj = [];
-        function setFunc(value) {
-            arrObj.setVerifyHelpProp = value;
-        }
+var arrObj = [];
+function setFunc(value) {
+    arrObj.setVerifyHelpProp = value;
+}
 
-        Object.defineProperty(arrObj, "0", {
-            set: setFunc,
-            configurable: true
-        });
+Object.defineProperty(arrObj, "0", {
+    set: setFunc,
+    configurable: true
+});
 
-        Object.defineProperty(arrObj, "0", {
-            configurable: false
-        });
-        return accessorPropertyAttributesAreCorrect(arrObj, "0", undefined, setFunc, "setVerifyHelpProp", false, false);
-    }
-runTestCase(testcase);
+Object.defineProperty(arrObj, "0", {
+    configurable: false
+});
+accessorPropertyAttributesAreCorrect(arrObj, "0", undefined, setFunc, "setVerifyHelpProp", false, false);

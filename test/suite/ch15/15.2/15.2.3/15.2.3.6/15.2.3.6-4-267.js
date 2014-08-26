@@ -14,21 +14,18 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var arrObj = [];
+var arrObj = [];
 
-        function getFunc() {
-            return 12;
-        }
-        Object.defineProperty(arrObj, "0", {
-            get: undefined,
-            configurable: true
-        });
+function getFunc() {
+    return 12;
+}
+Object.defineProperty(arrObj, "0", {
+    get: undefined,
+    configurable: true
+});
 
-        Object.defineProperty(arrObj, "0", {
-            get: getFunc
-        });
-        return accessorPropertyAttributesAreCorrect(arrObj, "0", getFunc, undefined, undefined, false, true);
-    }
-runTestCase(testcase);
+Object.defineProperty(arrObj, "0", {
+    get: getFunc
+});
+accessorPropertyAttributesAreCorrect(arrObj, "0", getFunc, undefined, undefined, false, true);
