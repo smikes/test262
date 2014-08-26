@@ -9,45 +9,46 @@ es5id: 15.2.3.7-6-a-88
 description: >
     Object.defineProperties throws TypeError when P.configurable is
     false, P.[[Set]] is undefined, properties.[[Set]] refers to an
-    objcet (8.12.9 step 11.a.i)
-includes: [runTestCase.js, propertyHelper.js]
+    object (8.12.9 step 11.a.i)
+includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        function get_Func() {
-            return 0;
+function get_Func() {
+    return 0;
+}
+
+Object.defineProperty(obj, "foo", {
+    set: undefined,
+    get: get_Func,
+    enumerable: false,
+    configurable: false
+});
+
+function set_Func() {}
+
+try {
+    Object.defineProperties(obj, {
+        foo: {
+            set: set_Func
         }
-
-        Object.defineProperty(obj, "foo", {
-            set: undefined,
-            get: get_Func,
-            enumerable: false,
-            configurable: false
-        });
-
-        function set_Func() { }
-
-        try {
-            Object.defineProperties(obj, {
-                foo: {
-                    set: set_Func
-                }
-            });
-            return false;
-        } catch (e) {
-            if (isEnumerable(obj, "foo")) {
-                $ERROR("Expected obj.foo to not be enumerable");
-            }
-
-            if (isConfigurable(obj, "foo")) {
-                $ERROR("Expected obj.foo to not be configurable");
-            }
-            var desc = Object.getOwnPropertyDescriptor(obj, "foo");
-
-            return e instanceof TypeError && typeof (desc.set) === "undefined";
-        }
+    });
+} catch (e) {
+    if (isEnumerable(obj, "foo")) {
+        $ERROR("Expected obj.foo to not be enumerable");
     }
-runTestCase(testcase);
+
+    if (isConfigurable(obj, "foo")) {
+        $ERROR("Expected obj.foo to not be configurable");
+    }
+    var desc = Object.getOwnPropertyDescriptor(obj, "foo");
+
+    if (typeof (desc.set) !== "undefined") {
+        $ERROR('Expected typeof (desc.set) === "undefined", actually ' + typeof (desc.set));
+    }
+
+    throw e;
+}

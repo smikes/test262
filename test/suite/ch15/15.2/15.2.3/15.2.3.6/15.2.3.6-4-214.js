@@ -21,16 +21,13 @@ var arrObj = [];
 Object.defineProperty(arrObj, 0, {
     value: 101,
     writable: false,
-    configurable: false 
+    configurable: false
 });
 
 try {
     Object.defineProperty(arrObj, "0", { value: "abc" });
-            return false;
 } catch (e) {
-            return e instanceof TypeError && dataPropertyAttributesAreCorrect(arrObj, "0", 101, false, false, false);
-        $ERROR("Expected e instanceof TypeError, actually " + e);
-    throw e;
     dataPropertyAttributesAreCorrect(arrObj, "0", 101, false, false, false);
+    throw e;
 }
 

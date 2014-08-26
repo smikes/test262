@@ -10,7 +10,6 @@ description: >
     Object.defineProperty - 'O' is an Array, 'name' is an array index
     named property, 'name' is an inherited data property, test that
     defining own index named property is successful (15.4.5.1 step 4.c)
-includes: [runTestCase.js]
 ---*/
 
 try {

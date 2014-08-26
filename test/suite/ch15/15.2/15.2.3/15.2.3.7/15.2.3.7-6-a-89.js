@@ -10,40 +10,37 @@ description: >
     Object.defineProperties will not throw TypeError when
     P.configurable is false, P.[[Set]] and properties.[[Set]] are
     undefined (8.12.9 step 11.a.i)
-includes: [runTestCase.js, propertyHelper.js]
+includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        function get_Func() {
-            return 0;
-        }
+function get_Func() {
+    return 0;
+}
 
-        Object.defineProperty(obj, "foo", {
-            get: get_Func,
-            set: undefined,
-            enumerable: false,
-            configurable: false
-        });
+Object.defineProperty(obj, "foo", {
+    get: get_Func,
+    set: undefined,
+    enumerable: false,
+    configurable: false
+});
 
-        Object.defineProperties(obj, {
-            foo: {
-                set: undefined
-            }
-        });
-
-        if (isEnumerable(obj, "foo")) {
-            $ERROR("Expected obj.foo to not be enumerable");
-        }
-
-        if (isConfigurable(obj, "foo")) {
-            $ERROR("Expected obj.foo to not be configurable");
-        }
-
-        var desc = Object.getOwnPropertyDescriptor(obj, "foo");
-
-        return typeof (desc.set) === "undefined";
+Object.defineProperties(obj, {
+    foo: {
+        set: undefined
     }
-runTestCase(testcase);
+});
+
+if (isEnumerable(obj, "foo")) {
+    $ERROR("Expected obj.foo to not be enumerable");
+}
+
+if (isConfigurable(obj, "foo")) {
+    $ERROR("Expected obj.foo to not be configurable");
+}
+
+var desc = Object.getOwnPropertyDescriptor(obj, "foo");
+
+typeof (desc.set) === "undefined";

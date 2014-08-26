@@ -20,7 +20,7 @@ var obj = {};
 
 var set_func = function (value) {
     obj.setVerifyHelpProp = value;
-}
+};
 
 Object.defineProperty(obj, "foo", {
     set: set_func,
@@ -29,7 +29,7 @@ Object.defineProperty(obj, "foo", {
 
 set_func = function (value) {
     obj.setVerifyHelpProp1 = value;
-}
+};
 
 try {
     Object.defineProperties(obj, {
@@ -37,8 +37,7 @@ try {
             set: set_func
         }
     });
-}
-catch (e) {
+} catch (e) {
     accessorPropertyAttributesAreCorrect(obj, "foo", undefined, set_func, "setVerifyHelpProp", false, false);
     throw e;
 }

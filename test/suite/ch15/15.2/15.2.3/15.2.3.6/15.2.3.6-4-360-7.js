@@ -11,36 +11,30 @@ description: >
     attributes are [[Writable]]: false, [[Enumerable]]: true,
     [[Configurable]]: true to an accessor property, 'O' is the global
     object (8.12.9 - step 9.b.i)
-includes:
-    - runTestCase.js
-    - fnGlobalObject.js
+includes: [propertyHelper.js, fnGlobalObject.js]
 ---*/
 
-function testcase() {
-    function getFunc() {
-        return 20;
-    }
+function getFunc() {
+    return 20;
+}
 
-        var obj = fnGlobalObject();
-        try {
-            Object.defineProperty(obj, "0", {
-                value: 2010,
-                writable: false,
-                enumerable: true,
-                configurable: true
-            });
-            var desc1 = Object.getOwnPropertyDescriptor(obj, "0");
+var obj = fnGlobalObject();
+try {
+    Object.defineProperty(obj, "0", {
+        value: 2010,
+        writable: false,
+        enumerable: true,
+        configurable: true
+    });
+    var desc1 = Object.getOwnPropertyDescriptor(obj, "0");
 
-            Object.defineProperty(obj, "0", {
-                get: getFunc
-            });
-            var desc2 = Object.getOwnPropertyDescriptor(obj, "0");
+    Object.defineProperty(obj, "0", {
+        get: getFunc
+    });
+    var desc2 = Object.getOwnPropertyDescriptor(obj, "0");
 
-            return desc1.hasOwnProperty("value") && desc2.hasOwnProperty("get") &&
-                desc2.enumerable === true && desc2.configurable === true &&
-                obj[0] === 20 && typeof desc2.set === "undefined" && desc2.get === getFunc;
-        } finally {
-            delete obj[0];
-        }
-    }
-runTestCase(testcase);
+    accessorPropertyAttributesAreCorrect(obj, "0", getFunc, undefined, undefined,
+                                         true, true);
+} finally {
+    delete obj[0];
+}
