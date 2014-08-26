@@ -13,29 +13,27 @@ description: >
     the [[Get]] attribute value of 'name' which is not configurable
     (10.6 [[DefineOwnProperty]] step 4)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        return (function () {
-            function getFunc1() {
-                return 0;
-            }
-            Object.defineProperty(arguments, "0", {
-                get: getFunc1,
-                enumerable: false,
-                configurable: false
-            });
-            function getFunc2() {
-                return 10;
-            }
-            try {
-                Object.defineProperty(arguments, "0", {
-                    get: getFunc2
-                });
-                return false;
-            } catch (e) {
-                return e instanceof TypeError && accessorPropertyAttributesAreCorrect(arguments, "0", getFunc1, undefined, undefined, false, false);
-            }
-        }());
+(function () {
+    function getFunc1() {
+        return 0;
     }
-runTestCase(testcase);
+    Object.defineProperty(arguments, "0", {
+        get: getFunc1,
+        enumerable: false,
+        configurable: false
+    });
+    function getFunc2() {
+        return 10;
+    }
+    try {
+        Object.defineProperty(arguments, "0", {
+            get: getFunc2
+        });
+    } catch (e) {
+        accessorPropertyAttributesAreCorrect(arguments, "0", getFunc1, undefined, undefined, false, false);
+        throw e;
+    }
+}());

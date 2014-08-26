@@ -13,24 +13,21 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var arrObj = [];
+var arrObj = [];
 
-        function getFunc() {
-            return 12;
-        }
-        function setFunc(value) {
-            arrObj.setVerifyHelpProp = value;
-        }
+function getFunc() {
+    return 12;
+}
+function setFunc(value) {
+    arrObj.setVerifyHelpProp = value;
+}
 
-        Object.defineProperty(arrObj, "property", {
-            get: getFunc,
-            set: setFunc,
-            enumerable: true,
-            configurable: true
-        });
+Object.defineProperty(arrObj, "property", {
+    get: getFunc,
+    set: setFunc,
+    enumerable: true,
+    configurable: true
+});
 
-        return accessorPropertyAttributesAreCorrect(arrObj, "property", getFunc, setFunc, "setVerifyHelpProp", true, true);
-    }
-runTestCase(testcase);
+accessorPropertyAttributesAreCorrect(arrObj, "property", getFunc, setFunc, "setVerifyHelpProp", true, true);

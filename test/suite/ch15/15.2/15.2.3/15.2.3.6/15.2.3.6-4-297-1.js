@@ -14,30 +14,31 @@ description: >
     which is defined as non-configurable (10.6 [[DefineOwnProperty]]
     step 4 and step 5a)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        return (function (a, b, c) {
-            function getFunc1() {
-                return 10;
-            }
-            Object.defineProperty(arguments, "0", {
-                get: getFunc1,
-                enumerable: false,
-                configurable: false
-            });
-            function getFunc2() {
-                return 20;
-            }
-            try {
-                Object.defineProperty(arguments, "0", {
-                    get: getFunc2
-                });
-            } catch (e) {
-                var verifyFormal = a === 0;
-                return e instanceof TypeError && accessorPropertyAttributesAreCorrect(arguments, "0", getFunc1, undefined, undefined, false, false) && verifyFormal;
-            }
-            return false;
-        }(0, 1, 2));
+(function (a, b, c) {
+    function getFunc1() {
+        return 10;
     }
-runTestCase(testcase);
+    Object.defineProperty(arguments, "0", {
+        get: getFunc1,
+        enumerable: false,
+        configurable: false
+    });
+    function getFunc2() {
+        return 20;
+    }
+    try {
+        Object.defineProperty(arguments, "0", {
+            get: getFunc2
+        });
+    } catch (e) {
+        if (a !== 0) {
+            $ERROR('Expected a === 0, actually ' + a);
+        }
+
+        accessorPropertyAttributesAreCorrect(arguments, "0", getFunc1, undefined, undefined, false, false);
+        throw e;
+    }
+}(0, 1, 2));

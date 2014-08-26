@@ -14,21 +14,18 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        return (function () {
-            function getFunc() {
-                return "getFunctionString";
-            }
-            function setFunc(value) {
-                this.testgetFunction = value;
-            }
-            Object.defineProperty(arguments, "genericProperty", {
-                get: getFunc,
-                set: setFunc,
-                enumerable: true,
-                configurable: true
-            });
-            return accessorPropertyAttributesAreCorrect(arguments, "genericProperty", getFunc, setFunc, "testgetFunction", true, true);
-        }(1, 2, 3));
+(function () {
+    function getFunc() {
+        return "getFunctionString";
     }
-runTestCase(testcase);
+    function setFunc(value) {
+        this.testgetFunction = value;
+    }
+    Object.defineProperty(arguments, "genericProperty", {
+        get: getFunc,
+        set: setFunc,
+        enumerable: true,
+        configurable: true
+    });
+    accessorPropertyAttributesAreCorrect(arguments, "genericProperty", getFunc, setFunc, "testgetFunction", true, true);
+}(1, 2, 3));

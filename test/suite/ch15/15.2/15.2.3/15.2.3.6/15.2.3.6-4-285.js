@@ -12,31 +12,29 @@ description: >
     the [[Get]] attribute value of 'name' which is defined as
     non-configurable (15.4.5.1 step 5)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var arrObj = [];
+var arrObj = [];
 
-        function getFunc() {
-            return 12;
+function getFunc() {
+    return 12;
+}
+function setFunc(value) {
+    arrObj.setVerifyHelpProp = value;
+}
+Object.defineProperty(arrObj, "property", {
+    get: getFunc,
+    set: setFunc
+});
+try {
+    Object.defineProperty(arrObj, "property", {
+        get: function () {
+            return 36;
         }
-        function setFunc(value) {
-            arrObj.setVerifyHelpProp = value;
-        }
-        Object.defineProperty(arrObj, "property", {
-            get: getFunc,
-            set: setFunc
-        });
-        try {
-            Object.defineProperty(arrObj, "property", {
-                get: function () {
-                    return 36;
-                }
-            });
-            return false;
-        } catch (e) {
-            return e instanceof TypeError && accessorPropertyAttributesAreCorrect(arrObj, "property", getFunc, setFunc, "setVerifyHelpProp", false, false);
-        }
-    }
-runTestCase(testcase);
+    });
+} catch (e) {
+    accessorPropertyAttributesAreCorrect(arrObj, "property", getFunc, setFunc, "setVerifyHelpProp", false, false);
+    throw e;
+}
