@@ -13,29 +13,27 @@ description: >
     its value is different from the [[Enumerable]] attribute value of
     'P'  (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var arr = [];
+var arr = [];
 
-        Object.defineProperty(arr, "1", {
-            value: 3,
-            configurable: false,
-            enumerable: false
+Object.defineProperty(arr, "1", {
+    value: 3,
+    configurable: false,
+    enumerable: false
 
-        });
+});
 
-        try {
-            Object.defineProperties(arr, {
-                "1": {
-                    value: 13,
-                    enumerable: true
-                }
-            });
-            return false;
-        } catch (ex) {
-            return (ex instanceof TypeError) && dataPropertyAttributesAreCorrect(arr, "1", 3, false, false, false);
+try {
+    Object.defineProperties(arr, {
+        "1": {
+            value: 13,
+            enumerable: true
         }
-    }
-runTestCase(testcase);
+    });
+} catch (ex) {
+    dataPropertyAttributesAreCorrect(arr, "1", 3, false, false, false);
+    throw ex;
+}

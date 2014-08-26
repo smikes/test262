@@ -12,27 +12,25 @@ description: >
     value of 'P' is false  and the [[Configurable]] field of 'desc' is
     true  (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var arr = [];
+var arr = [];
 
-        Object.defineProperty(arr, "1", {
-            value: 3,
-            configurable: false
-        });
+Object.defineProperty(arr, "1", {
+    value: 3,
+    configurable: false
+});
 
-        try {
-            Object.defineProperties(arr, {
-                "1": {
-                    value: 13,
-                    configurable: true
-                }
-            });
-            return false;
-        } catch (ex) {
-            return (ex instanceof TypeError) && dataPropertyAttributesAreCorrect(arr, "1", 3, false, false, false);
+try {
+    Object.defineProperties(arr, {
+        "1": {
+            value: 13,
+            configurable: true
         }
-    }
-runTestCase(testcase);
+    });
+} catch (ex) {
+    dataPropertyAttributesAreCorrect(arr, "1", 3, false, false, false);
+    throw ex;
+}
