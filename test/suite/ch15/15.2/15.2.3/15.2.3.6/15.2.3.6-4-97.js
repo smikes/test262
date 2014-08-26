@@ -11,32 +11,29 @@ description: >
     = false, name.[[Set]] is undefined, desc.[[Set]] refers to an
     object (8.12.9 step 11.a.i)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        function getFunc() {
-            return "property";
-        }
+function getFunc() {
+    return "property";
+}
 
-        Object.defineProperty(obj, "property", {
-            get: getFunc,
-            configurable: false
-        });
+Object.defineProperty(obj, "property", {
+    get: getFunc,
+    configurable: false
+});
 
-        try {
-            Object.defineProperty(obj, "property", {
-                get: getFunc,
-                set: function () { },
-                configurable: false
-            });
+try {
+    Object.defineProperty(obj, "property", {
+        get: getFunc,
+        set: function () { },
+        configurable: false
+    });
 
-            return false;
-        } catch (e) {
-            return e instanceof TypeError &&
-                accessorPropertyAttributesAreCorrect(obj, "property", getFunc, undefined, undefined, false, false);
-        }
-    }
-runTestCase(testcase);
+} catch (e) {
+    accessorPropertyAttributesAreCorrect(obj, "property", getFunc, undefined, undefined, false, false);
+    throw e;
+}
