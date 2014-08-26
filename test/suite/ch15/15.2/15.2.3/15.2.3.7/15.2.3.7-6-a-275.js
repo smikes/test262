@@ -12,28 +12,26 @@ description: >
     the [[Set]] attribute value of 'P' which is defined as
     non-configurable (15.4.5.1 step 5)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var arr = [];
+var arr = [];
 
-        function set_fun(value) {
-            arr.setVerifyHelpProp = value;
+function set_fun(value) {
+    arr.setVerifyHelpProp = value;
+}
+Object.defineProperty(arr, "property", {
+    set: set_fun
+});
+
+try {
+    Object.defineProperties(arr, {
+        "property": {
+            set: function () { }
         }
-        Object.defineProperty(arr, "property", {
-            set: set_fun
-        });
-
-        try {
-            Object.defineProperties(arr, {
-                "property": {
-                    set: function () { }
-                }
-            });
-            return false;
-        } catch (ex) {
-            return (ex instanceof TypeError) && accessorPropertyAttributesAreCorrect(arr, "property", undefined, set_fun, "setVerifyHelpProp", false, false);
-        }
-    }
-runTestCase(testcase);
+    });
+} catch (ex) {
+    accessorPropertyAttributesAreCorrect(arr, "property", undefined, set_fun, "setVerifyHelpProp", false, false);
+    throw ex;
+}

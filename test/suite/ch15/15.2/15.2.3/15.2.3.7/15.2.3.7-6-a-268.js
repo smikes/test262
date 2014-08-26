@@ -13,29 +13,26 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var arr = [];
-        function get_fun() {
-            return 12;
-        }
-        function set_fun(value) {
-            arr.verifySetFun = value;
-        }
-        Object.defineProperty(arr, "property", {
-            get: function () {
-                return 36;
-            },
-            enumerable: true,
-            configurable: true
-        });
+var arr = [];
+function get_fun() {
+    return 12;
+}
+function set_fun(value) {
+    arr.verifySetFun = value;
+}
+Object.defineProperty(arr, "property", {
+    get: function () {
+        return 36;
+    },
+    enumerable: true,
+    configurable: true
+});
 
-        Object.defineProperties(arr, {
-            "property": {
-                get: get_fun,
-                set: set_fun,
-                enumerable: false
-            }
-        });
-        return accessorPropertyAttributesAreCorrect(arr, "property", get_fun, set_fun, "verifySetFun", false, true);
+Object.defineProperties(arr, {
+    "property": {
+        get: get_fun,
+        set: set_fun,
+        enumerable: false
     }
-runTestCase(testcase);
+});
+accessorPropertyAttributesAreCorrect(arr, "property", get_fun, set_fun, "verifySetFun", false, true);
