@@ -22,8 +22,9 @@ includes: [propertyHelper.js]
         enumerable: false,
         configurable: false
     });
-    dataPropertyAttributesAreCorrect(arguments, "0", 20, false, false, false);
     if (a !== 20) {
-        $ERROR("Expected a === 20, actually " + a);
+        $ERROR('Expected a === 20, actually ' + a);
     }
+
+    dataPropertyAttributesAreCorrect(arguments, "0", 20, false, false, false);
 }(0, 1, 2));

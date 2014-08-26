@@ -12,25 +12,22 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var proto = {};
-        Object.defineProperty(proto, "prop", {
-            value: 11,
-            configurable: false
-        });
-        var Con = function () { };
-        Con.prototype = proto;
+var proto = {};
+Object.defineProperty(proto, "prop", {
+    value: 11,
+    configurable: false
+});
+var Con = function () { };
+Con.prototype = proto;
 
-        var obj = new Con();
+var obj = new Con();
 
-        Object.defineProperties(obj, {
-            prop: {
-                value: 12,
-                configurable: true
-            }
-        });
-
-        return dataPropertyAttributesAreCorrect(obj, "prop", 12, false, false, true);
-
+Object.defineProperties(obj, {
+    prop: {
+        value: 12,
+        configurable: true
     }
-runTestCase(testcase);
+});
+
+dataPropertyAttributesAreCorrect(obj, "prop", 12, false, false, true);
+

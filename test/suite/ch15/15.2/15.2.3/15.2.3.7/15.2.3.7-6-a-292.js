@@ -15,36 +15,33 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var arg;
+var arg;
 
-        (function fun() {
-            arg = arguments;
-        }(0, 1, 2));
+(function fun() {
+    arg = arguments;
+}(0, 1, 2));
 
-        function get_func1() {
-            return 10;
-        }
+function get_func1() {
+    return 10;
+}
 
-        Object.defineProperty(arg, "0", {
-            get: get_func1,
-            enumerable: true,
-            configurable: true
-        });
+Object.defineProperty(arg, "0", {
+    get: get_func1,
+    enumerable: true,
+    configurable: true
+});
 
-        function get_func2() {
-            return 20;
-        }
+function get_func2() {
+    return 20;
+}
 
-        Object.defineProperties(arg, {
-            "0": {
-                get: get_func2,
-                enumerable: false,
-                configurable: false
-            }
-        });
-
-        return accessorPropertyAttributesAreCorrect(arg, "0", get_func2, undefined, undefined, false, false);
+Object.defineProperties(arg, {
+    "0": {
+        get: get_func2,
+        enumerable: false,
+        configurable: false
     }
-runTestCase(testcase);
+});
+
+accessorPropertyAttributesAreCorrect(arg, "0", get_func2, undefined, undefined, false, false);

@@ -38,11 +38,13 @@ Object.defineProperty(obj, "prop", {
 var desc2 = Object.getOwnPropertyDescriptor(obj, "prop");
 
 if (!desc1.hasOwnProperty("get") ) {
-    $ERROR('Expected desc1.hasOwnProperty("get") , actually ' + desc1.hasOwnProperty("get") );
+    $ERROR('Expected desc1.hasOwnProperty("get") to be true, actually ' + desc1.hasOwnProperty("get"));
 }
+
 if (!desc2.hasOwnProperty("value") ) {
-    $ERROR('Expected desc2.hasOwnProperty("value") , actually ' + desc2.hasOwnProperty("value") );
+    $ERROR('Expected desc2.hasOwnProperty("value") to be true, actually ' + desc2.hasOwnProperty("value"));
 }
+
 if (typeof desc2.get !== "undefined" ) {
     $ERROR('Expected typeof desc2.get === "undefined" , actually ' + typeof desc2.get );
 }
@@ -50,3 +52,5 @@ if (typeof desc2.get !== "undefined" ) {
 
 dataPropertyAttributesAreCorrect(obj, "prop", 1001, false, true, true);
 
+
+    

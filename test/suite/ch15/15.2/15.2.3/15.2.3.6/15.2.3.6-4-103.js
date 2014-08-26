@@ -23,4 +23,3 @@ Object.defineProperty(obj, "foo", {
     writable: true
 });
 dataPropertyAttributesAreCorrect(obj, "foo", undefined, true, false, true);
-

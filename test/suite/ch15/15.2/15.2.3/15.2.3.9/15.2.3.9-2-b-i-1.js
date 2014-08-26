@@ -12,20 +12,25 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var obj = {};
+var obj = {};
 
-        Object.defineProperty(obj, "foo", {
-            value: 10,
-            writable: true,
-            enumerable: true,
-            configurable: false
-        });
+Object.defineProperty(obj, "foo", {
+    value: 10,
+    writable: true,
+    enumerable: true,
+    configurable: false
+});
 
-        Object.freeze(obj);
-        var desc = Object.getOwnPropertyDescriptor(obj, "foo");
+Object.freeze(obj);
+var desc = Object.getOwnPropertyDescriptor(obj, "foo");
 
-        return dataPropertyAttributesAreCorrect(obj, "foo", 10, false, true, false) &&
-            desc.writable === false && desc.configurable === false;
-    }
-runTestCase(testcase);
+dataPropertyAttributesAreCorrect(obj, "foo", 10, false, true, false);
+
+if (desc.writable !== false) {
+    $ERROR('Expected desc.writable === false, actually ' + desc.writable);
+}
+
+if (desc.configurable !== false) {
+    $ERROR('Expected desc.configurable === false, actually ' + desc.configurable);
+}
+

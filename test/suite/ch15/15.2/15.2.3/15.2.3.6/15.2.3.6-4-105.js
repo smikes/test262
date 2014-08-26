@@ -27,4 +27,3 @@ Object.defineProperty(obj, "foo", {
 });
 
 dataPropertyAttributesAreCorrect(obj, "foo", 200, true, true, false);
-

@@ -12,32 +12,30 @@ description: >
     'desc' is data descriptor, and the [[Configurable]] attribute
     value of 'P' is false  (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var arr = [];
+var arr = [];
 
-        function set_fun(value) {
-            arr.setVerifyHelpProp = value;
+function set_fun(value) {
+    arr.setVerifyHelpProp = value;
+}
+
+Object.defineProperty(arr, "1", {
+    set: set_fun,
+    configurable: false
+
+});
+
+try {
+    Object.defineProperties(arr, {
+        "1": {
+            value: 13
         }
+    });
 
-        Object.defineProperty(arr, "1", {
-            set: set_fun,
-            configurable: false
-
-        });
-
-        try {
-            Object.defineProperties(arr, {
-                "1": {
-                    value: 13
-                }
-            });
-            return false;
-
-        } catch (ex) {
-            return (ex instanceof TypeError) && accessorPropertyAttributesAreCorrect(arr, "1", undefined, set_fun, "setVerifyHelpProp", false, false);
-        }
-    }
-runTestCase(testcase);
+} catch (ex) {
+    accessorPropertyAttributesAreCorrect(arr, "1", undefined, set_fun, "setVerifyHelpProp", false, false);
+    throw ex;
+}

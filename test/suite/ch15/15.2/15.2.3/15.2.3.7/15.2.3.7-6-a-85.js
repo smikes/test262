@@ -11,31 +11,29 @@ description: >
     false, P.writalbe is false, properties.value and P.value are two
     objects with different values (8.12.9 step 10.a.ii.1)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        var obj1 = { length: 10 };
+var obj1 = { length: 10 };
 
-        Object.defineProperty(obj, "foo", { 
-            value: obj1, 
-            writable: false, 
-            configurable: false 
-        });
+Object.defineProperty(obj, "foo", { 
+    value: obj1, 
+    writable: false, 
+    configurable: false 
+});
 
-        var obj2 = { length: 20 };
+var obj2 = { length: 20 };
 
-        try {
-            Object.defineProperties(obj, {
-                foo: {
-                    value: obj2
-                }
-            });
-            return false;
-        } catch (e) {
-            return (e instanceof TypeError) && dataPropertyAttributesAreCorrect(obj, "foo", obj1, false, false, false);
+try {
+    Object.defineProperties(obj, {
+        foo: {
+            value: obj2
         }
-    }
-runTestCase(testcase);
+    });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(obj, "foo", obj1, false, false, false);
+    throw e;
+}

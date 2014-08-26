@@ -20,4 +20,3 @@ Object.defineProperty(obj, "foo", {
     value: 200
 });
 dataPropertyAttributesAreCorrect(obj, "foo", 200, true, true, true);
-

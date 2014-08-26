@@ -12,19 +12,17 @@ description: >
     'desc' is -0, and the [[Value]] attribute value of 'name' is +0
     (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-        var arrObj = [];
+var arrObj = [];
 
-        Object.defineProperty(arrObj, "0", { value: +0 });
+Object.defineProperty(arrObj, "0", { value: +0 });
 
-        try {
-            Object.defineProperty(arrObj, "0", { value: -0 });
-            $ERROR("Should not reach: expected exception.");
-        } catch (e) {
-            if (!e instanceof TypeError) {
-                $ERROR("Expected e instanceof TypeError, actually " + e);
-            }
-            dataPropertyAttributesAreCorrect(arrObj, "0", +0, false, false, false);
-        }
+try {
+    Object.defineProperty(arrObj, "0", { value: -0 });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(arrObj, "0", +0, false, false, false);
+    throw e;
+    }
 

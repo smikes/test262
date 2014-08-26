@@ -13,26 +13,23 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        function set_func(value) {
-            obj.setVerifyHelpProp = value;
-        }
+function set_func(value) {
+    obj.setVerifyHelpProp = value;
+}
 
-        Object.defineProperty(obj, "foo", {
-            get: undefined,
-            set: set_func,
-            enumerable: false,
-            configurable: false
-        });
+Object.defineProperty(obj, "foo", {
+    get: undefined,
+    set: set_func,
+    enumerable: false,
+    configurable: false
+});
 
-        Object.defineProperties(obj, {
-            foo: {
-                get: undefined
-            }
-        });
-        return accessorPropertyAttributesAreCorrect(obj, "foo", undefined, set_func, "setVerifyHelpProp", false, false);
+Object.defineProperties(obj, {
+    foo: {
+        get: undefined
     }
-runTestCase(testcase);
+});
+accessorPropertyAttributesAreCorrect(obj, "foo", undefined, set_func, "setVerifyHelpProp", false, false);

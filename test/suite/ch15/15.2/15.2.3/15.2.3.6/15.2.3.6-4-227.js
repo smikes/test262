@@ -12,6 +12,7 @@ description: >
     'desc' and the [[Value]] attribute value of 'name' are two objects
     which refer to two different objects (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
 var arrObj = [];
@@ -27,11 +28,8 @@ var obj2 = { length: 20 };
 
 try {
     Object.defineProperty(arrObj, "0", { value: obj2 });
-    $ERROR("Should not reach: expected exception.");
 } catch (e) {
-    if (!e instanceof TypeError) {
-        $ERROR("Expected e instanceof TypeError, actually " + e);
-    }
     dataPropertyAttributesAreCorrect(arrObj, "0", obj1, false, false, false);
+    throw e;
 }
 

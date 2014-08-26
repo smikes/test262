@@ -17,13 +17,13 @@ includes: [propertyHelper.js]
  ---*/
 
 (function (a, b, c) {
-        delete arguments[0];
-        Object.defineProperty(arguments, "0", {
-            value: 10,
-            writable: true,
-            enumerable: true,
-            configurable: true
-        });
+            delete arguments[0];
+            Object.defineProperty(arguments, "0", {
+                value: 10,
+                writable: true,
+                enumerable: true,
+                configurable: true
+            });
     if (a !== 0) {
         $ERROR("Expected a === 0, actually " + a);
     }

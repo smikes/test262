@@ -13,18 +13,15 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var arr = [];
+var arr = [];
 
-        Object.defineProperty(arr, "0", {
-            value: null
-        });
+Object.defineProperty(arr, "0", {
+    value: null
+});
 
-        Object.defineProperties(arr, {
-            "0": {
-                value: null
-            }
-        });
-        return dataPropertyAttributesAreCorrect(arr, "0", null, false, false, false);
+Object.defineProperties(arr, {
+    "0": {
+        value: null
     }
-runTestCase(testcase);
+});
+dataPropertyAttributesAreCorrect(arr, "0", null, false, false, false);

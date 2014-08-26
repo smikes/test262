@@ -14,23 +14,20 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var arg;
+var arg;
 
-        (function fun(a, b, c) {
-            arg = arguments;
-        }(0, 1, 2));
+(function fun(a, b, c) {
+    arg = arguments;
+}(0, 1, 2));
 
-        Object.defineProperties(arg, {
-            "0": {
-                value: 20,
-                writable: false,
-                enumerable: false,
-                configurable: false
-            }
-        });
-
-        return dataPropertyAttributesAreCorrect(arg, "0", 20, false, false, false);
+Object.defineProperties(arg, {
+    "0": {
+        value: 20,
+        writable: false,
+        enumerable: false,
+        configurable: false
     }
-runTestCase(testcase);
+});
+
+dataPropertyAttributesAreCorrect(arg, "0", 20, false, false, false);

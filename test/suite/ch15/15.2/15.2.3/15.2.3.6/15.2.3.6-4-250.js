@@ -15,23 +15,20 @@ description: >
     the [[Value]] attribute value of 'name' are two booleans with
     different values (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        var arrObj = [];
+var arrObj = [];
 
-        Object.defineProperty(arrObj, "1", {
-            value: false
-        });
+Object.defineProperty(arrObj, "1", {
+    value: false
+});
 
-        try {
-            Object.defineProperty(arrObj, "1", {
-                value: true
-            });
-
-            return false;
-        } catch (e) {
-            return e instanceof TypeError && dataPropertyAttributesAreCorrect(arrObj, "1", false, false, false, false);
-        }
-    }
-runTestCase(testcase);
+try {
+    Object.defineProperty(arrObj, "1", {
+        value: true
+    });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(arrObj, "1", false, false, false, false);
+    throw e;
+}

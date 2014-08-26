@@ -13,23 +13,17 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var arr = [];
+var arr = [];
 
-        Object.defineProperty(arr, "0", {
-            writable: true,
-            configurable: true
-        });
+Object.defineProperty(arr, "0", {
+    writable: true,
+    configurable: true
+});
 
-        try {
-            Object.defineProperties(arr, {
-                "0": {
-                    writable: false
-                }
-            });
-            return dataPropertyAttributesAreCorrect(arr, "0", undefined, false, false, true);
-        } catch (e) {
-            return false;
-        }
+Object.defineProperties(arr, {
+    "0": {
+        writable: false
     }
-runTestCase(testcase);
+});
+dataPropertyAttributesAreCorrect(arr, "0", undefined, false, false, true);
+

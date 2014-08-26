@@ -13,6 +13,7 @@ description: >
     field of 'desc' is different from the type of the [[Value]]
     attribute value of 'name' (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
 var arrObj = [];
@@ -25,11 +26,11 @@ Object.defineProperty(arrObj, 0, {
 
 try {
     Object.defineProperty(arrObj, "0", { value: "abc" });
-    false;
+            return false;
 } catch (e) {
-    if (!e instanceof TypeError) {
+            return e instanceof TypeError && dataPropertyAttributesAreCorrect(arrObj, "0", 101, false, false, false);
         $ERROR("Expected e instanceof TypeError, actually " + e);
-    }
+    throw e;
     dataPropertyAttributesAreCorrect(arrObj, "0", 101, false, false, false);
 }
 

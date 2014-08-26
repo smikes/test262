@@ -28,4 +28,3 @@ Object.defineProperty(obj, "foo", {
     enumerable: false 
 });
 dataPropertyAttributesAreCorrect(obj, "foo", 200, false, false, true);
-

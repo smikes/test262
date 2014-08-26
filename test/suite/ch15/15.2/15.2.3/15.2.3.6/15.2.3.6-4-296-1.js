@@ -14,6 +14,7 @@ description: >
     'name' which is defined as non-configurable (10.6
     [[DefineOwnProperty]] step 4 and step 5b)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
 (function (a, b, c) {
@@ -28,15 +29,12 @@ includes: [propertyHelper.js]
             configurable: true
         });
     } catch (e) {
-        if (!e instanceof TypeError) {
-            $ERROR("Expected a TypeError, got " + e);
-        }
         if (a !== 10) {
-            $ERROR("Expected a === 10, actually " + a);
+            $ERROR('Expected "a === 10;", actually ' + a);
         }
+
         dataPropertyAttributesAreCorrect(arguments, "0", 10, false, false, false);
 
-        return;
+        throw e;
     }
-    $ERROR("Should not reach: expected an exception.");
 }(0, 1, 2));

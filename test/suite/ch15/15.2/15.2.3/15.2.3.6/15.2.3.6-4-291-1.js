@@ -15,26 +15,26 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        return (function (a, b, c) { 
-            function getFunc1() {
-                return 10;
-            }
-            Object.defineProperty(arguments, "0", {
-                get: getFunc1,
-                enumerable: true,
-                configurable: true
-            });
-            function getFunc2() {
-                return 20;
-            }
-            Object.defineProperty(arguments, "0", {
-                get: getFunc2,
-                enumerable: false,
-                configurable: false
-            });
-            var verifyFormal = a === 0;
-            return accessorPropertyAttributesAreCorrect(arguments, "0", getFunc2, undefined, undefined, false, false) && verifyFormal;
-        }(0, 1, 2));
+(function (a, b, c) { 
+    function getFunc1() {
+        return 10;
     }
-runTestCase(testcase);
+    Object.defineProperty(arguments, "0", {
+        get: getFunc1,
+        enumerable: true,
+        configurable: true
+    });
+    function getFunc2() {
+        return 20;
+    }
+    Object.defineProperty(arguments, "0", {
+        get: getFunc2,
+        enumerable: false,
+        configurable: false
+    });
+    if (a !== 0) {
+        $ERROR('Expected a === 0, actually ' + a);
+    }
+
+    accessorPropertyAttributesAreCorrect(arguments, "0", getFunc2, undefined, undefined, false, false);
+}(0, 1, 2));

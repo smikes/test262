@@ -13,22 +13,19 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var obj = {};
-        var getFunc = function () {
-            return 12;
-        };
-        Object.defineProperties(obj, {
-            foo: {
-                get: getFunc,
-                enumerable: true,
-                configurable: true
-            }
-        });
-
-        Object.defineProperties(obj, { foo: {} });
-
-        return accessorPropertyAttributesAreCorrect(obj, "foo", getFunc, undefined, undefined, true, true);
+var obj = {};
+var getFunc = function () {
+    return 12;
+};
+Object.defineProperties(obj, {
+    foo: {
+        get: getFunc,
+        enumerable: true,
+        configurable: true
     }
-runTestCase(testcase);
+});
+
+Object.defineProperties(obj, { foo: {} });
+
+accessorPropertyAttributesAreCorrect(obj, "foo", getFunc, undefined, undefined, true, true);

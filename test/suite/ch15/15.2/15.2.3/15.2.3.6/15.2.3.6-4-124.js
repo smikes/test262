@@ -20,4 +20,3 @@ Object.defineProperty(arrObj, "length", {
     writable: false
 });
 dataPropertyAttributesAreCorrect(arrObj, "length", 0, false, false, false);
-

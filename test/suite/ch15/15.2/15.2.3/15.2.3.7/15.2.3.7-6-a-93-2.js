@@ -12,39 +12,36 @@ description: >
     true and [[Writable]] attribute is false but not when both are
     false (8.12.9 - step Note & 10.a.ii.1)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        Object.defineProperty(obj, "0", {
-            value: 1001,
-            writable: false,
-            configurable: true
-        });
-        
-        Object.defineProperty(obj, "1", {
-            value: 1003,
-            writable: false,
-            configurable: false
-        });
+Object.defineProperty(obj, "0", {
+    value: 1001,
+    writable: false,
+    configurable: true
+});
 
-        try {
-            Object.defineProperties(obj, {
-                0: {
-                    value: 1002
-                },
-                1: {
-                    value: 1004
-                }
-            });
+Object.defineProperty(obj, "1", {
+    value: 1003,
+    writable: false,
+    configurable: false
+});
 
-            return false;
-        } catch (e) {
-            return e instanceof TypeError &&
-                dataPropertyAttributesAreCorrect(obj, "0", 1002, false, false, true) &&
-                dataPropertyAttributesAreCorrect(obj, "1", 1003, false, false, false);
+try {
+    Object.defineProperties(obj, {
+        0: {
+            value: 1002
+        },
+        1: {
+            value: 1004
         }
-    }
-runTestCase(testcase);
+    });
+
+} catch (e) {
+    dataPropertyAttributesAreCorrect(obj, "0", 1002, false, false, true);
+    dataPropertyAttributesAreCorrect(obj, "1", 1003, false, false, false);
+    throw e;
+}

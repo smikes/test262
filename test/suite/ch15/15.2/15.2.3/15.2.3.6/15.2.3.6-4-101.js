@@ -18,4 +18,3 @@ obj.foo = 100; // default value of attributes: writable: true, configurable: tru
 
 Object.defineProperty(obj, "foo", { value: undefined });
 dataPropertyAttributesAreCorrect(obj, "foo", undefined, true, true, true);
-

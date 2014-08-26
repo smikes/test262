@@ -16,23 +16,23 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        return (function (a, b, c) { 
-            delete arguments[0];
-            function getFunc() {
-                return 10;
-            }
-            function setFunc(value) {
-                this.setVerifyHelpProp = value;
-            }
-            Object.defineProperty(arguments, "0", {
-                get: getFunc,
-                set: setFunc,
-                enumerable: true,
-                configurable: true
-            });
-            var verifyFormal = a === 0;
-            return accessorPropertyAttributesAreCorrect(arguments, "0", getFunc, setFunc, "setVerifyHelpProp", true, true) && verifyFormal;
-        }(0, 1, 2));
+(function (a, b, c) { 
+    delete arguments[0];
+    function getFunc() {
+        return 10;
     }
-runTestCase(testcase);
+    function setFunc(value) {
+        this.setVerifyHelpProp = value;
+    }
+    Object.defineProperty(arguments, "0", {
+        get: getFunc,
+        set: setFunc,
+        enumerable: true,
+        configurable: true
+    });
+    if (a !== 0) {
+        $ERROR('Expected a === 0, actually ' + a);
+    }
+
+    accessorPropertyAttributesAreCorrect(arguments, "0", getFunc, setFunc, "setVerifyHelpProp", true, true);
+}(0, 1, 2));

@@ -63,29 +63,30 @@ function accessorPropertyAttributesAreCorrect(obj,
                                               enumerable,
                                               configurable) {
     var attributesCorrect = true;
+    var prop = 'obj["' + name + '"]';
 
     if (get !== undefined) {
         var value = get();
         if (!isEqualTo(obj, name, value)) {
-            $ERROR("Expected obj[name] to equal " + value +
+            $ERROR("Expected " + prop + " to equal " + value +
                    ", actually " + obj[name]);
         }
     }
 
     if ((typeof set !== "undefined") && setVerifyHelpProp) {
         if (!isWritable(obj, name, setVerifyHelpProp)) {
-            $ERROR("Expected writes to obj[name] to set " + setVerifyHelpProp +
+            $ERROR("Expected writes to " + prop + " to set " + setVerifyHelpProp +
                    ", but did not.");
         }
     }
 
     if (enumerable !== isEnumerable(obj, name)) {
-        $ERROR("Expected obj[prop].[[Enumerable]] to be " +
+        $ERROR("Expected " + prop + ".[[Enumerable]] to be " +
                enumerable + ", actually " + !enumerable);
     }
 
     if (configurable !== isConfigurable(obj, name)) {
-        $ERROR("Expected obj[prop].[[Configurable]] to be " +
+        $ERROR("Expected " + prop + ".[[Configurable]] to be " +
                configurable + ", actually " + !configurable);
     }
 
@@ -103,33 +104,28 @@ function dataPropertyAttributesAreCorrect(obj,
                                           enumerable,
                                           configurable) {
     var attributesCorrect = true;
+    var prop = 'obj["' + name + '"]';
 
     if (!isEqualTo(obj, name, value)) {
-        $ERROR("Expected obj[name] to equal " + value +
+        $ERROR("Expected " + prop + " to equal " + value +
                ", actually " + obj[name]);
     }
 
     if (writable != isWritable(obj, name)) {
-        $ERROR("Expected obj[prop].[[Writable]] to be " +
+        $ERROR("Expected " + prop + ".[[Writable]] to be " +
                writable + ", actually " + !writable);
     }
 
     if(enumerable !== isEnumerable(obj, name)) {
-        $ERROR("Expected obj[prop].[[Enumerable]] to be " +
+        $ERROR("Expected " + prop + ".[[Enumerable]] to be " +
                enumerable + ", actually " + !enumerable);
     }
 
 
     if (configurable !== isConfigurable(obj, name)) {
-        $ERROR("Expected obj[prop].[[Configurable]] to be " +
+        $ERROR("Expected " + prop + ".[[Configurable]] to be " +
                configurable + ", actually " + !configurable);
     }
 
     return attributesCorrect;
-}
-
-function runTestCase(testcase) {
-    if (testcase() !== true) {
-        $ERROR("Test case returned non-true value!");
-    }
 }

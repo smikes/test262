@@ -13,35 +13,32 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var arr = [];
+var arr = [];
 
-        Object.defineProperties(arr, {
-            "0": {
-                get: function () {
-                    return 11;
-                },
-                set: function () { },
-                configurable: true,
-                enumerable: true
-            }
-        });
-
-        var setFun = function (value) {
-            arr.setVerifyHelpProp = value;
-        };
-        var getFun = function () {
-            return 14;
-        };
-        Object.defineProperties(arr, {
-            "0": {
-                get: getFun,
-                set: setFun,
-                configurable: false,
-                enumerable: false
-            }
-        });
-
-        return accessorPropertyAttributesAreCorrect(arr, "0", getFun, setFun, "setVerifyHelpProp", false, false);
+Object.defineProperties(arr, {
+    "0": {
+        get: function () {
+            return 11;
+        },
+        set: function () { },
+        configurable: true,
+        enumerable: true
     }
-runTestCase(testcase);
+});
+
+var setFun = function (value) {
+    arr.setVerifyHelpProp = value;
+};
+var getFun = function () {
+    return 14;
+};
+Object.defineProperties(arr, {
+    "0": {
+        get: getFun,
+        set: setFun,
+        configurable: false,
+        enumerable: false
+    }
+});
+
+accessorPropertyAttributesAreCorrect(arr, "0", getFun, setFun, "setVerifyHelpProp", false, false);

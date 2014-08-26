@@ -24,8 +24,9 @@ includes: [propertyHelper.js]
     Object.defineProperty(arguments, "0", {
         value: 20
     });
-    dataPropertyAttributesAreCorrect(arguments, "0", 20, false, true, true);
     if (a !== 10) {
-        $ERROR("Expected a === 10, actually " + a);
+        $ERROR('Expected "a === 10", actually ' + a);
     }
+
+    dataPropertyAttributesAreCorrect(arguments, "0", 20, false, true, true);
 }(0, 1, 2));

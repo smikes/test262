@@ -12,38 +12,35 @@ description: >
     when updating the [[Get]] attribute value of 'P' which is not
     configurable (10.6 [[DefineOwnProperty]] step 4)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        var arg = (function () {
-            return arguments;
-        } (1, 2, 3));
+var arg = (function () {
+    return arguments;
+} (1, 2, 3));
 
-        function getFun() {
-            return "genericPropertyString";
-        }
-        function setFun(value) {
-            arg.verifySetFun = value;
-        }
-        Object.defineProperty(arg, "genericProperty", {
-            get: getFun,
-            set: setFun,
-            configurable: false
-        });
+function getFun() {
+    return "genericPropertyString";
+}
+function setFun(value) {
+    arg.verifySetFun = value;
+}
+Object.defineProperty(arg, "genericProperty", {
+    get: getFun,
+    set: setFun,
+    configurable: false
+});
 
-        try {
-            Object.defineProperties(arg, {
-                "genericProperty": {
-                    get: function () {
-                        return "overideGenericPropertyString";
-                    }
-                }
-            });
-
-            return false;
-        } catch (ex) {
-            return ex instanceof TypeError &&
-                accessorPropertyAttributesAreCorrect(arg, "genericProperty", getFun, setFun, "verifySetFun", false, false, false);
+try {
+    Object.defineProperties(arg, {
+        "genericProperty": {
+            get: function () {
+                return "overideGenericPropertyString";
+            }
         }
-    }
-runTestCase(testcase);
+    });
+
+} catch (ex) {
+    accessorPropertyAttributesAreCorrect(arg, "genericProperty", getFun, setFun, "verifySetFun", false, false, false);
+    throw ex;
+}

@@ -13,28 +13,28 @@ description: >
     attribute value of 'P' which is not configurable (10.6
     [[DefineOwnProperty]] step 4)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        return (function (a, b, c) {
-            function setFunc(value) {
-                this.genericPropertyString = value;
-            }
-            Object.defineProperty(arguments, "genericProperty", {
-                set: setFunc,
-                enumerable: true,
-                configurable: false
-            });
-            try {
-                Object.defineProperty(arguments, "genericProperty", {
-                    enumerable: false
-                });
-            } catch (e) {
-                var verifyFormal = c === 3;
-                return e instanceof TypeError &&
-                    accessorPropertyAttributesAreCorrect(arguments, "genericProperty", undefined, setFunc, "genericPropertyString", true, false) && verifyFormal;
-            }
-            return false;
-        }(1, 2, 3));
+(function (a, b, c) {
+    function setFunc(value) {
+        this.genericPropertyString = value;
     }
-runTestCase(testcase);
+    Object.defineProperty(arguments, "genericProperty", {
+        set: setFunc,
+        enumerable: true,
+        configurable: false
+    });
+    try {
+        Object.defineProperty(arguments, "genericProperty", {
+            enumerable: false
+        });
+    } catch (e) {
+        if (c !== 3) {
+            $ERROR('Expected c === 3, actually ' + c);
+        }
+        accessorPropertyAttributesAreCorrect(arguments, "genericProperty", undefined, setFunc, "genericPropertyString", true, false);
+        throw e;
+    }
+
+}(1, 2, 3));

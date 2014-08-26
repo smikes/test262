@@ -15,6 +15,7 @@ description: >
     and the [[Value]] attribute value of 'name' is -0 (15.4.5.1 step
     4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
 var arrObj = [];
@@ -28,12 +29,8 @@ try {
     Object.defineProperty(arrObj, "1", {
         value: +0
     });
-
-    $ERROR("Should not reach: expected exception.");
 } catch (e) {
-    if (!e instanceof TypeError) {
-        $ERROR("Expected e instanceof TypeError, actually " + e);
-    }
     dataPropertyAttributesAreCorrect(arrObj, "1", -0, false, false, false);
+    throw e;
 }
 

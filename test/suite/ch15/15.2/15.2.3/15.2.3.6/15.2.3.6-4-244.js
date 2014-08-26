@@ -14,6 +14,7 @@ description: >
     value of 'name' is false and the [[Writable]] field of 'desc' is
     true (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
 
@@ -29,11 +30,9 @@ try {
     Object.defineProperty(arrObj, "1", {
         writable: true
     });
-    $ERROR("Should not reach: expected exception.");
+
 } catch (e) {
-    if (!e instanceof TypeError) {
-        $ERROR("Expected e instanceof TypeError, actually " + e);
-    }
     dataPropertyAttributesAreCorrect(arrObj, "1", undefined, false, false, false);
+    throw e;
 }
 

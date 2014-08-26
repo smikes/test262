@@ -13,6 +13,7 @@ description: >
     is present and its value is different from the [[Enumerable]]
     attribute value of 'name' (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
 
@@ -31,12 +32,9 @@ try {
         writable: true,
         enumerable: true
     });
-    $ERROR("Should not reach: expected exception.");
 
 } catch (e) {
-    if (!e instanceof TypeError) {
-        $ERROR("Expected e instanceof TypeError, actually " + e );
-    }
     dataPropertyAttributesAreCorrect(arrObj, "1", 3, true, false, false);
+    throw e;
 }
 

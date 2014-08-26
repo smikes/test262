@@ -13,26 +13,23 @@ description: >
     the [[Configurable]] attribute value of 'name' which is not
     configurable (10.6 [[DefineOwnProperty]] step 4)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        return (function () {
-            function getFunc() {
-                return 0;
-            }
-            Object.defineProperty(arguments, "0", {
-                get: getFunc,
-                enumerable: true,
-                configurable: false
-            });
-            try {
-                Object.defineProperty(arguments, "0", {
-                    configurable: true
-                });
-            } catch (e) {
-                return e instanceof TypeError && accessorPropertyAttributesAreCorrect(arguments, "0", getFunc, undefined, undefined, true, false);
-            }
-            return false;
-        }());
+(function () {
+    function getFunc() {
     }
-runTestCase(testcase);
+    Object.defineProperty(arguments, "0", {
+        get: getFunc,
+        enumerable: true,
+        configurable: false
+    });
+    try {
+        Object.defineProperty(arguments, "0", {
+            configurable: true
+        });
+    } catch (e) {
+        accessorPropertyAttributesAreCorrect(arguments, "0", getFunc, undefined, undefined, true, false);
+        throw e;
+    }
+}());

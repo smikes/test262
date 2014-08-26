@@ -11,23 +11,21 @@ description: >
     = false, name.writable = false, desc.value and name.value are two
     numbers with different values (8.12.9 step 10.a.ii.1)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        Object.defineProperty(obj, "foo", { 
-            value: 10, 
-            writable: false, 
-            configurable: false 
-        });
-        
-        try {
-            Object.defineProperty(obj, "foo", { value: 20 });
-            return false;
-        } catch (e) {
-            return e instanceof TypeError && dataPropertyAttributesAreCorrect(obj, "foo", 10, false, false, false);
-        }
-    }
-runTestCase(testcase);
+Object.defineProperty(obj, "foo", { 
+    value: 10, 
+    writable: false, 
+    configurable: false 
+});
+
+try {
+    Object.defineProperty(obj, "foo", { value: 20 });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(obj, "foo", 10, false, false, false);
+    throw e;
+}

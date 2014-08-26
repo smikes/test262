@@ -12,26 +12,24 @@ description: >
     the [[Enumerable]] attribute value of 'name' which is defined as
     non-configurable (15.4.5.1 step 5)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var arrObj = [];
+var arrObj = [];
 
-        function setFunc(value) {
-            arrObj.setVerifyHelpProp = value;
-        }
-        Object.defineProperty(arrObj, "property", {
-            set: setFunc,
-            enumerable: false
-        });
-        try {
-            Object.defineProperty(arrObj, "property", {
-                enumerable: true
-            });
-            return false;
-        } catch (e) {
-            return e instanceof TypeError && accessorPropertyAttributesAreCorrect(arrObj, "property", undefined, setFunc, "setVerifyHelpProp", false, false);
-        }
-    }
-runTestCase(testcase);
+function setFunc(value) {
+    arrObj.setVerifyHelpProp = value;
+}
+Object.defineProperty(arrObj, "property", {
+    set: setFunc,
+    enumerable: false
+});
+try {
+    Object.defineProperty(arrObj, "property", {
+        enumerable: true
+    });
+} catch (e) {
+    accessorPropertyAttributesAreCorrect(arrObj, "property", undefined, setFunc, "setVerifyHelpProp", false, false);
+    throw e;
+}
