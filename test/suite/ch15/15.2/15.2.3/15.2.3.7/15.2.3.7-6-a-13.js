@@ -10,26 +10,24 @@ description: >
     Object.defineProperties - 'O' is an Array object which implements
     its own [[GetOwnProperty]] method to get 'P' (8.12.9 step 1 )
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        var arr = [];
+var arr = [];
 
-        Object.defineProperty(arr, "prop", {
-            value: 11,
-            configurable: false
-        });
+Object.defineProperty(arr, "prop", {
+    value: 11,
+    configurable: false
+});
 
-        try {
-            Object.defineProperties(arr, {
-                prop: {
-                    value: 12,
-                    configurable: true
-                }
-            });
-            return false;
-        } catch (e) {
-            return e instanceof TypeError && dataPropertyAttributesAreCorrect(arr, "prop", 11, false, false, false);
+try {
+    Object.defineProperties(arr, {
+        prop: {
+            value: 12,
+            configurable: true
         }
-    }
-runTestCase(testcase);
+    });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(arr, "prop", 11, false, false, false);
+    throw e;
+}

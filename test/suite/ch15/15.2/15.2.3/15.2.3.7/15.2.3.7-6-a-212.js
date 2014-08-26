@@ -13,19 +13,16 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var arr = [];
+var arr = [];
 
-        Object.defineProperty(arr, "0", {
-            value: NaN
-        });
+Object.defineProperty(arr, "0", {
+    value: NaN
+});
 
-        Object.defineProperties(arr, {
-            "0": {
-                value: NaN
-            }
-        });
-
-        return dataPropertyAttributesAreCorrect(arr, "0", NaN, false, false, false);
+Object.defineProperties(arr, {
+    "0": {
+        value: NaN
     }
-runTestCase(testcase);
+});
+
+dataPropertyAttributesAreCorrect(arr, "0", NaN, false, false, false);

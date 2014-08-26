@@ -11,24 +11,22 @@ description: >
     index property, the [[Value]] field of 'desc' is +0, and the
     [[Value]] attribute value of 'name' is -0  (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
-        var arr = [];
+var arr = [];
 
-        Object.defineProperty(arr, "0", {
-            value: -0
-        });
+Object.defineProperty(arr, "0", {
+    value: -0
+});
 
-        try {
-            Object.defineProperties(arr, {
-                "0": {
-                    value: +0
-                }
-            });
-            return false;
-        } catch (e) {
-            return (e instanceof TypeError) && dataPropertyAttributesAreCorrect(arr, "0", -0, false, false, false);
+try {
+    Object.defineProperties(arr, {
+        "0": {
+            value: +0
         }
-    }
-runTestCase(testcase);
+    });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(arr, "0", -0, false, false, false);
+    throw e;
+}
