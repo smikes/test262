@@ -12,22 +12,20 @@ description: >
     [[Value]] attribute value of 'name' which is defined as
     non-writable and non-configurable (15.4.5.1 step 5)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var arrObj = [];
+var arrObj = [];
 
-        Object.defineProperty(arrObj, "property", {
-            value: 12
-        });
-        try {
-            Object.defineProperty(arrObj, "property", {
-                value: 36
-            });
-            return false;
-        } catch (e) {
-            return e instanceof TypeError && dataPropertyAttributesAreCorrect(arrObj, "property", 12, false, false, false);
-        }
-    }
-runTestCase(testcase);
+Object.defineProperty(arrObj, "property", {
+    value: 12
+});
+try {
+    Object.defineProperty(arrObj, "property", {
+        value: 36
+    });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(arrObj, "property", 12, false, false, false);
+    throw e;
+}
