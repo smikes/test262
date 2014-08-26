@@ -13,24 +13,21 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        function get_func() {
-            return 10;
-        }
+function get_func() {
+    return 10;
+}
 
-        Object.defineProperty(obj, "foo", {
-            get: get_func,
-            configurable: true
-        });
+Object.defineProperty(obj, "foo", {
+    get: get_func,
+    configurable: true
+});
 
-        Object.defineProperties(obj, {
-            foo: {
-                value: 12
-            }
-        });
-        return dataPropertyAttributesAreCorrect(obj, "foo", 12, false, false, true);
+Object.defineProperties(obj, {
+    foo: {
+        value: 12
     }
-runTestCase(testcase);
+});
+dataPropertyAttributesAreCorrect(obj, "foo", 12, false, false, true);

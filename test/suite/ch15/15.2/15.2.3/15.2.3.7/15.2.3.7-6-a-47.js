@@ -12,18 +12,15 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        var desc = { value: 101 };
-        Object.defineProperty(obj, "foo", desc);
+var desc = { value: 101 };
+Object.defineProperty(obj, "foo", desc);
 
-        Object.defineProperties(obj, {
-            foo: {
-                value: 101
-            }
-        });
-        return dataPropertyAttributesAreCorrect(obj, "foo", 101, false, false, false);
+Object.defineProperties(obj, {
+    foo: {
+        value: 101
     }
-runTestCase(testcase);
+});
+dataPropertyAttributesAreCorrect(obj, "foo", 101, false, false, false);

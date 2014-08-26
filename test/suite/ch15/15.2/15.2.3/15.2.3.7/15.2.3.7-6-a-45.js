@@ -10,24 +10,22 @@ description: >
     Object.defineProperties - desc.value is +0 and P.value is -0
     (8.12.9 step 6)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        var desc = { value: -0 };
-        Object.defineProperty(obj, "foo", desc);
+var desc = { value: -0 };
+Object.defineProperty(obj, "foo", desc);
 
-        try {
-            Object.defineProperties(obj, {
-                foo: {
-                    value: +0
-                }
-            });
-            return false;
-        } catch (e) {
-            return (e instanceof TypeError) && dataPropertyAttributesAreCorrect(obj, "foo", -0, false, false, false);
+try {
+    Object.defineProperties(obj, {
+        foo: {
+            value: +0
         }
-    }
-runTestCase(testcase);
+    });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(obj, "foo", -0, false, false, false);
+    throw e;
+}

@@ -10,26 +10,24 @@ description: >
     Object.defineProperties throws TypeError when P.configurable is
     false and desc.configurable is true (8.12.9 step 7.a)
 includes: [propertyHelper.js]
+negative: TypeError
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        Object.defineProperty(obj, "foo", {
-            value: 10,
-            configurable: false 
-        });
+Object.defineProperty(obj, "foo", {
+    value: 10,
+    configurable: false 
+});
 
-        try {
-            Object.defineProperties(obj, {
-                foo: {
-                    configurable: true
-                }
-            });
-            return false;
-        } catch (e) {
-            return (e instanceof TypeError) && dataPropertyAttributesAreCorrect(obj, "foo", 10, false, false, false);
+try {
+    Object.defineProperties(obj, {
+        foo: {
+            configurable: true
         }
-    }
-runTestCase(testcase);
+    });
+} catch (e) {
+    dataPropertyAttributesAreCorrect(obj, "foo", 10, false, false, false);
+    throw e;
+}
