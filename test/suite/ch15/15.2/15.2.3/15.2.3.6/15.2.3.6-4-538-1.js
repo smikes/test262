@@ -51,4 +51,3 @@ if (typeof desc2.get !== "undefined") {
 }
 
 dataPropertyAttributesAreCorrect(obj, "0", 1001, false, true, true);
-
