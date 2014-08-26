@@ -14,21 +14,14 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        Object.defineProperty(obj, "foo", { 
-            value: 100, 
-            writable: false, 
-            configurable: false 
-        });
+Object.defineProperty(obj, "foo", { 
+    value: 100, 
+    writable: false, 
+    configurable: false 
+});
 
-        try {
-            Object.defineProperty(obj, "foo", { value: 100 });
-            return dataPropertyAttributesAreCorrect(obj, "foo", 100, false, false, false);
-        } catch (e) {
-            return false;
-        }
-    }
-runTestCase(testcase);
+Object.defineProperty(obj, "foo", { value: 100 });
+dataPropertyAttributesAreCorrect(obj, "foo", 100, false, false, false);

@@ -13,21 +13,18 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        Object.defineProperty(obj, "foo", { 
-            value: undefined, 
-            writable: false, 
-            configurable: false 
-        });
+Object.defineProperty(obj, "foo", { 
+    value: undefined, 
+    writable: false, 
+    configurable: false 
+});
 
-        Object.defineProperty(obj, "foo", { 
-            value: undefined, 
-            writable: false, 
-            configurable: false
-        });
-        return dataPropertyAttributesAreCorrect(obj, "foo", undefined, false, false, false);
-    }
-runTestCase(testcase);
+Object.defineProperty(obj, "foo", { 
+    value: undefined, 
+    writable: false, 
+    configurable: false
+});
+dataPropertyAttributesAreCorrect(obj, "foo", undefined, false, false, false);

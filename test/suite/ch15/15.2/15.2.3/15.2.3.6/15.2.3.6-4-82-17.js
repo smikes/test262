@@ -16,22 +16,19 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-    
-        var obj = {};
 
-        Object.defineProperty(obj, "0", {
-            value: 1001,
-            writable: true,
-            enumerable: true,
-            configurable: true
-        });
+var obj = {};
 
-        Object.defineProperty(obj, "0", {
-            enumerable: false,
-            configurable: false
-        });
+Object.defineProperty(obj, "0", {
+    value: 1001,
+    writable: true,
+    enumerable: true,
+    configurable: true
+});
 
-        return dataPropertyAttributesAreCorrect(obj, "0", 1001, true, false, false);
-    }
-runTestCase(testcase);
+Object.defineProperty(obj, "0", {
+    enumerable: false,
+    configurable: false
+});
+
+dataPropertyAttributesAreCorrect(obj, "0", 1001, true, false, false);
