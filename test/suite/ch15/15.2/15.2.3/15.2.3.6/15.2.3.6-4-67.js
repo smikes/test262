@@ -13,13 +13,10 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
 
-        var obj = {};
+var obj = {};
 
-        Object.defineProperty(obj, "foo", { value: "abcd" });
+Object.defineProperty(obj, "foo", { value: "abcd" });
 
-        Object.defineProperty(obj, "foo", { value: "abcd" });
-        return dataPropertyAttributesAreCorrect(obj, "foo", "abcd", false, false, false);
-    }
-runTestCase(testcase);
+Object.defineProperty(obj, "foo", { value: "abcd" });
+dataPropertyAttributesAreCorrect(obj, "foo", "abcd", false, false, false);
