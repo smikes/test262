@@ -129,9 +129,3 @@ function dataPropertyAttributesAreCorrect(obj,
 
     return attributesCorrect;
 }
-
-function runTestCase(testcase) {
-    if (testcase() !== true) {
-        $ERROR("Test case returned non-true value!");
-    }
-}
