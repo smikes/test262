@@ -14,22 +14,19 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-function testcase() {
-        var arr = [];
+var arr = [];
 
-        function get_func() {
-            return 10;
-        }
+function get_func() {
+    return 10;
+}
 
-        Object.defineProperty(arr, "0", {
-            get: get_func
-        });
+Object.defineProperty(arr, "0", {
+    get: get_func
+});
 
-        Object.defineProperties(arr, {
-            "0": {
-                get: get_func
-            }
-        });
-        return accessorPropertyAttributesAreCorrect(arr, "0", get_func, undefined, undefined, false, false);
+Object.defineProperties(arr, {
+    "0": {
+        get: get_func
     }
-runTestCase(testcase);
+});
+accessorPropertyAttributesAreCorrect(arr, "0", get_func, undefined, undefined, false, false);
