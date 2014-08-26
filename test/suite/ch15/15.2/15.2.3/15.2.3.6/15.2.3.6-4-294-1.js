@@ -38,6 +38,5 @@ negative: TypeError
         throw e;
     }
 
-    $ERROR("Should not reach: expected an exception.");
 }(0, 1, 2));
 
