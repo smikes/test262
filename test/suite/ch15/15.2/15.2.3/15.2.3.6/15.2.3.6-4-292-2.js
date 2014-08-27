@@ -13,10 +13,12 @@ description: >
     descriptor, test updating multiple attribute values of 'name'
     (10.6 [[DefineOwnProperty]] step 3 and 5.b)
 includes: [propertyHelper.js]
-flags: [noStrict]
+flags: [onlyStrict]
 ---*/
 
 (function (a, b, c) {
+    "use strict";
+
     Object.defineProperty(arguments, "0", {
         value: 20,
         writable: false,
@@ -24,8 +26,8 @@ flags: [noStrict]
         configurable: false
     });
 
-    if (a !== 20) {
-        $ERROR('Expected a === 20, actually ' + a);
+    if (a !== 0) {
+        $ERROR('Expected a === 0, actually ' + a);
     }
 
     dataPropertyAttributesAreCorrect(arguments, "0", 20, false, false, false);

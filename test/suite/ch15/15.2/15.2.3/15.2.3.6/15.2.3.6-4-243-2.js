@@ -5,14 +5,15 @@
 // copyright and this notice and otherwise comply with the Use Terms.
 
 /*---
-es5id: 15.2.3.6-4-243-1
+es5id: 15.2.3.6-4-243-2
 description: >
     Object.defineProperty - 'O' is an Array, 'name' is an array index
     named property,  'name' is accessor property and  assignment to
     the accessor property, fails to convert accessor property from
     accessor property to data property (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
-flags: [noStrict]
+flags: [onlyStrict]
+negative: TypeError
 ---*/
 
 
@@ -26,6 +27,10 @@ Object.defineProperty(arrObj, "1", {
     configurable: true
 });
 
-arrObj[1] = 4;
+try {
+    arrObj[1] = 4;
+} catch (e) {
+    accessorPropertyAttributesAreCorrect(arrObj, "1", getFunc, undefined, undefined, false, true);
+    throw e;
+}
 
-accessorPropertyAttributesAreCorrect(arrObj, "1", getFunc, undefined, undefined, false, true);

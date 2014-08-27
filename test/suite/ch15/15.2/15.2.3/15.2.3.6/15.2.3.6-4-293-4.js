@@ -5,28 +5,29 @@
 // copyright and this notice and otherwise comply with the Use Terms.
 
 /*---
-es5id: 15.2.3.6-4-292-1
+es5id: 15.2.3.6-4-293-4
 description: >
     Object.defineProperty - 'O' is an Arguments object of a function
-    that has formal parameters, 'name' is own property of 'O' which is
-    also defined in [[ParameterMap]] of 'O', and 'desc' is data
-    descriptor, test updating multiple attribute values of 'name'
-    (10.6 [[DefineOwnProperty]] step 3 and 5.b)
+    that has formal parameters, 'name' is own data property of 'O'
+    which is also defined in [[ParameterMap]] of 'O', test TypeError
+    is not thrown when updating the [[Value]] attribute value of
+    'name' which is defined as non-writable and configurable (10.6
+    [[DefineOwnProperty]] step 3 and step 5.b)
 includes: [propertyHelper.js]
-flags: [noStrict]
+flags: [onlyStrict]
 ---*/
 
 (function (a, b, c) {
     Object.defineProperty(arguments, "0", {
-        value: 20,
+        value: 10,
         writable: false,
-        enumerable: false,
-        configurable: false
     });
-
-    if (a !== 20) {
-        $ERROR('Expected a === 20, actually ' + a);
+    Object.defineProperty(arguments, "0", {
+        value: 20
+    });
+    if (a !== 0) {
+        $ERROR('Expected "a === 0", actually ' + a);
     }
 
-    dataPropertyAttributesAreCorrect(arguments, "0", 20, false, false, false);
+    dataPropertyAttributesAreCorrect(arguments, "0", 20, false, true, true);
 }(0, 1, 2));

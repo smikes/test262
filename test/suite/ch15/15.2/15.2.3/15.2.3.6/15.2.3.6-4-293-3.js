@@ -14,6 +14,7 @@ description: >
     'name' which is defined as non-writable and configurable (10.6
     [[DefineOwnProperty]] step 3 and step 5.b)
 includes: [propertyHelper.js]
+flags: [noStrict]
 ---*/
 
 (function (a, b, c) {
