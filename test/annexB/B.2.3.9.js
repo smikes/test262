@@ -6,6 +6,7 @@
 // http://mathias.html5.org/tests/javascript/string/
 
 /*---
+ es6id: B.2.3.9
  includes: [v8-mjsunit.js]
  ---*/
 
