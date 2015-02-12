@@ -7,18 +7,17 @@
 
 /*---
  es6id: B.2.3.10
- includes: [v8-mjsunit.js]
  ---*/
 
-assertEquals('_'.link('b'), '<a href="b">_</a>');
-assertEquals('<'.link('<'), '<a href="<"><</a>');
-assertEquals('_'.link(0x2A), '<a href="42">_</a>');
-assertEquals('_'.link('\x22'), '<a href="&quot;">_</a>');
-assertEquals(String.prototype.link.call(0x2A, 0x2A), '<a href="42">42</a>');
-assertThrows(function() {
+assert.sameValue('_'.link('b'), '<a href="b">_</a>');
+assert.sameValue('<'.link('<'), '<a href="<"><</a>');
+assert.sameValue('_'.link(0x2A), '<a href="42">_</a>');
+assert.sameValue('_'.link('\x22'), '<a href="&quot;">_</a>');
+assert.sameValue(String.prototype.link.call(0x2A, 0x2A), '<a href="42">42</a>');
+assert.throws(TypeError, function() {
   String.prototype.link.call(undefined);
-}, TypeError);
-assertThrows(function() {
+});
+assert.throws(TypeError, function() {
   String.prototype.link.call(null);
-}, TypeError);
-assertEquals(String.prototype.link.length, 1);
+});
+assert.sameValue(String.prototype.link.length, 1);

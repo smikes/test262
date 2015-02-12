@@ -7,19 +7,18 @@
 
 /*---
  es6id: B.2.3.7
- includes: [v8-mjsunit.js]
  ---*/
 
-assertEquals('_'.fontcolor('b'), '<font color="b">_</font>');
-assertEquals('<'.fontcolor('<'), '<font color="<"><</font>');
-assertEquals('_'.fontcolor(0x2A), '<font color="42">_</font>');
-assertEquals('_'.fontcolor('\x22'), '<font color="&quot;">_</font>');
-assertEquals(String.prototype.fontcolor.call(0x2A, 0x2A),
+assert.sameValue('_'.fontcolor('b'), '<font color="b">_</font>');
+assert.sameValue('<'.fontcolor('<'), '<font color="<"><</font>');
+assert.sameValue('_'.fontcolor(0x2A), '<font color="42">_</font>');
+assert.sameValue('_'.fontcolor('\x22'), '<font color="&quot;">_</font>');
+assert.sameValue(String.prototype.fontcolor.call(0x2A, 0x2A),
   '<font color="42">42</font>');
-assertThrows(function() {
+assert.throws(TypeError, function() {
   String.prototype.fontcolor.call(undefined);
-}, TypeError);
-assertThrows(function() {
+});
+assert.throws(TypeError, function() {
   String.prototype.fontcolor.call(null);
-}, TypeError);
-assertEquals(String.prototype.fontcolor.length, 1);
+});
+assert.sameValue(String.prototype.fontcolor.length, 1);

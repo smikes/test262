@@ -7,16 +7,15 @@
 
 /*---
  es6id: B.2.3.4
- includes: [v8-mjsunit.js]
  ---*/
 
-assertEquals('_'.blink(), '<blink>_</blink>');
-assertEquals('<'.blink(), '<blink><</blink>');
-assertEquals(String.prototype.blink.call(0x2A), '<blink>42</blink>');
-assertThrows(function() {
+assert.sameValue('_'.blink(), '<blink>_</blink>');
+assert.sameValue('<'.blink(), '<blink><</blink>');
+assert.sameValue(String.prototype.blink.call(0x2A), '<blink>42</blink>');
+assert.throws(TypeError, function() {
   String.prototype.blink.call(undefined);
-}, TypeError);
-assertThrows(function() {
+});
+assert.throws(TypeError, function() {
   String.prototype.blink.call(null);
-}, TypeError);
-assertEquals(String.prototype.blink.length, 0);
+});
+assert.sameValue(String.prototype.blink.length, 0);

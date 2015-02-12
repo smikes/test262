@@ -7,16 +7,15 @@
 
 /*---
  es6id: B.2.3.12
- includes: [v8-mjsunit.js]
  ---*/
 
-assertEquals('_'.strike(), '<strike>_</strike>');
-assertEquals('<'.strike(), '<strike><</strike>');
-assertEquals(String.prototype.strike.call(0x2A), '<strike>42</strike>');
-assertThrows(function() {
+assert.sameValue('_'.strike(), '<strike>_</strike>');
+assert.sameValue('<'.strike(), '<strike><</strike>');
+assert.sameValue(String.prototype.strike.call(0x2A), '<strike>42</strike>');
+assert.throws(TypeError, function() {
   String.prototype.strike.call(undefined);
-}, TypeError);
-assertThrows(function() {
+});
+assert.throws(TypeError, function() {
   String.prototype.strike.call(null);
-}, TypeError);
-assertEquals(String.prototype.strike.length, 0);
+});
+assert.sameValue(String.prototype.strike.length, 0);

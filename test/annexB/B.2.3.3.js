@@ -7,16 +7,15 @@
 
 /*---
  es6id: B.2.3.3
- includes: [v8-mjsunit.js]
  ---*/
 
-assertEquals('_'.big(), '<big>_</big>');
-assertEquals('<'.big(), '<big><</big>');
-assertEquals(String.prototype.big.call(0x2A), '<big>42</big>');
-assertThrows(function() {
+assert.sameValue('_'.big(), '<big>_</big>');
+assert.sameValue('<'.big(), '<big><</big>');
+assert.sameValue(String.prototype.big.call(0x2A), '<big>42</big>');
+assert.throws(TypeError, function() {
   String.prototype.big.call(undefined);
-}, TypeError);
-assertThrows(function() {
+});
+assert.throws(TypeError, function() {
   String.prototype.big.call(null);
-}, TypeError);
-assertEquals(String.prototype.big.length, 0);
+});
+assert.sameValue(String.prototype.big.length, 0);

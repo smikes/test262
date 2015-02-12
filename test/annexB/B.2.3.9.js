@@ -7,16 +7,15 @@
 
 /*---
  es6id: B.2.3.9
- includes: [v8-mjsunit.js]
  ---*/
 
-assertEquals('_'.italics(), '<i>_</i>');
-assertEquals('<'.italics(), '<i><</i>');
-assertEquals(String.prototype.italics.call(0x2A), '<i>42</i>');
-assertThrows(function() {
+assert.sameValue('_'.italics(), '<i>_</i>');
+assert.sameValue('<'.italics(), '<i><</i>');
+assert.sameValue(String.prototype.italics.call(0x2A), '<i>42</i>');
+assert.throws(TypeError, function() {
   String.prototype.italics.call(undefined);
-}, TypeError);
-assertThrows(function() {
+});
+assert.throws(TypeError, function() {
   String.prototype.italics.call(null);
-}, TypeError);
-assertEquals(String.prototype.italics.length, 0);
+});
+assert.sameValue(String.prototype.italics.length, 0);

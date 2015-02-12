@@ -7,16 +7,15 @@
 
 /*---
  es6id: B.2.3.13
- includes: [v8-mjsunit.js]
  ---*/
 
-assertEquals('_'.sub(), '<sub>_</sub>');
-assertEquals('<'.sub(), '<sub><</sub>');
-assertEquals(String.prototype.sub.call(0x2A), '<sub>42</sub>');
-assertThrows(function() {
+assert.sameValue('_'.sub(), '<sub>_</sub>');
+assert.sameValue('<'.sub(), '<sub><</sub>');
+assert.sameValue(String.prototype.sub.call(0x2A), '<sub>42</sub>');
+assert.throws(TypeError, function() {
   String.prototype.sub.call(undefined);
-}, TypeError);
-assertThrows(function() {
+});
+assert.throws(TypeError, function() {
   String.prototype.sub.call(null);
-}, TypeError);
-assertEquals(String.prototype.sub.length, 0);
+});
+assert.sameValue(String.prototype.sub.length, 0);

@@ -7,16 +7,15 @@
 
 /*---
  es6id: B.2.3.11
- includes: [v8-mjsunit.js]
  ---*/
 
-assertEquals('_'.small(), '<small>_</small>');
-assertEquals('<'.small(), '<small><</small>');
-assertEquals(String.prototype.small.call(0x2A), '<small>42</small>');
-assertThrows(function() {
+assert.sameValue('_'.small(), '<small>_</small>');
+assert.sameValue('<'.small(), '<small><</small>');
+assert.sameValue(String.prototype.small.call(0x2A), '<small>42</small>');
+assert.throws(TypeError, function() {
   String.prototype.small.call(undefined);
-}, TypeError);
-assertThrows(function() {
+});
+assert.throws(TypeError, function() {
   String.prototype.small.call(null);
-}, TypeError);
-assertEquals(String.prototype.small.length, 0);
+});
+assert.sameValue(String.prototype.small.length, 0);

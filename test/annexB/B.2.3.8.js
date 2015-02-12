@@ -7,19 +7,18 @@
 
 /*---
  es6id: B.2.3.8
- includes: [v8-mjsunit.js]
  ---*/
 
-assertEquals('_'.fontsize('b'), '<font size="b">_</font>');
-assertEquals('<'.fontsize('<'), '<font size="<"><</font>');
-assertEquals('_'.fontsize(0x2A), '<font size="42">_</font>');
-assertEquals('_'.fontsize('\x22'), '<font size="&quot;">_</font>');
-assertEquals(String.prototype.fontsize.call(0x2A, 0x2A),
+assert.sameValue('_'.fontsize('b'), '<font size="b">_</font>');
+assert.sameValue('<'.fontsize('<'), '<font size="<"><</font>');
+assert.sameValue('_'.fontsize(0x2A), '<font size="42">_</font>');
+assert.sameValue('_'.fontsize('\x22'), '<font size="&quot;">_</font>');
+assert.sameValue(String.prototype.fontsize.call(0x2A, 0x2A),
   '<font size="42">42</font>');
-assertThrows(function() {
+assert.throws(TypeError, function() {
   String.prototype.fontsize.call(undefined);
-}, TypeError);
-assertThrows(function() {
+});
+assert.throws(TypeError, function() {
   String.prototype.fontsize.call(null);
-}, TypeError);
-assertEquals(String.prototype.fontsize.length, 1);
+});
+assert.sameValue(String.prototype.fontsize.length, 1);

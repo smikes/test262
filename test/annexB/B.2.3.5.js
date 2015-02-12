@@ -7,16 +7,15 @@
 
 /*---
  es6id: B.2.3.5
- includes: [v8-mjsunit.js]
  ---*/
 
-assertEquals('_'.bold(), '<b>_</b>');
-assertEquals('<'.bold(), '<b><</b>');
-assertEquals(String.prototype.bold.call(0x2A), '<b>42</b>');
-assertThrows(function() {
+assert.sameValue('_'.bold(), '<b>_</b>');
+assert.sameValue('<'.bold(), '<b><</b>');
+assert.sameValue(String.prototype.bold.call(0x2A), '<b>42</b>');
+assert.throws(TypeError, function() {
   String.prototype.bold.call(undefined);
-}, TypeError);
-assertThrows(function() {
+});
+assert.throws(TypeError, function() {
   String.prototype.bold.call(null);
-}, TypeError);
-assertEquals(String.prototype.bold.length, 0);
+});
+assert.sameValue(String.prototype.bold.length, 0);

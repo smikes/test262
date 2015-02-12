@@ -7,16 +7,15 @@
 
 /*---
  es6id: B.2.3.6
- includes: [v8-mjsunit.js]
  ---*/
 
-assertEquals('_'.fixed(), '<tt>_</tt>');
-assertEquals('<'.fixed(), '<tt><</tt>');
-assertEquals(String.prototype.fixed.call(0x2A), '<tt>42</tt>');
-assertThrows(function() {
+assert.sameValue('_'.fixed(), '<tt>_</tt>');
+assert.sameValue('<'.fixed(), '<tt><</tt>');
+assert.sameValue(String.prototype.fixed.call(0x2A), '<tt>42</tt>');
+assert.throws(TypeError, function() {
   String.prototype.fixed.call(undefined);
-}, TypeError);
-assertThrows(function() {
+});
+assert.throws(TypeError, function() {
   String.prototype.fixed.call(null);
-}, TypeError);
-assertEquals(String.prototype.fixed.length, 0);
+});
+assert.sameValue(String.prototype.fixed.length, 0);
