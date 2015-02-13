@@ -6,6 +6,10 @@
 // http://mathias.html5.org/tests/javascript/string/
 
 /*---
+ description: >
+     String.prototype.bold returns a string of HTML describing a single HTML
+     bold element. The element's content is the `this` value of the function
+     invocation, coerced to a string.
  es6id: B.2.3.5
  ---*/
 
