@@ -44,12 +44,14 @@ function isWritable(obj, name, verifyProp, value) {
     result = (verifyProp && isEqualTo(obj, verifyProp, newValue)) ||
         isEqualTo(obj, name, newValue);
 
-    if (hadValue) {
-      obj[name] = oldValue;
-    } else {
-      delete obj[name];
+    if (result) {
+        if (hadValue) {
+            obj[name] = oldValue;
+        } else {
+            delete obj[name];
+        }
     }
-
+    
     return result;
 }
 
