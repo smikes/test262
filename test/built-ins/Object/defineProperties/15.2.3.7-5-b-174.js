@@ -12,19 +12,13 @@ description: >
 includes: [propertyHelper.js]
 ---*/
 
-        var obj = {};
+var obj = {};
 
-        Object.defineProperties(obj, {
-            property: {
-                writable: ""
+Object.defineProperties(obj, {
+    property: {
+        writable: ""
             }
-        });
+});
 
-        obj.property = "isWritable";
-
-        return obj.hasOwnProperty("property") && typeof (obj.property) === "undefined";
-
-    }
 assert(obj.hasOwnProperty("property"));
 verifyNotWritable(obj, "property");
-assert(obj.hasOwnProperty("property"));
